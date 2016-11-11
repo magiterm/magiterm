@@ -65,4 +65,8 @@ router.get('/user', function(req, res) {
   // res.send(200)
 });
 
+router.get('*', function(req, res, next) {
+  res.render('index', { title: 'picoShell' });
+});
+
 module.exports = router;
