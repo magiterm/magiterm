@@ -1,15 +1,27 @@
 var expect = require('chai').expect;
+var docker = require('../utils/dockerAPI.js');
 
 describe('Docker', function() {
-  it('should show all images', function() {
+
+  describe('should create an image', function() {
+
+  });
+  
+  before(function() {
+    // 
+  });
+
+  xit('should show all images', function() {
 
   });
 
   it('should start container', function() {
-    
+    docker.startContainer('szhou/test', 'test1', 'bash', function(err, res) {
+      console.log(res);
+    });
   });
 
-  it('should install a package', function() {
+  xit('should install a package', function() {
     
   });
 

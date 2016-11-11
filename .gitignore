@@ -4,3 +4,4 @@ node_modules
 public/dist/
 test/dist/
 .sass-cache/
+dump.rdb

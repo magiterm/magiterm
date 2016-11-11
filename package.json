@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "webpack -p --config webpacktest.js",
+    "test": "mocha test/dockerHelpersSpec.js",
     "start": "nodemon ./bin/www",
     "dev-react": "webpack -d --watch"
   },
