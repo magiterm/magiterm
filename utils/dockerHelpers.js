@@ -31,6 +31,13 @@ const buildImage = function(dockerfile, options, callback) {
   });
 }
 
+//options should be {Name: username}
+const createContainer = function(image, options, callback) {
+  docker.run(image, ['-t', '-d', '/bin/bash'], [process.stdout, process.stderr], function(err, data, container) {
+    console.log(data);
+  });
+}
+
 // container.inspect(function(err, data) {
 //   console.log(data);
 // });
