@@ -131,6 +131,10 @@ router.get('*', function(req, res, next) {
   res.render('index', { title: 'picoShell' });
 });
 
+router.get('*', function(req, res, next) {
+  res.render('index', { title: 'picoShell' });
+});
+
 module.exports = router;
 
 
