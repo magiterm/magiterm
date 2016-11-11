@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 
 router.post('/handleCodeSave', function (req, res) {
   const codeValue = JSON.stringify(req.body.codeValue);
-  const echo = "'echo ";
+  const echo = "'echo -e ";
   const file = " >> juice.js'";
   const command = 'bash -c ' + echo + codeValue + file;
   console.log(command);

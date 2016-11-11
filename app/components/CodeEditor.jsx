@@ -1,13 +1,35 @@
 const React = require('react');
 const axios = require('axios');
+// const CodeMirror = require('react-codemirror');
+// import '../../node_modules/codemirror/mode/javascript/javascript';
 
 class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
     var context = this;
     this.state = {
-      codeValue: null
+      codeValue: ''
     }
+  }
+
+  componentDidMount() {
+    var context = this;
+    var codeEditor = document.getElementById("code-editor")
+    var editor = CodeMirror.fromTextArea(codeEditor, {
+      lineNumbers: true,
+      theme: 'abcdef',
+      styleActiveLine: true,
+      matchBrackets: true,
+      autoCloseBrackets: true,
+      indent: true,
+    });
+
+    editor.on('changes', function(editor, e){
+      var code = editor.getValue();
+      var textArea = document.getElementById("code-editor");
+      textArea.value = code;
+      context.handleCodeChange();
+    });
   }
 
   componentWillMount() {
@@ -25,8 +47,9 @@ class CodeEditor extends React.Component {
   }
 
 
-  handleCodeChange(e) {
+  handleCodeChange() {
       var code = document.getElementById('code-editor').value;
+      console.log(code);
       this.socket.emit('/TE/1', code);
   }
 
@@ -46,11 +69,9 @@ class CodeEditor extends React.Component {
   render() {
     return (
       <div>
-        <form> 
-          <textarea id="code-editor" onKeyUp={this.handleCodeChange.bind(this)}>
-            {this.state.codeValue}
-          </textarea><br/>
-        </form>
+        <textarea id="code-editor">
+          {this.state.codeValue}
+        </textarea><br/>
         <button onClick={this.handleCodeSave.bind(this)}> Save </button>
       </div>
     )
