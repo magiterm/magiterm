@@ -8,6 +8,7 @@
     "dev-react": "webpack -d --watch"
   },
   "dependencies": {
+    "axios": "^0.15.2",
     "babel-core": "^6.17.0",
     "body-parser": "~1.15.1",
     "bootstrap": "^3.3.7",
@@ -17,6 +18,7 @@
     "debug": "~2.2.0",
     "dockerode": "^2.3.1",
     "ejs": "^2.5.2",
+    "engine.io": "1.7.2",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.14.2",
@@ -39,11 +41,10 @@
     "sequelize": "^3.24.5",
     "sequelize-cli": "^2.4.0",
     "serve-favicon": "^2.3.0",
-    "engine.io": "1.7.2",
-    "socket.io-parser": "2.3.1",
-    "socket.io-client": "1.5.1",
+    "socket.io": ">= 1.0.0",
     "socket.io-adapter": "0.4.0",
-    "socket.io": ">= 1.0.0"
+    "socket.io-client": "1.5.1",
+    "socket.io-parser": "2.3.1"
   },
   "devDependencies": {
     "babel-loader": "^6.2.5",
