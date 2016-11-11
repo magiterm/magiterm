@@ -22,10 +22,27 @@ body {
       text-align: center;
       height: 455px; }
       .homepage-container .header .overlay .logo-container {
-        padding-top: 120px; }
+        padding-top: 120px; 
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center
+      }
+        .homepage-container .header .overlay .logo-container .login {
+          flex:1;
+          font-size: 20px;
+          color: #FFFFFF;
+          justify-content: center;
+          align-items: center;
+          border-style: solid;
+          border-radius: 10px;
+          border-color: black;
+        }
         .homepage-container .header .overlay .logo-container .title {
           font-family: Dosis-Regular;
           font-size: 120px;
-          color: #FFFFFF; }
+          color: #FFFFFF;
+
+        }
 
 /*# sourceMappingURL=style.css.map */
