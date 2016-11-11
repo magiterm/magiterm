@@ -45,7 +45,6 @@ class CodeEditor extends React.Component {
 
     this.editor = editor;
     this.lastUpdate = Date.now();
-
   }
 
   componentWillMount() {
