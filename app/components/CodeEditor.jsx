@@ -25,11 +25,27 @@ class CodeEditor extends React.Component {
     });
 
     editor.on('changes', function(editor, e){
+      //context.cursorPos = context.editor.doc.getCursor();
+      if(Date.now() - context.lastUpdate < 100) {
+        return;
+      }
       var code = editor.getValue();
       var textArea = document.getElementById("code-editor");
       textArea.value = code;
-      context.handleCodeChange();
+      //Need this to prevent an infinite loop. Calling .getDoc().setValue() triggers 'changes'
+      if(context.state.codeValue !== code)
+      {
+        context.handleCodeChange();
+      }
     });
+
+    editor.on('cursorActivity', function(editor, e) {
+      //context.cursorPos = context.editor.doc.getCursor();
+    });
+
+    this.editor = editor;
+    this.lastUpdate = Date.now();
+
   }
 
   componentWillMount() {
@@ -38,11 +54,14 @@ class CodeEditor extends React.Component {
 
     //The 1 will be replaced by container/user ID when we have sessions
     this.socket.on('/TE/1', function(code) {
+      console.log('CODE: ', code);
       context.setState({
         codeValue: code
       });
-      //Not sure why setState isn't redrawing, so I forced it to re-render. Need to fix.
-      document.getElementById('code-editor').value = code;
+      //Must place the cursor back where it was after replacing contents. Otherwise weird things happen.
+      context.cursorPos = context.editor.doc.getCursor();
+      context.editor.getDoc().setValue(code);
+      context.editor.doc.setCursor(context.cursorPos);
     });
   }
 
