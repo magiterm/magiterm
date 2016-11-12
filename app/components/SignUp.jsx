@@ -16,7 +16,8 @@ class Signup extends React.Component {
         textDecoration: 'none',
         color: 'white',
         username: '',
-        password: ''
+        password: '',
+        usernameExists: false
       }
     };
   }
@@ -59,11 +60,15 @@ class Signup extends React.Component {
       console.log(response.data);
       if (response.data === 'User already exists') {
         console.log('User already exists. Please choose a different username');
+        context.setState({
+          usernameExists : true
+        });
+      } else {
+        context.setState({
+          password: '',
+          username: ''
+        });
       }
-      context.setState({
-        password: '',
-        username: ''
-      });
     })
     .catch(function (error) {
       console.log('Error: ', error);
@@ -85,12 +90,14 @@ class Signup extends React.Component {
             />
           <input 
             onChange={this.changePasswordInput}
-            type='text' 
+            type='password' 
             placeholder='password'
-            value={this.state.password}
             />					
           <input type='submit'/>
         </form>
+
+        {this.state.usernameExists ? <div> Username exists. Please choose a different username. </div> : null}
+
 				<div 
 					style={this.state.hover} 
 					onMouseOver={this.hoverOver}
