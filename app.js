@@ -7,7 +7,7 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
-var LocalStrategy = require('passport-local'), Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const db = require('./db/config');
@@ -30,6 +30,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -44,6 +49,14 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+
+passport.use(new LocalStrategy(function(username, password, done) {
+  db.User.find({where: {username: username}}).then(function(user) {
+    passwd = user ? user.password : '';
+    isMatch = User.validPassword(password, passwd, done, user);
+  });
+}));
 
 // error handlers
 // development error handler
