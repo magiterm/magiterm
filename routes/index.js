@@ -26,8 +26,6 @@ router.post('/handleCodeSave', function (req, res) {
   const echo = "'echo -e ";
   const file = " > juice.js'";
   const command = 'bash -c ' + echo + code + file;
-
-
   console.log(command);
   docker.runCommand('juice', command, function(err, response) {
     if (err) {
@@ -133,11 +131,6 @@ router.get('*', function(req, res, next) {
   res.render('index', { title: 'picoShell' });
 });
 
-router.get('*', function(req, res, next) {
-  res.render('index', { title: 'picoShell' });
-});
-
 module.exports = router;
-
 
 

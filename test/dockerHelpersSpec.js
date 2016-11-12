@@ -25,4 +25,11 @@ describe('Docker', function() {
     
   });
 
+  xit('it should write to a file', function() {
+
+  });
+
+  xit('it should write to a file with quotations in code input', function() {
+
+  });
 });

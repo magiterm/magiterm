@@ -44,10 +44,28 @@ const install = function(installName, containerName, callback) {
   });
 }
 
+const writeToFile = function(containerName, codeInput, callback) {
+  const code = JSON.stringify(codeInput).replace("'", "'\\''");
+  const echo = "'echo -e ";
+  const file = " > juice.js'";
+  const command = ' bash -c ' + echo + code + file;
+  const fullCommand = dockex + ' ' + containerName + ' ' + command;
+  console.log(fullCommand);
+
+  exec(fullCommand, function(err, stdout, stderr) {
+    if (stderr) {
+      callback(err, null);
+    } else {
+      callback(null, stdout);
+    }
+  });
+}
+
 module.exports = {
   runCommand: runCommand,
   startContainer: startContainer,
-  install: install
+  install: install,
+  writeToFile: writeToFile
 };
 
 
