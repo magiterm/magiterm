@@ -81,18 +81,22 @@ router.post('/signup', function(req, res) {
         return console.log('Error hashing the password', err);
       }
       passwordHashed = hash;
-      const user = User.build({
+      const user = User.create({
         username: username,
         password: passwordHashed,
         salt: salty,
         bio: 'bio'
       })
-      .save()
       .then(function(response) {
         res.send(201, response);
       })
       .catch(function(err) {
-        res.send(err);
+        console.log(err.errors[0].type === 'unique violation')
+        if (err.errors[0].type === 'unique violation') {
+          res.status(200).send('User already exists');
+        } else {
+          res.status(500).send(err);
+        }
       });
     });
   });

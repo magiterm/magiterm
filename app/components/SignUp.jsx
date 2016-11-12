@@ -56,13 +56,17 @@ class Signup extends React.Component {
       password: pass
     })
     .then(function (response) {
+      console.log(response.data);
+      if (response.data === 'User already exists') {
+        console.log('User already exists. Please choose a different username');
+      }
       context.setState({
         password: '',
         username: ''
       });
     })
     .catch(function (error) {
-      console.log('error', error);
+      console.log('Error: ', error);
     });
   }
 
@@ -86,7 +90,7 @@ class Signup extends React.Component {
             value={this.state.password}
             />					
           <input type='submit'/>
-          </form>
+        </form>
 				<div 
 					style={this.state.hover} 
 					onMouseOver={this.hoverOver}
