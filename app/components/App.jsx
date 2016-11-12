@@ -17,7 +17,32 @@ class App extends React.Component {
       authenticate: 'login'
     };
   }
-
+  handleSubmit(e, user, pass) {
+    event.preventDefault();
+    if (this.state.authenticate === 'login') {
+      console.log('login', user, pass);
+      axios.post('/login', {
+          username: user,
+          password: pass
+      }).then(function(response) {
+        console.log(response);
+      }).catch(function(err) {
+        console.log('err', err);
+      });
+    } else {
+      axios.post('/signup', {
+        username: user,
+        password: pass
+      })
+      .then(function (response) {
+        console.log(response);
+        console.log('signup', user, pass);
+      })
+      .catch(function (error) {
+        console.log('error', error);
+      });
+    }
+  }
   GoToLogin() {
     this.setState({
       authenticate: 'login'
