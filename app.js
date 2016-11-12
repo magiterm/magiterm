@@ -11,7 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const db = require('./db/config');
-
+    require('./config/passport')(passport)
 const routes = require('./routes/index');
 const users = require('./routes/users');
 

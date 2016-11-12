@@ -78,6 +78,13 @@ router.post('/signup', function(req, res) {
   });
 });
 
+router.post('/user', function(req, res) {
+  passport.authenticate('local-signup', {
+  successRedirect : res.redirect('/linuxcomputer'), // redirect to the secure profile section
+  failureRedirect : '/signup', // redirect back to the signup page if there is an error
+  failureFlash : true // allow flash messages
+})
+});
 
 
 
