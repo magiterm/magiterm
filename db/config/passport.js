@@ -1,7 +1,7 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var db = require('../models/index');
-var User = db.sequelize.import(__dirname + "/../models/User");
+var db = require('../config');
+var User = db.import(__dirname + "/../../models/User");
 var bcrypt = require('bcrypt');
 
 SALT_WORK_FACTOR = 12;
@@ -14,7 +14,6 @@ passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 
-<<<<<<< 7d10d4b7db493dbe9560ce8b2e23425d3447fb0e:db/config/passport.js
 passport.deserializeUser(function(user, done) {
   User.find({where: {id: user.id}}).then(function(user){
     done(null, user);
@@ -29,13 +28,7 @@ passport.use(new LocalStrategy(function(username, password, done){
     isMatch = User.validPassword(password, passwd, done, user)
   });
 }));
-=======
-// used to deserialize the user
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-      done(err, user);
-  });
-});
+
 
 passport.use('local-signup', new LocalStrategy({
   usernameField: 'username',
@@ -84,18 +77,11 @@ passport.use('local-signup', new LocalStrategy({
             });
           });
         });
-<<<<<<< 5c76f95435387b2a546c90813ca294ee1f178783:db/config/passport.js
-
-    }));
->>>>>>> working with passport sign in for session:config/passport.js
-=======
       }
-    });     
-  }));
-<<<<<<< cb4535ed795ed383acccf85ddce347e9e38e2ab8:db/config/passport.js
-};
->>>>>>> signin with passport:config/passport.js
-=======
+    })
+  }));     
+
+
 
 
     // passport.use('local-login', new LocalStrategy({
@@ -167,6 +153,3 @@ passport.use('local-signup', new LocalStrategy({
     }));
 
 };
-
-
->>>>>>> trying to login correclty:config/passport.js

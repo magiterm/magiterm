@@ -5,8 +5,8 @@ const kue = require('kue');
 const jobs = kue.createQueue();
 var bcrypt = require('bcrypt');
 const docker = require('../utils/dockerAPI');
-var db = require('../models/index');
-var User = db.sequelize.import(__dirname + "/../models/User");
+var db = require('../db/config');
+var User = db.import(__dirname + "/../models/User");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -71,17 +71,6 @@ router.post('/cmd', function (req, res) {
 });
 
 router.post('/signup', function(req, res) {
-<<<<<<< cb4535ed795ed383acccf85ddce347e9e38e2ab8
-  passport.authenticate('local-signup', {
-    successRedirect : res.redirect('/linuxcomputer'), // redirect to the secure profile section
-    failureRedirect : '/signup', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
-  });
-});
-
-router.post('/user', function(req, res) {
-=======
->>>>>>> trying to login correclty
   passport.authenticate('local-signup', {
     successRedirect : res.redirect('/linuxcomputer'), // redirect to the secure profile section
     failureRedirect : '/signup', // redirect back to the signup page if there is an error
@@ -90,11 +79,6 @@ router.post('/user', function(req, res) {
 });
 
 
-
-<<<<<<< cb4535ed795ed383acccf85ddce347e9e38e2ab8
-=======
-
->>>>>>> trying to login correclty
 router.post('/login', function(req, res) {
   console.log('trying to authenticate');
   passport.authenticate('local-login', {
