@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const axios = require('axios');
 
 class Signup extends React.Component {
   constructor (props) {
@@ -8,6 +9,8 @@ class Signup extends React.Component {
     this.hoverOut = this.hoverOut.bind(this);
     this.changeUserNameInput = this.changeUserNameInput.bind(this);
     this.changePasswordInput = this.changePasswordInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
     this.state = {
       hover: {
         textDecoration: 'none',
@@ -43,16 +46,32 @@ class Signup extends React.Component {
       }
     });
   }
+
+  handleSubmit(e, user, pass) {
+    const context = this;
+    e.preventDefault();
+    console.log('submitting a new user', user);
+    axios.post('/signup', {
+      username: user,
+      password: pass
+    })
+    .then(function (response) {
+      context.setState({
+        password: '',
+        username: ''
+      });
+    })
+    .catch(function (error) {
+      console.log('error', error);
+    });
+  }
+
   render() {
     return (
 			<div>
 				<div>Signup</div>
 				<form onSubmit={function(e) {
-          this.props.handleSubmit(e, this.state.username, this.state.password);
-          this.setState({
-            password: '',
-            username: ''
-          });
+          this.handleSubmit(e, this.state.username, this.state.password);
         }.bind(this)}>
 					<input 
             onChange={this.changeUserNameInput}

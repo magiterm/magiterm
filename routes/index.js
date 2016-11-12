@@ -5,8 +5,8 @@ const kue = require('kue');
 const jobs = kue.createQueue();
 var bcrypt = require('bcrypt');
 const docker = require('../utils/dockerAPI');
-var db = require('../models/index');
-var User = db.sequelize.import(__dirname + "/../models/User");
+var db = require('../db/config');
+var User = require('../models/User');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -55,6 +55,7 @@ router.post('/cmd', function (req, res) {
     docker.runCommand(containerName, 'cat /picoShell/.pico', function(err1, res1) {
 
       console.log('response from cat /picoShell/.pico :', res1);
+
       res1 = res1.replace(/^\s+|\s+$/g, '');
 
       cmd = '"cd ' + res1 + ' && ' + cmd + '"';
@@ -64,66 +65,62 @@ router.post('/cmd', function (req, res) {
         if (err2) { res.status(200).send(err2); } 
         else { res.status(200).send(res2); }
       });
-    })
-    
+    }) 
   }
-
-
 });
 
-router.post('/user', function(req, res) {
-  console.log('posting');
-  var username = req.body.username;
-  var salty;
-  var password;
+router.post('/signup', function(req, res) {
+  console.log('signing up: ', req.body.username);
+  const username = req.body.username;
+  const password = req.body.password;
+
   bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
-    salty = salt;
-    bcrypt.hash(req.body.password, salt, function(err, hash) {
+    const salty = salt;
+    bcrypt.hash(password, salt, function(err, hash) {
       if (err) {
-        return console.log('bcrypt hashing error', err);
+        return console.log('Error hashing the password', err);
       }
-      console.log('hellohellohellohellohello', hash);
-      password = hash;
-      var user = User.build({
+      passwordHashed = hash;
+      const user = User.build({
         username: username,
-        password: password,
+        password: passwordHashed,
         salt: salty,
         bio: 'bio'
-      }).save().then(function(response) {
-        console.log( 'asdfasdfasdfasdfasd', response);
-        res.send(response);
-      }).catch(function(err) {
+      })
+      .save()
+      .then(function(response) {
+        res.send(201, response);
+      })
+      .catch(function(err) {
         res.send(err);
       });
     });
   });
-  // res.send(200)
 });
 
-router.get('/user', function(req, res) {
-  var username = req.query.username;
-  var password = req.query.password;
+router.get('/login', function(req, res) {
+  const username = req.query.username;
+  const password = req.query.password;
   console.log(password, username);
     User.findOne({
       where: {
         username: username
       }
-    }).then(function(response) {
-      bcrypt.compare(password, response.dataValues.password, function(err, results) {
-        if (err) {
-          return console.log(err);
-        }
-        if (response) {
-          console.log('all god', response);
-          res.send(response);
-        } else {
-          res.send('not found');
-        }
-      });
-      
+    })
+    .then(function(response) {
+      if (response) {
+        bcrypt.compare(password, response.dataValues.password, function(err, results) {
+          if (err) {
+            return console.log(err);
+          } else {
+            res.send(200, results);
+          }
+        });
+      } else {
+        res.send(200, 'User not found');
+      }
     }).catch(function(err) {
-      console.log(err);
-      res.send(err); 
+      res.send(404, err); 
     });
 });
 

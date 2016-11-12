@@ -13,39 +13,11 @@ class App extends React.Component {
     super(props);
     this.GoToLogin = this.GoToLogin.bind(this);
     this.GoToSignUp = this.GoToSignUp.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       authenticate: 'login'
     };
   }
-  handleSubmit(e, user, pass) {
-    event.preventDefault();
-    if (this.state.authenticate === 'login') {
-      console.log('login', user, pass);
-      axios.get('/user', {
-        params: {
-          username: user,
-          password: pass
-        }
-      }).then(function(response) {
-        console.log(response);
-      }).catch(function(err) {
-        console.log('err', err);
-      });
-    } else {
-      axios.post('/user', {
-        username: user,
-        password: pass
-      })
-      .then(function (response) {
-        console.log(response);
-        console.log('signup', user, pass);
-      })
-      .catch(function (error) {
-        console.log('error', error);
-      });
-    }
-  }
+
   GoToLogin() {
     this.setState({
       authenticate: 'login'
@@ -57,7 +29,7 @@ class App extends React.Component {
     });
   }
   render() {
-    this.state.authenticate === 'login' ? authenticate = <Login handleSubmit={this.handleSubmit} GoToSignUp={this.GoToSignUp}/> : authenticate = <SignUp handleSubmit={this.handleSubmit} GoToLogin={this.GoToLogin}/>;
+    this.state.authenticate === 'login' ? authenticate = <Login GoToSignUp={this.GoToSignUp}/> : authenticate = <SignUp GoToLogin={this.GoToLogin}/>;
     return (
       <div>        
         <div className="homepage-container">

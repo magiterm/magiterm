@@ -1,14 +1,9 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var Container = sequelize.define('Container', {
-    ownerID: DataTypes.STRING,
-    collaboratorId: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
-  return Container;
-};
+const db = require('../db/config.js');
+const Sequelize = require('sequelize');
+
+const Container = db.define('container', {
+    ownerID: Sequelize.STRING,
+    collaboratorID: Sequelize.STRING
+});
+
+module.exports = Container;

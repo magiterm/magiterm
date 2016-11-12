@@ -1,17 +1,17 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Containers', {
+    return queryInterface.createTable('UserDockerStats', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ownerID: {
+      userID: {
         type: Sequelize.STRING
       },
-      collaboratorId: {
+      stats: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -25,6 +25,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Containers');
+    return queryInterface.dropTable('UserDockerStats');
   }
 };

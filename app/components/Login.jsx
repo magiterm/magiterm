@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const axios = require('axios');
 
 class Login extends React.Component {
   constructor(props) {
@@ -43,16 +44,34 @@ class Login extends React.Component {
       }
     });
   }
+
+  handleSubmit(e, user, pass) {
+    const context = this;
+    e.preventDefault();
+    axios.get('/login', {
+      params: {
+        username: user,
+        password: pass
+      }
+    })
+    .then(function(response) {
+      console.log(response);
+      context.setState({
+        password: '',
+        username: ''
+      });
+    })
+    .catch(function(err) {
+      console.log('err', err);
+    });
+  }
+
   render() {
     return (
 			<div>
 				<div>Login</div>
 				<form onSubmit={function(e) {
-          this.props.handleSubmit(e, this.state.username, this.state.password);
-          this.setState({
-            password: '',
-            username: ''
-          });
+          this.handleSubmit(e, this.state.username, this.state.password);
         }.bind(this)}>
 					<input 
             onChange={this.changeUserNameInput}

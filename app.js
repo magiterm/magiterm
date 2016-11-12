@@ -10,7 +10,7 @@ const passport = require('passport');
 var LocalStrategy = require('passport-local'), Strategy;
 const favicon = require('serve-favicon');
 const logger = require('morgan');
-const db = require('./models/index');
+const db = require('./db/config');
 
 const routes = require('./routes/index');
 const users = require('./routes/users');
