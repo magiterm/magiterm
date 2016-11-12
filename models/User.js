@@ -1,13 +1,14 @@
 const db = require('../db/config.js');
 const Sequelize = require('sequelize');
+var passportLocal = require('passport-local');
 
-const User = db.define('user', {
-  username: Sequelize.STRING,
-  password: Sequelize.STRING,
-  salt: Sequelize.STRING,
-  bio: Sequelize.TEXT
-  }, 
-  {
+module.exports = function(sequelize, DataTypes) {
+  var User = sequelize.define('user', {
+    username: DataTypes.STRING,
+    password: DataTypes.STRING,
+    salt: DataTypes.STRING,
+    bio: DataTypes.TEXT
+  }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
@@ -26,5 +27,5 @@ const User = db.define('user', {
       }
     }
   });
+};
 
-module.exports = User;
