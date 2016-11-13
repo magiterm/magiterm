@@ -117,7 +117,11 @@ router.get('/login', function(req, res) {
           if (err) {
             return console.log(err);
           } else {
-            res.send(200, results);
+            if (results === true) {
+              res.send(200, username);
+            } else {
+              res.send(200, results);
+            }
           }
         });
       } else {

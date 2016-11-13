@@ -56,10 +56,16 @@ class Login extends React.Component {
     })
     .then(function(response) {
       console.log(response);
-      context.setState({
-        password: '',
-        username: ''
-      });
+
+      if (response) {
+        console.log('this is the username: ', response.data);
+        window.sessionStorage['username'] = response.data;
+        window.location = window.location + 'dashboard';
+      }
+      // context.setState({
+      //   password: '',
+      //   username: ''
+      // });
     })
     .catch(function(err) {
       console.log(err);  

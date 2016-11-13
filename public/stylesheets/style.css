@@ -28,6 +28,10 @@ body {
           font-size: 120px;
           color: #FFFFFF; }
 
+.error {
+  color: #FFFFFF;
+  font-size: 120px; }
+
 /* BASICS */
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */

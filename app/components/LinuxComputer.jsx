@@ -10,12 +10,21 @@ class LinuxComputer extends React.Component {
 	}
 
 	render() {
-		return (
-			<div>
-				<CodeEditor />
-				<Terminal />
-			</div>
-		)
+   if (!sessionStorage['username']) {
+     window.location = '/';
+
+     return(
+       <div className="error"> 
+         You are not logged in! Returning back to Login Page...
+       </div>
+     )
+  	}	else {return (
+  			<div>
+  				<CodeEditor />
+  				<Terminal />
+  			</div>
+  		)
+    }
 	}
 }
 

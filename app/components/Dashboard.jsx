@@ -10,15 +10,25 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    return (
-        <div>
-          Dashboard!
-          <Stats username="username" email="email@email.com" github="somegithub"/>
-          <Bio bioInfo="Bio Info!"/>
-          <Collaborators curCollab="Hobo Jim" collabWith={["Mr. Cool", "Some Guy"]}/>
-          <UserInfo />
+    if (!sessionStorage['username']) {
+      window.location = '/';
+
+      return(
+        <div className="error"> 
+          You are not logged in! Returning back to Login Page...
         </div>
-      );
+      )
+    } else {
+      return (
+          <div>
+            Dashboard!
+            <Stats username="username" email="email@email.com" github="somegithub"/>
+            <Bio bioInfo="Bio Info!"/>
+            <Collaborators curCollab="Hobo Jim" collabWith={["Mr. Cool", "Some Guy"]}/>
+            <UserInfo />
+          </div>
+        );
+    }
   }
 }
 
