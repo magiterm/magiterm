@@ -69,6 +69,7 @@ class Signup extends React.Component {
           username: ''
         });
       }
+
     })
     .catch(function (error) {
       console.log('Error: ', error);
