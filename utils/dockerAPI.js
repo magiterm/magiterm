@@ -11,8 +11,12 @@ const run = "docker run -t -d --name"
 const runCommand = function(containerName, command, callback) {
   runCommandCommand = dockex + ' ' + containerName + ' ' + command;
   exec(runCommandCommand, function(err, stdout, stderr) {
-    if (stderr) {
-      callback(err, null);
+    console.log('STDOUT', stdout);
+    console.log('STDERR', stderr);
+    console.log('ERR', err);
+    if (stderr && !stdout) {
+      //callback(err, null);
+      callback(null, stderr);
     } else {
       callback(null, stdout);
     }

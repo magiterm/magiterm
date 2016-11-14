@@ -5,3 +5,4 @@ public/dist/
 test/dist/
 .sass-cache/
 dump.rdb
+npm-debug*

@@ -10,6 +10,7 @@ class CodeEditor extends React.Component {
     this.state = {
       codeValue: ''
     }
+    this.username = sessionStorage['username'];
   }
 
   componentDidMount() {
@@ -53,22 +54,23 @@ class CodeEditor extends React.Component {
 
     //The 1 will be replaced by container/user ID when we have sessions
     this.socket.on('/TE/1', function(code) {
-      console.log('CODE: ', code);
-      context.setState({
-        codeValue: code
-      });
-      //Must place the cursor back where it was after replacing contents. Otherwise weird things happen.
-      context.cursorPos = context.editor.doc.getCursor();
-      context.editor.getDoc().setValue(code);
-      context.editor.doc.setCursor(context.cursorPos);
+      if(code.username !== context.username) {
+        context.setState({
+          codeValue: code.code
+        });
+        //Must place the cursor back where it was after replacing contents. Otherwise weird things happen.
+        console.log(code.code);
+        context.cursorPos = context.editor.doc.getCursor();
+        context.editor.getDoc().setValue(code.code);
+        context.editor.doc.setCursor(context.cursorPos);
+      }
     });
   }
 
 
   handleCodeChange() {
       var code = document.getElementById('code-editor').value;
-      console.log(code);
-      this.socket.emit('/TE/1', code);
+      this.socket.emit('/TE/1', {code: code, username: this.username});
   }
 
   handleCodeSave(e) {
