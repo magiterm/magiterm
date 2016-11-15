@@ -9,34 +9,14 @@ class CodeEditor extends React.Component {
     var context = this;
     this.state = {
       codeValue: '',
-      containerName: '',
-      username: '',
+      containerName: this.props.containerName,
+      username: this.props.username,
       fileName: ''
     }
     this.username = localStorage['jwtToken'];
   }
   
   componentDidMount() {
-    var context = this;
-
-    const token = localStorage['jwtToken'];
-
-    if (token) {
-      axios.get('/decode', {
-        params: {
-          token: token
-        }
-      })
-      .then (function(response) {
-        const user = response.data;
-
-        context.setState({
-          containerName: user.username,
-          username: user.username
-       });
-      });
-    }
-
     var codeEditor = document.getElementById("code-editor")
     var editor = CodeMirror.fromTextArea(codeEditor, {
       lineNumbers: true,

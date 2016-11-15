@@ -5,38 +5,19 @@ const axios = require('axios');
 class Terminal extends React.Component {
 	constructor(props) {
 		super(props);
-    var context = this;
-		this.state = {
+
+    console.log('this is props', props);
+
+    this.state = {
 			command: null,
       prompt: '/picoShell >> ',
-      containerName: '', // change this to refer to user name when login is done
+      containerName: this.props.containerName, // change this to refer to user name when login is done
       curCommand: null,
       curDir: '/',
-      username: ''
+      username: this.props.username
 		}
+    this.renderTerminal();
 	}
-
-  componentDidMount() {
-    const token = localStorage['jwtToken'];
-    const context = this;
-
-    if (token) {
-      axios.get('/decode', {
-        params: {
-          token: token
-        }
-      })
-      .then (function(response) {
-        const user = response.data;
-
-        context.setState({
-          containerName: user.username,
-          username: user.username
-       });
-        context.renderTerminal();
-      });
-    }
-  }
 
   componentWillMount() {
     this.socket = io();

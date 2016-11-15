@@ -9,7 +9,6 @@ const axios = require('axios');
 
 let authenticate;
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +17,8 @@ class App extends React.Component {
     this.state = {
       authenticate: 'login',
       authenticated: false,
-      username: ''
+      username: '',
+      containerName: ''
     };
   }
 
@@ -37,7 +37,8 @@ class App extends React.Component {
 
         context.setState({
          authenticated: true,
-         username: user.username  
+         username: user.username,
+         containerName: user.containerName  
        });
       });
     }
