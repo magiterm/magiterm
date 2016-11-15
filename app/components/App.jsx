@@ -27,7 +27,7 @@ class App extends React.Component {
     const context = this;
 
     if (token) {
-      axios.get('/auth/decode', {
+      axios.get('/decode', {
         params: {
           token: token
         }
@@ -130,7 +130,7 @@ function requireAuth(nextState, replace) {
   const token = localStorage['jwtToken'];
 
   if (token) {
-    axios.get('/auth/decode', {
+    axios.get('/decode', {
       params: {
         token: token
       }

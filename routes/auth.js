@@ -6,11 +6,6 @@ const secret = "PICOSHELL";
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
-
-
-
-
-
 router.get('/', function(req, res, next) {
   console.log('try');
   res.send(200);
@@ -64,6 +59,7 @@ router.post('/authenticate', function(req, res) {
     }
   })
   .then(function(response) {
+    console.log(response);
     if (response) {
       bcrypt.compare(password, response.dataValues.password, function(err, results) {
         if (err) {

@@ -18,6 +18,13 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'picoShell' });
 });
 
+router.get('/decode', function(req, res) {
+  console.log('trying to access decode');
+  const decoded = jwtDecode(req.query.token);
+  res.send(200, decoded)
+});
+
+
 router.post('/handleCodeSave', function (req, res) {
   const code = JSON.stringify(req.body.codeValue).replace(/'/g, "\\\"");
   const echo = "'echo -e ";
@@ -79,8 +86,8 @@ router.post('/cmd', function (req, res) {
 
 
 
-// router.get('*', function(req, res, next) {
-//   res.render('index', { title: 'picoShell' });
-// });
+router.get('*', function(req, res, next) {
+  res.render('index', { title: 'picoShell' });
+});
 
 module.exports = router;
