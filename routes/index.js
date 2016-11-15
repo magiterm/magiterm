@@ -9,6 +9,8 @@ var db = require('../db/config');
 var User = require('../models/User');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+const jwt = require('jsonwebtoken');
+const jwtDecode = require('jwt-decode');
 
 
 /* GET home page. */
@@ -17,11 +19,6 @@ router.get('/', function(req, res) {
 });
 
 router.post('/handleCodeSave', function (req, res) {
-  // const code = JSON.stringify(req.body.codeValue);
-  // console.log(req.body.codeValue);
-  // console.log(JSON.stringify(req.body.codeValue));
-  // console.log(JSON.stringify(req.body.codeValue).replace(/'/g, "\\\""));
-
   const code = JSON.stringify(req.body.codeValue).replace(/'/g, "\\\"");
   const echo = "'echo -e ";
   const file = " > juice.js'";
@@ -35,6 +32,8 @@ router.post('/handleCodeSave', function (req, res) {
     }
   });
 });
+
+
 
 router.post('/cmd', function (req, res) {
   var cmd = req.body.cmd;
@@ -78,71 +77,10 @@ router.post('/cmd', function (req, res) {
   }
 });
 
-router.post('/signup', function(req, res) {
-  console.log('signing up: ', req.body.username);
-  const username = req.body.username;
-  const password = req.body.password;
 
-  bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
-    const salty = salt;
-    bcrypt.hash(password, salt, function(err, hash) {
-      if (err) {
-        return console.log('Error hashing the password', err);
-      }
-      passwordHashed = hash;
-      const user = User.create({
-        username: username,
-        password: passwordHashed,
-        salt: salty,
-        bio: 'bio'
-      })
-      .then(function(response) {
-        res.send(201, response);
-      })
-      .catch(function(err) {
-        console.log(err.errors[0].type === 'unique violation')
-        if (err.errors[0].type === 'unique violation') {
-          res.status(200).send('User already exists');
-        } else {
-          res.status(500).send(err);
-        }
-      });
-    });
-  });
-});
 
-router.get('/login', function(req, res) {
-  const username = req.query.username;
-  const password = req.query.password;
-  console.log(password, username);
-    User.findOne({
-      where: {
-        username: username
-      }
-    })
-    .then(function(response) {
-      if (response) {
-        bcrypt.compare(password, response.dataValues.password, function(err, results) {
-          if (err) {
-            return console.log(err);
-          } else {
-            if (results === true) {
-              res.send(200, username);
-            } else {
-              res.send(200, results);
-            }
-          }
-        });
-      } else {
-        res.send(200, 'User not found');
-      }
-    }).catch(function(err) {
-      res.send(404, err); 
-    });
-});
-
-router.get('*', function(req, res, next) {
-  res.render('index', { title: 'picoShell' });
-});
+// router.get('*', function(req, res, next) {
+//   res.render('index', { title: 'picoShell' });
+// });
 
 module.exports = router;

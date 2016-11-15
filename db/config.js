@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const db = new Sequelize('picodb', 'root', 'root', {
+const db = new Sequelize('picoDB', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
 

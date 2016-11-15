@@ -52,7 +52,7 @@ class Signup extends React.Component {
     const context = this;
     e.preventDefault();
     console.log('submitting a new user', user);
-    axios.post('/signup', {
+    axios.post('/auth/signup', {
       username: user,
       password: pass
     })

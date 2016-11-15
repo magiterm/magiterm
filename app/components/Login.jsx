@@ -47,33 +47,21 @@ class Login extends React.Component {
   }
 
   handleSubmit(e, user, pass) {
-    const context = this;
     e.preventDefault();
-    axios.get('/login', {
+    var context = this;
+    axios.post('/auth/authenticate', {
       params: {
-        username: user,
+        username: user, 
         password: pass
       }
     })
     .then(function(response) {
-      console.log(response);
-
       if (response) {
-        console.log('this is the username: ', response.data);
-        context.socket.emit('/userEncrypt', {username: response.data});
-        context.socket.on('/' + response.data + '/encrypted', function(encrypted) {
-          console.log('ENCRYPTED', encrypted);
-          window.sessionStorage.setItem('token', encrypted);
-          window.location = window.location + 'dashboard';
-        });
+        localStorage['jwtToken'] = response.data.token;
+        window.location = '/linuxcomputer'
+      } else {
+        alert("authentication failed");
       }
-      // context.setState({
-      //   password: '',
-      //   username: ''
-      // });
-    })
-    .catch(function(err) {
-      console.log(err);  
     });
   }
 
