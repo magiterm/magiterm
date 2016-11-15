@@ -14,7 +14,6 @@ const jwtDecode = require('jwt-decode')
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  console.log(req);
   res.render('index', { title: 'picoShell' });
 });
 
@@ -25,7 +24,6 @@ router.get('/decode', function(req, res) {
 
 
 router.post('/handleCodeSave', function (req, res) {
-  console.log(req.body);
   const fileName = req.body.fileName;
   const containerName = req.body.containerName;
   const code = JSON.stringify(req.body.codeValue).replace(/'/g, "\\\"");
@@ -119,33 +117,26 @@ router.post('/cmd', function (req, res) {
       }
     });
   } else {
-      docker.runCommand(containerName, 'cat /picoShell/.pico', function(err1, res1) {
+    docker.runCommand(containerName, 'cat /picoShell/.pico', function(err1, res1) {
 
-        console.log('response from cat /picoShell/.pico :', res1);
+      console.log('response from cat /picoShell/.pico :', res1);
 
-        res1 = res1.replace(/^\s+|\s+$/g, '');
+      res1 = res1.replace(/^\s+|\s+$/g, '');
 
-        cmd = '"cd ' + res1 + ' && ' + cmd + '"';
-        const command = 'bash -c ' + cmd;
-        console.log(command);
-
-        docker.runCommand(containerName, command, function(err2, res2) {
-          if (err2) { res.status(200).send(err2); } 
-          else { res.status(200).send(res2); }
-        docker.runCommand('juice', command, function(err2, res2) {
-          if (err2) {
-            res.status(200).send(err2);
-          } else {
-            res.status(200).send(res2);
-          }
-        });
-      }) 
-    })
+      cmd = '"cd ' + res1 + ' && ' + cmd + '"';
+      const command = 'bash -c ' + cmd;
+      console.log(command);
+      docker.runCommand(containerName, command, function(err2, res2) {
+        if (err2) { res.status(200).send(err2); } 
+        else { res.status(200).send(res2); }
+      });
+    }) 
   }
 });
 
+
 User.updateOrCreate = function(user, cb) {
-  if (user.authenticatedWith !== 'local') {
+  if (user.authenticatedWith !== 'local' && user.authenticatedWith) {
     User.findOne({where: {username: username}})
     .then(function(err, oldUser) {
       if (err) {
@@ -159,6 +150,7 @@ User.updateOrCreate = function(user, cb) {
       cb(null, user);
     });
   } else {
+    console.log('in else');
     cb(null, user);
   }
 };
@@ -177,11 +169,12 @@ function serialize(req, res, next) {
   var user = req.authInfo.dataValues;
   User.updateOrCreate(user, function(err, user) {
     if (err) {
+      console.log('error in user update or create');
       return next(err);
     }
     req.user = user;
     next();
-  });
+  })
 }
 
 router.post('/authenticate', 

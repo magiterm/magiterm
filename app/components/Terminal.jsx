@@ -5,10 +5,7 @@ const axios = require('axios');
 class Terminal extends React.Component {
 	constructor(props) {
 		super(props);
-
-    console.log('this is props', props);
-
-    this.state = {
+		this.state = {
 			command: null,
       prompt: '/picoShell >> ',
       containerName: this.props.containerName, // change this to refer to user name when login is done
@@ -134,7 +131,6 @@ class Terminal extends React.Component {
           },
           onCommandChange: function(command, term) {
             if(command !== context.state.curCommand) {
-              console.log('EMITTING. USERNAME = ', context.username);
               context.socket.emit('/TERM/1', {cmd: command, username: context.username});
               context.setState({
                 curCommand: command

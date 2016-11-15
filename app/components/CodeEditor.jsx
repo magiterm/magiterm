@@ -17,6 +17,7 @@ class CodeEditor extends React.Component {
   }
   
   componentDidMount() {
+    const context = this;
     var codeEditor = document.getElementById("code-editor")
     var editor = CodeMirror.fromTextArea(codeEditor, {
       lineNumbers: true,

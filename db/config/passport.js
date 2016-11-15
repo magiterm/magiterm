@@ -21,7 +21,7 @@ passport.use(new Strategy({
               done(err);
           } 
           if (isMatch) {
-            console.log('bycrtyp match good');
+            console.log('bycrypt match good');
               done(null, isMatch, user);
           } else {
             console.log('bycrtup match bad', isMatch);
@@ -29,22 +29,6 @@ passport.use(new Strategy({
           }
         });
       }
-      
-
-      //   if (!user.dataValues) { 
-      //     console.log('no User');
-      //     return done(null, false); 
-      //   }
-      //   if (!User.validPassword(password, user.dataValues.password)) { 
-      //     console.log('non valid password');
-      //     return done(null, false); 
-      //   }
-      //   console.log('passowrd looks good')
-      //   return done(null, true, user.dataValues);
-      //   })
-      // .catch(function(err){
-      //   if (err) { return done(err); }
-      // });
     }).catch(function(err) {
       done(err, null, null);
     });
