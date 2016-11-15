@@ -50,8 +50,17 @@ router.post('/cmd', function (req, res) {
       if (err) { res.status(200).send(err); } 
       else { res.status(200).send(res1); }
     })
-  }
-  else {
+  } else if(cmd.split(" ")[0] === 'open') {
+    docker.runCommand(containerName, 'cat ' + cmd.split(" ")[1], function(err1, res1) {
+      console.log('err1', err1);
+      console.log('res1', res1);
+      if(err1) {
+        res.status(200).send(err1);
+      } else {
+        res.status(200).send({termResponse: res1, fileOpen: true});
+      }
+    });
+  } else {
     docker.runCommand(containerName, 'cat /picoShell/.pico', function(err1, res1) {
 
       console.log('response from cat /picoShell/.pico :', res1);

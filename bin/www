@@ -7,7 +7,25 @@
 const app = require('../app');
 const debug = require('debug')('magiterm:server');
 const http = require('http');
+const User = require('../models/User');
 
+const crypto = require('crypto'),
+    algorithm = 'aes-256-ctr',
+    password = 'mdirjwnstkdo491mndgiiu23na1';
+
+function encrypt(text){
+  var cipher = crypto.createCipher(algorithm,password)
+  var crypted = cipher.update(text,'utf8','hex')
+  crypted += cipher.final('hex');
+  return crypted;
+}
+ 
+function decrypt(text){
+  var decipher = crypto.createDecipher(algorithm,password)
+  var dec = decipher.update(text,'hex','utf8')
+  dec += decipher.final('utf8');
+  return dec;
+}    
 /**
  * Get port from environment and store in Express.
  */
@@ -36,6 +54,37 @@ io.on('connection', function(socket) {
   socket.on('/TE/1', function(code) {
     //rebroadcast the message to all connected sockets.
     io.sockets.emit('/TE/1', code);
+  });
+
+  socket.on('/TERM/1', function(code) {
+    io.sockets.emit('/TERM/1', code);
+  });
+
+  socket.on('/TERM/RES/1', function(code) {
+    io.sockets.emit('/TERM/RES/1', code);
+  });
+
+  socket.on('/userEncrypt', function(userObj) {
+    //encrypt username
+    const encrypted = encrypt(userObj.username);
+    console.log('ENCRYPTED', encrypted);
+    io.sockets.emit('/' + userObj.username + '/encrypted', encrypted);
+  });
+
+  socket.on('/userDecrypt', function(userObj) {
+    const username = decrypt(userObj.encrypted);
+    User.findOne({
+      where: {
+        username: username
+      }
+    })
+    .then(function(response) {
+      if(response) {
+        io.sockets.emit('/auth/' + userObj.encrypted, true);
+      } else {
+        io.sockets.emit('/auth/' + userObj.encrypted, false);
+      }
+    });
   });
 
 });

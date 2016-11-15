@@ -5,6 +5,7 @@ const axios = require('axios');
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.socket = io();
     this.hoverOver = this.hoverOver.bind(this);
     this.hoverOut = this.hoverOut.bind(this);
     this.changeUserNameInput = this.changeUserNameInput.bind(this);
@@ -59,8 +60,12 @@ class Login extends React.Component {
 
       if (response) {
         console.log('this is the username: ', response.data);
-        window.sessionStorage['username'] = response.data;
-        window.location = window.location + 'dashboard';
+        context.socket.emit('/userEncrypt', {username: response.data});
+        context.socket.on('/' + response.data + '/encrypted', function(encrypted) {
+          console.log('ENCRYPTED', encrypted);
+          window.sessionStorage.setItem('token', encrypted);
+          window.location = window.location + 'dashboard';
+        });
       }
       // context.setState({
       //   password: '',
