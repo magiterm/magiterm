@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var docker = require('../utils/dockerAPI.js');
+var docker = require('../../utils/dockerAPI.js');
 
 describe('Docker', function() {
 
