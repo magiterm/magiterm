@@ -93,33 +93,35 @@ class Signup extends React.Component {
   render() {
     return (
 			<div>
-				<div>Signup</div>
 				<form onSubmit={function(e) {
           this.handleSubmit(e, this.state.username, this.state.password);
         }.bind(this)}>
-					<input 
-            onChange={this.changeUserNameInput}
-            type='text' 
-            placeholder='username'
-            value={this.state.username}
-            />
-          <input 
-            onChange={this.changePasswordInput}
-            type='password' 
-            placeholder='password'
-            />					
-          <input type='submit'/>
+          <div className="form-inputs">
+            <input 
+              onChange={this.changeUserNameInput}
+              className="login-input"
+              type='text' 
+              placeholder='username'
+              value={this.state.username}
+              /><br/>
+            <input 
+              onChange={this.changePasswordInput}
+              className="login-input"
+              type='password' 
+              placeholder='password'
+              />
+            <div className="submit">
+             <button type="submit" className="btn btn-success">Sign Up</button>
+            </div>
+          </div>
         </form>
-
-        {this.state.usernameExists ? <div> Username exists. Please choose a different username. </div> : null}
-
-				<div 
-					style={this.state.hover} 
-					onMouseOver={this.hoverOver}
-					onMouseOut={this.hoverOut} 
-					onClick={this.props.GoToLogin}
-					>
-					Already have an account?</div>
+        <div className="login-query-container">
+          <a href="#"
+          className="login-query"
+          onClick={this.props.GoToLogin}>
+          Already have an Account?
+          </a>
+        </div>
 			</div>
 		);
   }

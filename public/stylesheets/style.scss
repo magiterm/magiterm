@@ -2,6 +2,7 @@ $offwhite: #F4F6F7;
 $offblack: #242327;
 $darkblack: #161820;
 $lightblue: #638898;
+$purpleblue: #b2baef;
 $white: #FFFFFF;
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 @import url('https://fonts.googleapis.com/css?family=Advent+Pro|Dosis');
@@ -14,6 +15,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 
 .homepage-container {
 	width: 100%;
@@ -54,6 +56,44 @@ body {
           margin-bottom: 100px;
           height: 100%;
           background: rgba(36, 35, 39, 0.4);
+
+          .login {
+            .login-input {
+              margin: 5px;
+              background: rgba(36, 35, 39, 0.6);
+              border: 0;
+              color: $offwhite;
+              width: 90%;
+              padding: 5px;
+
+              &:focus {
+                outline: none;
+              }
+            }
+            .login-query-container {
+              padding: 5px;
+              .login-query {
+                color: $darkblack;
+
+                &:hover {
+                  color: $offwhite;
+                  text-decoration: none;
+                }
+              }
+            }
+            .btn-success {
+              background-color: $lightblue;
+              border-color: $lightblue;
+              border-radius: 0;
+              width: 90%;
+              padding: 2px;
+
+              &:hover {
+               background-color: $purpleblue;
+               border-color: $purpleblue; 
+              }
+            }
+          }
         }
 			}
 		}
