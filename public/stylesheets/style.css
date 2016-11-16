@@ -14,7 +14,8 @@ body {
 
 .code-editor-container {
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  height: 620px; }
   .code-editor-container .current-file {
     color: #03CEA1;
     text-align: right;
@@ -138,7 +139,7 @@ body {
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
   font-family: monospace;
-  height: 300px;
+  height: 90%;
   color: black; }
 
 /* PADDING */
@@ -151,13 +152,13 @@ body {
   /* Horizontal padding of content */ }
 
 .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
-  background-color: white;
+  background-color: #191919;
   /* The little square between H and V scrollbars */ }
 
 /* GUTTER */
 .CodeMirror-gutters {
   border-right: 1px solid #ddd;
-  background-color: #f7f7f7;
+  background-color: #191919;
   white-space: nowrap; }
 
 .CodeMirror-linenumber {

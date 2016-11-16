@@ -19,7 +19,8 @@ class App extends React.Component {
       authenticate: 'login',
       authenticated: false,
       username: '',
-      containerName: ''
+      containerName: '',
+      render: false
     };
   }
 
@@ -33,16 +34,16 @@ class App extends React.Component {
           token: token
         }
       })
-      .then (function(response) {
+      .then(function(response) {
         const user = response.data;
 
         context.setState({
          authenticated: true,
          username: user.username,
-         containerName: user.containerName  
+         containerName: user.containerName,
        });
       });
-    }
+    } 
   }
 
   GoToLogin() {
@@ -58,6 +59,7 @@ class App extends React.Component {
 
   render() {
     if (!this.state.authenticated) {
+
       this.state.authenticate === 'login' ? authenticate = <Login GoToSignUp={this.GoToSignUp}/> : authenticate = <SignUp GoToLogin={this.GoToLogin}/>;
       return (
         <div>        

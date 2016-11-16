@@ -115,6 +115,15 @@ class Terminal extends React.Component {
           greetings: '',
           name: '',
           prompt: prompt,
+          tabcompletion: true,
+          completion: function(terminal, command, callback) {
+            axios.post('/cmd', { cmd: 'ls', containerName: containerName })
+              .then(function(res) {
+                console.log(res.data);
+                const possibilities = (res.data.split('\n'));
+                callback(possibilities);
+              })
+          },
           onInit: function(term) {
             context.terminal = term;
             var command = 'cd /picoShell';
