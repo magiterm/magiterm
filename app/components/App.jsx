@@ -76,8 +76,15 @@ class App extends React.Component {
                   </div>
                   <div className="col-md-6">
                     <div className="logo-container">
-                      <div className="login">
-                       {authenticate}
+                      <div className="login-header">
+                        <div className="login">
+                          Reinvent the Interview Process
+                        </div>
+                      </div>
+                      <div className="login-box">
+                        <div className="login">
+                         {authenticate}
+                        </div>
                       </div>
                     </div>
                   </div>
