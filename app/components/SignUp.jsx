@@ -138,8 +138,9 @@ class Signup extends React.Component {
             </div>
           </div>
         </form>
+        {this.state.usernameExists ? <div> Username exists. Please choose a different username. </div> : null}
         <div className="login-query-container">
-          <a href="#"
+          <a
           className="login-query"
           onClick={this.props.GoToLogin}>
           Already have an Account?

@@ -74,7 +74,7 @@ class Login extends React.Component {
           </div>
 				</form>
         <div className="login-query-container">
-  				<a href="#"
+  				<a
           className="login-query"
   				onClick={this.props.GoToSignUp}>
           Need to signup?

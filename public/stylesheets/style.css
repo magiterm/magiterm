@@ -117,7 +117,8 @@ body {
           .homepage-container .header .overlay .logo-container .login-box .login .login-query-container {
             padding: 5px; }
             .homepage-container .header .overlay .logo-container .login-box .login .login-query-container .login-query {
-              color: #191919; }
+              color: #191919;
+              cursor: pointer; }
               .homepage-container .header .overlay .logo-container .login-box .login .login-query-container .login-query:hover {
                 color: #F4F6F7;
                 text-decoration: none; }
