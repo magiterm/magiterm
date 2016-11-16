@@ -6,6 +6,15 @@ var User = require('../../models/User');
 const bcrypt = require('bcrypt');
 var GitHubStrategy = require('passport-github').Strategy;
 
+passport.serializeUser(function(user, done) {
+  console.log('serialize useradkjaskjfadskjkjhadfkjadsfkjl', user)
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    console.log('deserializeUser userasdfasdfasdfasd', obj)
+    done(null, obj);
+});
 
 passport.use(new Strategy({  
   passReqToCallback : true
@@ -45,7 +54,6 @@ passport.use(new GitHubStrategy({
     callbackURL: 'http://localhost:3000/github/callback'
   },
   function(accessToken, refreshToken, profile, cb) {
-    console.log('back from github', profile._json)
     var nameArray = profile.displayName.split(' ');
     var user = {
       username: profile.username,
@@ -55,13 +63,9 @@ passport.use(new GitHubStrategy({
       email: profile.emails[0].value,
       authenticatedWith: 'github'
     };
-    cb(null, true, user);
-    // User.updateOrCreate(user, function (err, user) {
-    //   if (err) {
-    //     cb(err);
-    //   }
-    //   console.log('updated userrrrrr', user, err);
-    //   cb(null, true, user);
-    // });
+    User.updateOrCreate(user, function(err, user) {
+      console.log('userasdfasdfasdfasd')
+      cb(null, user);
+    });
   }
 ));
