@@ -64,6 +64,9 @@ body {
         color: #F4F6F7; }
         .navbar ul li a:hover {
           text-decoration: none; }
+    .navbar ul .logout {
+      cursor: pointer;
+      color: #F4F6F7; }
     .navbar ul .username {
       color: #F4F6F7;
       font-weight: bold;

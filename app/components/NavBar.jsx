@@ -20,7 +20,7 @@ class NavBar extends React.Component {
 		<div>
 			<div className = "navbar">
 				<ul>
-          <li> <a href="#" onClick={this.handleLogOut.bind(this)}> Log Out </a> </li>
+          <li> <a className="logout" onClick={this.handleLogOut.bind(this)}> Log Out </a> </li>
           <li> <a href="/"> Home </a> </li>
 					<li> <a href="/linuxcomputer"> Computer </a> </li>
 					<li> <a href="/dashboard"> Dashboard </a> </li>

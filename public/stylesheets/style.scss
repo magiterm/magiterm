@@ -90,6 +90,10 @@ body {
         }
       }
     }
+    .logout {
+      cursor: pointer;
+      color: $offwhite;
+    }
     .username {
       color: $offwhite;
       font-weight: bold;
