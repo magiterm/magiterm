@@ -14,7 +14,6 @@ const jwtDecode = require('jwt-decode')
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  console.log(req);
   res.render('index', { title: 'picoShell' });
 });
 

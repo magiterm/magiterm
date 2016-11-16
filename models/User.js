@@ -7,6 +7,9 @@ const User = db.define('user', {
   password: Sequelize.STRING,
   salt: Sequelize.STRING,
   bio: Sequelize.TEXT,
+  firstName: Sequelize.STRING,
+  lastName: Sequelize.STRING,
+  email: Sequelize.STRING,
   authenticatedWith: Sequelize.STRING
 }, 
   {
