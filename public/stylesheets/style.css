@@ -53,7 +53,10 @@ body {
 .navbar {
   height: 100%;
   background-color: #03CEA1;
-  border-radius: 0; }
+  border-radius: 0;
+  padding: 2px;
+  margin: 0;
+  min-height: 0; }
   .navbar ul {
     list-style-type: none;
     padding: 0;

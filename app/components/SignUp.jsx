@@ -126,25 +126,33 @@ class Signup extends React.Component {
     e.preventDefault();
 
     if (this.state.usernameValid && this.state.firstnameValid && this.state.lastnameValid && this.state.emailValid && this.state.passwordValid) {
-      context.setState({
-        password: '',
-        username: ''
-      });
-      axios.post('/authenticate', {
-        username: user,
-        password: pass
-      })
-      .then(function(response) {
-        if (response.data.token) {
-          localStorage['jwtToken'] = response.data.token;
-          window.location = window.location + 'dashboard';
-        } else {
-          alert('Failed Login');
-        }
-      })
-      .catch(function(err) {
-        console.log(err);  
-      });
+      axios.post('/auth/signup', {
+         username: user,
+         password: pass,
+         firstname: firstname,
+         lastname: lastname,
+         email: email
+       })
+       .then(function (response) {
+         axios.post('/authenticate', {
+           username: user,
+           password: pass
+         })
+         .then(function(response) {
+           if (response.data.token) {
+             localStorage['jwtToken'] = response.data.token;
+             window.location = window.location + 'dashboard';
+           } else {
+             alert('Failed Login');
+           }
+         })
+         .catch(function(err) {
+           console.log(err);  
+         });
+       })
+       .catch(function (error) {
+         console.log('Error: ', error);
+       });
     } else {
         ReactDOM.render(
           <div> Please make sure all entries are valid</div>,
