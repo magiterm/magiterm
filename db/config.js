@@ -2,6 +2,10 @@ const Sequelize = require('sequelize');
 
 const LOCAL_DB_URL = 'mysql://root:root@127.0.0.1:3306/demo_schema';
 
+const db = new Sequelize('demo_schema', 'root', 'root', {
+  host: 'localhost',
+  dialect: 'mysql',
+
 const db = new Sequelize(process.env.JAWSDB_URL || LOCAL_DB_URL, {
   pool: {
     max: 5,
