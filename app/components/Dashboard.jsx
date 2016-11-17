@@ -20,33 +20,19 @@ class Dashboard extends React.Component {
       createdAt: null,
       github: '',
       commandHistory: []
-    }
+    };
   }
 
   componentWillMount() {
+    axios.get('/oAuth').then(response => {
+      localStorage['user'] = response.data.username;
+    });
     var context = this;
-    const token = localStorage['jwtToken'];
-    //const history = JSON.parse(localStorage['0_commands']);
-    const history = [];
-    if (token) {
-      axios.get('/decode', {
-        params: {
-          token: token
-        }
-      })
-      .then (function(response) {
-        const user = response.data;
-        console.log('setting state!');
-        context.setState({
-          containerName: user.username,
-          username: user.username
-       });
-        axios.get('/infodashboard', {
-          params: {
-            username: user.username
-          }
-        })
-        .then(function(response){
+    const user = localStorage['user'];
+    const history = JSON.parse(localStorage['0_commands']);
+    if (user) {
+        axios.get('/oAuth')
+        .then(function(response) {
           console.log(response);
           const user = response.data;
           context.setState({
@@ -55,11 +41,10 @@ class Dashboard extends React.Component {
             email: user.email,
             createdAt: user.createdAt,
             commandHistory: history
-          })
-        })
-      });
+          });
+        });
+      };
     }
-  } 
 
 
   render() {

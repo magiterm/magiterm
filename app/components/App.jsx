@@ -24,19 +24,15 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const token = localStorage['jwtToken'];
+  componentWillMount() {
+    const user = localStorage['user'];
     const context = this;
 
-    if (token) {
-      axios.get('/decode', {
-        params: {
-          token: token
-        }
+    if (user) {
+      axios.get('/oAuth', {
       })
       .then(function(response) {
         const user = response.data;
-
         context.setState({
          authenticated: true,
          username: user.username,
@@ -119,22 +115,19 @@ class App extends React.Component {
 }
 
 function requireAuth(nextState, replace) {
-  const token = localStorage['jwtToken'];
-
-  if (token) {
-    axios.get('/decode', {
-      params: {
-        token: token
-      }
+  const user = localStorage['user'];
+  if (user) {
+    axios.get('/oAuth', {
     })
     .then(function(response) {
-      if (!response) {
-        replace('/');
-      } 
+      if (response.data) {
+        var myUser = reaponse.data;
+        localStorage['user'] = myUser;
+      }
     })
     .catch(function(err) {
-      console.log(err)
-    })
+      console.log(err);
+    });
   } else {
     window.location = '/';
   }

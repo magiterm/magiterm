@@ -134,13 +134,13 @@ class Signup extends React.Component {
          email: email
        })
        .then(function (response) {
-         axios.post('/authenticate', {
+         axios.post('/oAuth', {
            username: user,
            password: pass
          })
          .then(function(response) {
-           if (response.data.token) {
-             localStorage['jwtToken'] = response.data.token;
+           if (response.data.username) {
+             localStorage['user'] = response.data.username;
              window.location = window.location + 'dashboard';
            } else {
              alert('Failed Login');
