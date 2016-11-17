@@ -10,9 +10,7 @@ class Collaborators extends React.Component {
     this.state = {
       invUsername: '',
       username: this.props.username,
-      pendingInvites: [],
-      collaborators: [],
-      collabWith: []
+      pendingInvites: []
     };
 
     this.changeUserNameInput = this.changeUserNameInput.bind(this);
@@ -23,24 +21,6 @@ class Collaborators extends React.Component {
         });
         context.setState({
           pendingInvites: pendingUsernames
-        });
-      });
-    axios.post('/myCollaborators', {username: this.state.username})
-      .then(function(res) {
-        const acceptedUsernames = res.data.map(function(accepted) {
-          return accepted.requesterUsername;
-        });
-        context.setState({
-          collaborators: acceptedUsernames
-        });
-      });
-    axios.post('/collaboratingWith', {username: this.state.username})
-      .then(function(res) {
-        const acceptedUsernames = res.data.map(function(accepted) {
-          return accepted.recieverUsername;
-        });
-        context.setState({
-          collabWith: acceptedUsernames
         });
       });
   }
@@ -73,37 +53,13 @@ class Collaborators extends React.Component {
     }
   }
 
-  handleAcceptCollab(username) {
-    axios.post('/acceptInvite', {invited: username, accepter: this.state.username})
-      .then(function(res) {
-        console.log(res);
-      });
-  }
-
-  handleRejectCollab(username) {
-    //remove row from DB
-  }
-
   render() {
-    var context = this;
     return (
         <div>
           Currently Collaborating With:
-          <div>
-            {this.state.collabWith.map(function(accepted) {
-              return (
-                  <div>{accepted}</div>
-                );
-            })}
-          </div>
+          <div>(Users whose containers you can access)</div>
           Collaborators on Your Computer:
-          <div>
-            {this.state.collaborators.map(function(accepted) {
-              return (
-                  <div>{accepted}</div>
-                );
-            })}
-          </div>
+          <div>(Users who can access your container)</div>
           Invite a New Collaborator To Your Computer:
           <div>
             <form onSubmit={function(e) {
@@ -123,14 +79,13 @@ class Collaborators extends React.Component {
             </form>
           </div>
           <div>Pending Collaboration Invites:
+            <list>
               {this.state.pendingInvites.map(function(pending) {
                 return (
-                    <div>{pending} 
-                      <span onClick={() => {context.handleAcceptCollab(pending)}}> Accept </span>
-                      <span onClick={() => {context.handleRejectCollab(pending)}}> Reject </span>           
-                    </div>
+                    <ul>{pending}</ul>
                   );
               })}
+            </list>
           </div>
         </div>
       );
