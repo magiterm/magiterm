@@ -48,7 +48,7 @@ class Dashboard extends React.Component {
 
 
   render() {
-   if (this.state.lastName.length) {
+   if (localStorage['user'].length) {
       return (
          <div>
           <NavBar username={this.state.username} />

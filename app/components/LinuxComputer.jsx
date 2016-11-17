@@ -37,7 +37,7 @@ class LinuxComputer extends React.Component {
  } 
 
 	render() {
-    if (this.state.containerName.length) {
+    if (localStorage['user'].length) {
          return (
             <div>
               <NavBar username={this.state.username} />
