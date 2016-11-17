@@ -22,13 +22,15 @@ class Login extends React.Component {
     };
   }
   componentWillMount() {
-    axios.get('/oAuth')
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
+    if (localStorage['user']) {
+      axios.get('/oAuth')
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    }
   }
   changeUserNameInput(event) {
     this.setState({
