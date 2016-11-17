@@ -34,26 +34,10 @@ class Signup extends React.Component {
       username: event.target.value
     });
 
-    utils.isValidUsername(event.target.value, function(err, res) {
-      if (err) {
-        console.error(err);
-      } else {
-        if (res === 'valid username') {
-          context.setState({
-            usernameValid: true,
-            usernameExists: false
-          });
-        } else if (res === 'found user') {
-          context.setState({
-            usernameValid: false,
-            usernameExists: true
-          });
-        } else {
-          context.setState({
-            usernameValid: false
-          })
-        }
-      }
+
+     context.setState({
+      usernameValid: true,
+      usernameExists: false
     });
   }
   changePasswordInput(event) {
@@ -134,10 +118,7 @@ class Signup extends React.Component {
          email: email
        })
        .then(function (response) {
-         axios.post('/oAuth', {
-           username: user,
-           password: pass
-         })
+         axios.get('/oAuth')
          .then(function(response) {
            if (response.data.username) {
              localStorage['user'] = response.data.username;

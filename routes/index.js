@@ -261,9 +261,9 @@ router.post('/authenticate',
     session: true
   }),
   function(req, res) {
-    console.log('trying to send status', req.user, req.token);
+    console.log('trying to send status', req.user);
     req.session.user = req.user;
-    res.redirect('/');
+    res.send(req.user.dataValues);
   }
 );
 
