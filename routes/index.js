@@ -12,7 +12,7 @@ var Collaborator = require('../models/Collaborator');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const jwt = require('jsonwebtoken');
-const jwtDecode = require('jwt-decode')
+const jwtDecode = require('jwt-decode');
 
 /* GET home page. */
 router.get('/', function(req, res) {
