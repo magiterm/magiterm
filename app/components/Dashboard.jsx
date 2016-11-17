@@ -26,8 +26,8 @@ class Dashboard extends React.Component {
   componentWillMount() {
     var context = this;
     const token = localStorage['jwtToken'];
-    const history = JSON.parse(localStorage['0_commands']);
-
+    //const history = JSON.parse(localStorage['0_commands']);
+    const history = [];
     if (token) {
       axios.get('/decode', {
         params: {
