@@ -29,17 +29,16 @@ class App extends React.Component {
     const context = this;
 
     if (user) {
-      axios.get('/oAuth', {
-      })
-      .then(function(response) {
-        const user = response.data;
+      // axios.get('/oAuth', {
+      // })
+      // .then(function(response) {
+      //   const user = response.data;
         context.setState({
          authenticated: true,
          username: user.username,
          containerName: user.containerName,
        });
-      });
-    } 
+    }
   }
 
   GoToLogin() {

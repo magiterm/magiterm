@@ -1,8 +1,8 @@
 
 const React = require('react');
 const ReactDOM = require('react-dom');
-const CodeEditor = require('./CodeEditor.jsx')
-const Terminal = require('./Terminal.jsx')
+const CodeEditor = require('./CodeEditor.jsx');
+const Terminal = require('./Terminal.jsx');
 const axios = require('axios');
 const NavBar = require('./NavBar.jsx');
 

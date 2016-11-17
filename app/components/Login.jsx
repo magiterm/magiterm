@@ -21,23 +21,30 @@ class Login extends React.Component {
       }
     };
   }
-  
+  componentWillMount() {
+    if (localStorage['user']) {
+      axios.get('/oAuth')
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    }
+  }
   changeUserNameInput(event) {
     this.setState({
       username: event.target.value
     });
   }
-
   changePasswordInput(event) {
     this.setState({
       password: event.target.value
     });
   }
-
   handleGitSubmit(e) {
-    window.location = 'github';
+    // window.location = 'github';    
   }
-
   handleSubmit(e, user, pass) {
     const context = this;
     e.preventDefault();
@@ -46,8 +53,8 @@ class Login extends React.Component {
       password: pass
     })
     .then(function(response) {
-      if (response.data.token) {
-        localStorage['jwtToken'] = response.data.token;
+        if (response.data.username) {
+        localStorage['user'] = response.data.username;
         window.location = 'dashboard';
       } else {
         alert('Failed Login');
@@ -104,8 +111,8 @@ class Login extends React.Component {
           </div>
 				</form>
         <a href="/github"> 
-          <button className="btn btn-success">Login With Github</button>
-         </a>
+          <Button>Login With Github</Button>
+        </a>
         <div className="login-query-container">
   				<a
           className="login-query"
