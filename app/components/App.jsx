@@ -25,18 +25,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const token = localStorage['jwtToken'];
+    const user = localStorage['user'];
     const context = this;
 
-    if (token) {
-      axios.get('/decode', {
-        params: {
-          token: token
-        }
+    if (user) {
+      axios.get('/oAuth', {
       })
       .then(function(response) {
         const user = response.data;
-
         context.setState({
          authenticated: true,
          username: user.username,

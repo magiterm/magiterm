@@ -10,10 +10,10 @@ class NavBar extends React.Component {
 		};	
 	}
 
-	handleLogOut() {
-		localStorage.removeItem('jwtToken');
-		location.reload(); 
-	}
+  handleLogOut() {
+   localStorage.removeItem('user');
+   location.reload(); 
+  }
 
 	render() {
 		return (

@@ -45,8 +45,7 @@ router.post('/signup', function(req, res) {
           docker.startContainer('evenstevens/picoshell', username, '/bin/bash', function(err, dockerResponse) {
             if (err) {
               console.error('Error in creating container with docker');
-                        console.log('Error', err);
-
+              console.log('Error', err);
               res.status(500).send(err);
             } else {
               res.status(201).send('Created a new user and container!');
