@@ -20,13 +20,10 @@ class LinuxComputer extends React.Component {
 
  componentWillMount() {
    var context = this;
-   const token = localStorage['jwtToken'];
+   const user = localStorage['user'];
 
-   if (token) {
-     axios.get('/decode', {
-       params: {
-         token: token
-       }
+   if (user) {
+     axios.get('/oAuth', {
      })
      .then (function(response) {
        const user = response.data;

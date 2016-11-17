@@ -115,16 +115,13 @@ class App extends React.Component {
 }
 
 function requireAuth(nextState, replace) {
-  const token = localStorage['jwtToken'];
+  const user = localStorage['user'];
 
-  if (token) {
-    axios.get('/decode', {
-      params: {
-        token: token
-      }
+  if (user) {
+    axios.get('/oAuth', {
     })
     .then(function(response) {
-      if (!response) {
+      if (!response.data.username) {
         replace('/');
       } 
     })
