@@ -6,15 +6,6 @@ var User = require('../../models/User');
 const bcrypt = require('bcrypt');
 var GitHubStrategy = require('passport-github').Strategy;
 
-passport.serializeUser(function(user, done) {
-  console.log('serialize useradkjaskjfadskjkjhadfkjadsfkjl', user)
-  done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-    console.log('deserializeUser userasdfasdfasdfasd', obj)
-    done(null, obj);
-});
 
 passport.use(new Strategy({  
   passReqToCallback : true
@@ -22,7 +13,7 @@ passport.use(new Strategy({
   function(req, username, password, done) {
     console.log('username', username)
     User.findOne({where: { username: username }})
-    .then( function(user) { 
+    .then( function(user) {
       console.log('found one', user)
       if (!user) {
         return done(null, false, { message: 'No User Found.' });        
@@ -54,21 +45,23 @@ passport.use(new GitHubStrategy({
     callbackURL: 'http://localhost:3000/github/callback'
   },
   function(accessToken, refreshToken, profile, cb) {
-    if (profile.displayName) {
-      var nameArray = profile.displayName.split(' ');
-    } else {
-      var nameArray = ['', ''];
-    }
+    console.log('back from github', profile._json)
+    var nameArray = profile.displayName.split(' ');
     var user = {
       username: profile.username,
-      bio: profile._json.bio || '',
+      bio: profile._json.bio,
       firstName: nameArray[0],
       lastName: nameArray[nameArray.length - 1],
       email: profile.emails[0].value,
       authenticatedWith: 'github'
     };
-    User.updateOrCreate(user, function(err, user) {
-      cb(null, user);
-    });
+    cb(null, true, user);
+    // User.updateOrCreate(user, function (err, user) {
+    //   if (err) {
+    //     cb(err);
+    //   }
+    //   console.log('updated userrrrrr', user, err);
+    //   cb(null, true, user);
+    // });
   }
 ));

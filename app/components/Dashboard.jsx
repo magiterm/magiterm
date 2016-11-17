@@ -24,14 +24,15 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount() {
-    axios.get('/oAuth').then(response => {
-      localStorage['user'] = response.data.username;
-    });
     var context = this;
-    const user = localStorage['user'];
-    const history = JSON.parse(localStorage['0_commands']);
-    if (user) {
-      axios.get('/oAuth', {
+    const token = localStorage['jwtToken'];
+    //const history = JSON.parse(localStorage['0_commands']);
+    const history = [];
+    if (token) {
+      axios.get('/decode', {
+        params: {
+          token: token
+        }
       })
       .then (function(response) {
         const user = response.data;
@@ -42,10 +43,10 @@ class Dashboard extends React.Component {
        });
         axios.get('/infodashboard', {
           params: {
-            username: user.data.username
+            username: user.username
           }
         })
-        .then(function(response) {
+        .then(function(response){
           console.log(response);
           const user = response.data;
           context.setState({

@@ -19,6 +19,49 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'picoShell' });
 });
 
+router.post('/collaboratingWith', function(req, res) {
+  Collaborator.findAll({
+    where: {
+      requesterUsername: req.body.username,
+      confirmed: 'confirmed'
+    }
+  }).then(function(resp) {
+    res.status(200).send(resp);
+  });
+});
+
+router.post('/myCollaborators', function(req, res) {
+  Collaborator.findAll({
+    where: {
+      recieverUsername: req.body.username,
+      confirmed: 'confirmed'
+    }
+  }).then(function(resp) {
+    res.status(200).send(resp);
+  });
+});
+
+router.post('/acceptInvite', function(req, res) {
+  const reciever = req.body.invited;
+  const accepter = req.body.accepter;
+
+  Collaborator.update({
+    confirmed: 'confirmed'
+  }, {
+    where: {
+      requesterUsername: reciever,
+      recieverUsername: accepter
+    }
+  }).then(function (resp) {
+    console.log('ACCEPT RESP', resp);
+    res.status(200).send(resp);
+  });
+});
+
+router.post('/rejectInvite', function(req, res) {
+
+});
+
 router.post('/pendingInvites', function(req, res) {
   Collaborator.findAll({
     where: {
