@@ -10,13 +10,20 @@ class NavBar extends React.Component {
 		};	
 	}
 
+  componentWillMount() {
+    var name = localStorage['user']
+    console.log('name', name)
+    if (name === 'undefined') {
+      this.handleLogOut();
+      // window.location = '/';
+    }
+  }
   handleLogOut() {
    localStorage.removeItem('user');
    location.reload(); 
   }
 
 	render() {
-    var name = localStorage['user'] !== 'undefined'? localStorage['user'] : '';
 		return (
 			<div className = "navbar">
   			<ul>

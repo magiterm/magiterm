@@ -121,7 +121,7 @@ function requireAuth(nextState, replace) {
     })
     .then(function(response) {
       if (response.data) {
-        var myUser = reaponse.data;
+        var myUser = response.data;
         localStorage['user'] = myUser;
       }
     })
