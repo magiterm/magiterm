@@ -48,7 +48,7 @@ router.post('/signup', function(req, res) {
               console.log('Error', err);
               res.status(500).send(err);
             } else {
-              res.status(201).send('Created a new user and container!');
+              res.status(201).send({username: username, password: password});
             }
           })
         })

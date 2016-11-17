@@ -118,18 +118,22 @@ class Signup extends React.Component {
          email: email
        })
        .then(function (response) {
-         axios.get('/oAuth')
-         .then(function(response) {
-           if (response.data.username) {
-             localStorage['user'] = response.data.username;
-             window.location = window.location + 'dashboard';
-           } else {
-             alert('Failed Login');
-           }
-         })
-         .catch(function(err) {
-           console.log(err);  
-         });
+        console.log('hasjkfajlhdfkhjladfsklj', response)
+         axios.post('/authenticate', {
+          username: response.data.username,
+          password: response.data.password
+        })
+        .then(function(response) {
+            if (response.data.username) {
+            localStorage['user'] = response.data.username;
+            window.location = 'dashboard';
+          } else {
+            alert('Failed Login');
+          }
+        })
+        .catch(function(err) {
+          console.log(err);  
+        });
        })
        .catch(function (error) {
          console.log('Error: ', error);
