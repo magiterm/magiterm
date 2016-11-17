@@ -76,18 +76,18 @@ body {
       color: #F4F6F7;
       font-weight: bold;
       padding-left: 10px;
-      font-size: 2em;
+      font-size: 3em;
       cursor: default;}
 
 .navbar:hover ul:hover li:hover {
       display: inline;
       background-color: #03CEA1;
       text-decoration: underline;
-      cursor: default
     }
 
 .navbar:hover ul:hover .username:hover {
-  text-decoration: none; 
+  text-decoration: none;
+  cursor: default
 }
 
 .homepage-container {
