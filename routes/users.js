@@ -1,5 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const User = require('../models/User');
+
 
 router.post('/collaboratingWith', function(req, res) {
   Collaborator.findAll({
@@ -94,6 +96,28 @@ router.post('/sendInvite', function(req, res) {
   });
 });
 
+router.post('/updateuser', function(req, res) {
+  const user = req.body;
+
+  User.findOne({
+    where: {
+      username: user.username
+    }
+  })
+  .then(function(user) {
+      user.update(req.body.toUpdate);
+    })
+    .then(function() {
+      res.status(200).send('Successfully updated user');
+    })
+    .catch(function(err) {
+      res.status(500).send('Wasn\'t able to save to database');
+    })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send(err);
+  })
+});
 
 module.exports = router;
   
