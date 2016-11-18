@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const LOCAL_DB_URL = 'mysql://root:root@127.0.0.1:3306/picodb';
 
-const db = new Sequelize(process.env.JAWSDB_URL || LOCAL_DB_URL, {
+const db = new Sequelize(process.env.DB_URL || LOCAL_DB_URL, {
   pool: {
     max: 5,
     min: 0,
