@@ -23,24 +23,21 @@ class Dashboard extends React.Component {
       commandHistory: [],
       profilePictureUrl: '',
       bio: ''
-    }
+    };
   }
 
   componentWillMount() {
+    axios.get('/oAuth').then(response => {
+      localStorage['user'] = response.data.username;
+    });
     var context = this;
-    const token = localStorage['jwtToken'];
-    //const history = JSON.parse(localStorage['0_commands']);
-    const history = [];
-    
-    if (token) {
-      axios.get('/decode', {
-        params: {
-          token: token
-        }
-      })
-      .then (function(response) {
+    const user = localStorage['user'];
+    const history = JSON.parse(localStorage['0_commands']);
+    if (user) {
+      axios.get('/oAuth')
+      .then(function(response) {
+        console.log(response);
         const user = response.data;
-
         context.setState({
           containerName: user.username,
           username: user.username
@@ -69,8 +66,9 @@ class Dashboard extends React.Component {
   }
 
 
+
   render() {
-   if (this.state.lastName.length) {
+   if (localStorage['user'] && localStorage['user'].length) {
       return (
          <div>
           <NavBar username={this.state.username} />

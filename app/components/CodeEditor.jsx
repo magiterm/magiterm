@@ -14,8 +14,8 @@ class CodeEditor extends React.Component {
       fileName: '',
       fileNamePath: ''
     }
-    this.username = localStorage['jwtToken'];
     this.recievedCEChange = this.recievedCEChange.bind(this);
+    this.username = localStorage['user'];
   }
 
   componentWillReceiveProps(nextProps) {

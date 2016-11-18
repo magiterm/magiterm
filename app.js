@@ -34,6 +34,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
 
+app.use(session({ 
+  secret: 'keyboard cat', 
+  cookie: { maxAge: 86400000 }
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);

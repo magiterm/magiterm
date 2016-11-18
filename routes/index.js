@@ -9,8 +9,7 @@ var User = require('../models/User');
 var Collaborator = require('../models/Collaborator');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-const jwt = require('jsonwebtoken');
-const jwtDecode = require('jwt-decode')
+
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -264,59 +263,32 @@ router.post('/cmd', function (req, res) {
   }
 });
 
-
-function generateToken(req, res, next) {
-  var info = req.user;
-    console.log('here at generate', info)
-  var tokenUser = info.username.slice(info.username.length - 1);
-  var tokenMail = info.email.slice(info.email.indexOf('@'));
-  var tokenBio = info.bio.slice(6);
-    console.log('generating a token');
-  req.token = jwt.sign({ 
-    id: (tokenUser + tokenMail + tokenBio),
-    username: info.username
-  }, 'server secret', {
-    expiresIn: 7200
-  });
-  next();
-}
-
-function serialize(req, res, next) {
-  console.log('serializing userrrrrdffasdfasdfasdfasdfasdfasdfasdfasdr', res.req.authInfo)
-  var user = res.req.authInfo;
-  User.updateOrCreate(user, function(err, user) {
-    if (err) {
-      next(err);
-    }
-    req.user = user;
-    next();
-  });
-}
-
 router.post('/authenticate', 
   passport.authenticate('local', {
-    session: false
-  }), serialize, generateToken,
+    session: true
+  }),
   function(req, res) {
-    console.log('trying to send status', req.user, req.token);
-    res.status(200).json({
-      user: req.user,
-      token: req.token
-    });
+    console.log('trying to send status', req.user);
+    req.session.user = req.user;
+    res.send(req.user.dataValues);
   }
 );
+
+
+router.get('/oAuth', function(req, res) {
+  console.log('useruser useruser useruser useruser useruser', req.user, 'sess sess sess sess sess sess sess sess', req.session.user)
+  res.json(req.session.user);
+});
 
 router.get('/github', passport.authenticate('github'));
 
 router.get('/github/callback', passport.authenticate('github', {
-  session: false,
-}), serialize, generateToken,
+  session: true,
+}),
   function(req, res) {
-    console.log('trying to send status', req.user, req.token);
-    res.redirect('/dashboard').json({
-      user: req.user,
-      token: req.token
-    });
+    console.log('trying to send statuskjhafdskjhadsfkjlhdaskjldafskjldsafkljadsfkljh', req.user);
+    req.session.user = req.user;
+    res.redirect('/dashboard');
   });
 
 router.post('/updateuser', function(req, res) {

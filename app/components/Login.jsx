@@ -12,8 +12,6 @@ class Login extends React.Component {
     this.changeUserNameInput = this.changeUserNameInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changePasswordInput = this.changePasswordInput.bind(this);
-    this.handleGitSubmit = this.handleGitSubmit.bind(this);
-    
     this.state = {
         textDecoration: 'none',
         color: 'black',
@@ -22,7 +20,17 @@ class Login extends React.Component {
         password: ''
     };
   }
-  
+  componentWillMount() {
+    if (localStorage['user']) {
+      axios.get('/oAuth')
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    }
+  }
   changeUserNameInput(event) {
     this.setState({
       username: event.target.value
@@ -35,13 +43,9 @@ class Login extends React.Component {
     });
   }
 
-  handleGitSubmit(e) {
-    window.location = 'github';
-  }
 
-  handleSubmit(e) {
-    const context = this;
-
+  handleSubmit(e, user, pass) {
+     const context = this;
     e.preventDefault();
 
     axios.post('/authenticate', {
@@ -49,10 +53,11 @@ class Login extends React.Component {
       password: this.state.password
     })
     .then(function(response) {
-      if (response.data.token) {
-        localStorage['jwtToken'] = response.data.token;
+      console.log('we have a response')
+        if (response.data.username) {
+        localStorage['user'] = response.data.username;
         window.location = 'dashboard';
-      } else {
+      } else {  
         alert('Failed Login');
       }
     })
@@ -73,9 +78,9 @@ class Login extends React.Component {
             </div>
           </div>
 				</form>
-        <div> 
-          <a href="/github"><button className="btn btn-success">Login With Github</button></a>
-        </div>
+        <a href="/github"> 
+          <Button>Login With Github</Button>
+        </a>
         <div className="login-query-container">
   				<a className="login-query" onClick={this.props.GoToSignUp}> Need to signup?</a><br/>
         </div>
