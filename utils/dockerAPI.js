@@ -10,7 +10,7 @@ const run = "docker run -t -d --name"
 
 
 const runCommand = function(containerName, command, callback) {
-  runCommandCommand = dockex + ' ' + containerName + ' ' + command;
+  const runCommandCommand = dockex + ' ' + containerName + ' ' + command;
   exec(runCommandCommand, function(err, stdout, stderr) {
     if (stderr && !stdout) {
       callback(stderr, null);

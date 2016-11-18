@@ -164,7 +164,7 @@ class Signup extends React.Component {
   render() {
     return (
 			<div className="signup-container">
-				<form onSubmit={function(e) {
+				<form id="signup-form" onSubmit={function(e) {
           this.handleSubmit(e, this.state.username, this.state.password, this.state.firstname, this.state.lastname, this.state.email);
         }.bind(this)}>
           <div className="form-inputs">
@@ -175,6 +175,7 @@ class Signup extends React.Component {
               placeholder='username'
               value={this.state.username}
               />
+              <span id="username"></span>
               {this.state.usernameValid ? <i className="glyphicon glyphicon-ok"></i> : null}
             <input 
               onChange={this.changePasswordInput}
@@ -182,6 +183,7 @@ class Signup extends React.Component {
               type='password' 
               placeholder='password'
               />
+              <span id="password"></span>
               {this.state.passwordValid ? <i className="glyphicon glyphicon-ok"></i> : null}
             <input 
               onChange={this.changeFirstNameInput}
@@ -208,7 +210,7 @@ class Signup extends React.Component {
               <span id="email"></span>
               {this.state.emailValid ? <i className="glyphicon glyphicon-ok"></i> : null}
             <div className="submit">
-             <button type="submit" className="btn btn-success">Sign Up</button>
+             <button id="submit" type="submit" className="btn btn-success">Sign Up</button>
             </div>
           </div>
         </form>
