@@ -37,6 +37,7 @@ componentWillMount() {
 		localStorage.removeItem('user');
     axios.get('/logout')
     .then(function(response) {
+      console.log('logging them out')
       window.location = '/'; 
     })
     .catch(function(err) {

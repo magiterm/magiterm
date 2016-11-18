@@ -25,21 +25,30 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    const user = localStorage['user'];
     const context = this;
-
-    if (user) {
-        console.log('we have a usr', user)
-        context.setState({
-         authenticated: true,
-         username: user.username,
-         containerName: user.containerName,
-       });
-    } else {
-      console.log('we do not have a user')
-      authenticated: false;
-    }
+    console.log('mountingmountingmounting')
+    axios.get('/oAuth', {
+    })
+    .then(function(response) {
+      if (response.data) {
+        var myUser = response.data;
+        localStorage['user'] = myUser;
+        if (myUser) {
+          context.setState({
+            authenticated: true,
+            username: myUser.username,
+            containerName: myUser.containerName,
+          });
+        }
+      }
+    })
+    .catch(function(err) {
+      console.log('no user')
+      console.log(err);
+    });
+   
   }
+
   GoToLogin() {
     this.setState({
       authenticate: 'login'
@@ -124,9 +133,12 @@ function requireAuth(nextState, replace) {
       }
     })
     .catch(function(err) {
+      console.log('no user')
       console.log(err);
     });
   } else {
+          console.log('no user2')
+
     window.location = '/';
   }
 }

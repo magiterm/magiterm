@@ -293,6 +293,7 @@ router.get('/github/callback', passport.authenticate('github', {
   function(req, res) {
     console.log('trying to send statuskjhafdskjhadsfkjlhdaskjldafskjldsafkljadsfkljh', req.user);
     req.session.user = req.user;
+    console.log('helloasdfkjadsklfdas')
     res.redirect('/');
   });
 
