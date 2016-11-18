@@ -70,6 +70,7 @@ passport.use(new GitHubStrategy({
       authenticatedWith: 'github'
     };
     User.updateOrCreate(user, function(err, user1) {
+      console.log('user1', user1)
       cb(null, user);
     });
   }

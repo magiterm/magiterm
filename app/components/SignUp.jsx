@@ -100,6 +100,8 @@ class Signup extends React.Component {
     console.log('submitting', github);
 
     if (this.state.usernameValid && this.state.firstNameValid && this.state.githubValid && this.state.lastNameValid && this.state.emailValid && this.state.passwordValid) {
+      var username = this.state.username;
+      var password = this.state.password;
       axios.post('/auth/signup', {
          username: this.state.username,
          password: this.state.password,
@@ -110,12 +112,12 @@ class Signup extends React.Component {
        })
        .then(function (response) {
          axios.post('/authenticate', {
-           username: this.state.username,
-           password: this.state.password
+           username: username,
+           password: password
          })
          .then(function(response) {
-           if (response.data.token) {
-             localStorage['jwtToken'] = response.data.token;
+           if (response.data) {
+             localStorage['user'] = JSON.stringify(response.data);
              window.location = window.location + 'dashboard';
            } else {
              alert('Failed Login');

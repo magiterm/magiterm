@@ -276,8 +276,8 @@ router.post('/authenticate',
 router.get('/logout', function(req, res) {
   req.session.destroy(function(err) {
     res.redirect('/')
-  })
-})
+  });
+});
 
 
 router.get('/oAuth', function(req, res) {

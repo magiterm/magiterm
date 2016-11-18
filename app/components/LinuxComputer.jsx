@@ -87,6 +87,6 @@ class LinuxComputer extends React.Component {
     );
 	}
 }
-
+}
 
 module.exports = LinuxComputer;

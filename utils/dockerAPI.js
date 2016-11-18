@@ -34,8 +34,10 @@ const startContainer = function(imageName, containerName, command, callback) {
   exec(startContainerCommand, function(err, stdout, stderr) {
     console.log('executed start container command');
     if (stderr) {
+      console.log('failed docker');
       callback(stderr, null);
     } else {
+      console.log('good docker');
       callback(null, stdout);
     }
   })

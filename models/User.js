@@ -1,6 +1,8 @@
 const db = require('../db/config.js');
 const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
+const docker = require('../utils/dockerAPI');
+const Container = require('./Container');
 
 const User = db.define('user', {
   username: Sequelize.STRING,
@@ -19,30 +21,42 @@ const User = db.define('user', {
       associate: function(models) {
         // associations can be defined here
       },
-      updateOrCreate: function(user, cb) {
-        if (user.authenticatedWith !== 'local') {
-          // console.log('gethubbbbbbbbbing1', user.username);
-          var findUser = User.findOne({where: {username: user.username}})
-          findUser
+      updateOrCreate: function(newUser, cb) {
+        if (newUser.authenticatedWith !== 'local') {
+          console.log('gethubbbbbbbbbing1', newUser.username);
+          var findUser = User.findOne({where: {username: newUser.username}})
           .then(function(oldUser) {
             // console.log('gethubbbbbbbbbing2');
             if (oldUser) {
-              // console.log('gethubbbbbbbbbing3');
-              User.update(user, {
-                where: {username: user.username}
+              User.update(newUser, {
+                where: {username: newUser.username}
               })
               .then(function() {
-                cb(null, user);
+                cb(null, newUser);
               })
               .catch(function(err) {
-                // console.log('gethubbbbbbbbbing5', err);
+                console.log('gethubbbbbbbbbing5', err);
                 cb(err);
               });
             } else {
-              // console.log('no old user no old user');
-              User.create(user)
-              .then(function() {
-                cb(null, user);
+              console.log('no old user no old user no old user')
+              User.create(newUser)
+              .then(function(userResponse) {
+                console.log('containercontainercontainercontainercontainercontainercontainer', Container)
+                Container.create({
+                  ownerID: newUser.username
+                })
+                .then(function(containerResponse) {
+                  docker.startContainer('evenstevens/picoshell', newUser.username, '/bin/bash', function(err, dockerResponse) {
+                    if (err) {
+                      console.error('Error in creating container with docker');
+                      console.log('Error', err);
+                      cb(err);
+                    } else {
+                      cb(null, newUser);
+                    }
+                  });  
+                });                    
               })
               .catch(function(err) {
                 // console.log('gethubbbbbbbbbing4', err);
@@ -54,7 +68,7 @@ const User = db.define('user', {
             cb(err);
           });
         } else {
-          cb(null, user);
+          cb(null, newUser);
         }
       }
     }
