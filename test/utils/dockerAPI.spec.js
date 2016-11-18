@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var docker = require('../../utils/dockerAPI.js');
 
-xdescribe('Docker', function() {
+describe('Docker', function() {
 
   describe('should create an image', function() {
 

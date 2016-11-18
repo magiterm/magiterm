@@ -1,27 +1,27 @@
-// require('babel-register')
-// require('babel-polyfill')
+require('babel-register')
+require('babel-polyfill')
 
-// global.document = require('jsdom').jsdom('<body><div id="app"></div></body>')
-// global.window = document.defaultView
-// global.navigator = window.navigator
+global.document = require('jsdom').jsdom('<body><div id="app"></div></body>')
+global.window = document.defaultView
+global.navigator = window.navigator
 
-require('babel-register')();
+// require('babel-register')();
 
-var jsdom = require('jsdom').jsdom;
+// var jsdom = require('jsdom').jsdom;
 
-var exposedProperties = ['window', 'navigator', 'document'];
+// var exposedProperties = ['window', 'navigator', 'document'];
 
-global.document = jsdom('');
-global.window = document.defaultView;
-Object.keys(document.defaultView).forEach((property) => {
-  if (typeof global[property] === 'undefined') {
-    exposedProperties.push(property);
-    global[property] = document.defaultView[property];
-  }
-});
+// global.document = jsdom('');
+// global.window = document.defaultView;
+// Object.keys(document.defaultView).forEach((property) => {
+//   if (typeof global[property] === 'undefined') {
+//     exposedProperties.push(property);
+//     global[property] = document.defaultView[property];
+//   }
+// });
 
-global.navigator = {
-  userAgent: 'node.js'
-};
+// global.navigator = {
+//   userAgent: 'node.js'
+// };
 
-documentRef = document;
+// documentRef = document;

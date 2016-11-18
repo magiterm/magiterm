@@ -1,6 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount, render } from 'enzyme';
+import io from 'socket.io';
 // import App from '../app/components/App';
 import Login from '../../../app/components/Login';
 

@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import Sequelize from 'sequelize';
 import dbConfig from '../../db/config.js';
 
-xdescribe("mySQL database", function() {
+describe("mySQL database", function() {
 
   it('should connect with valid credentials', function(done){
 
