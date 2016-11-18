@@ -155,7 +155,7 @@ class Terminal extends React.Component {
                 console.log(res.data);
                 const possibilities = (res.data.split('\n'));
                 callback(possibilities);
-              })
+              });
           },
           onInit: function(term) {
             context.terminal = term;
