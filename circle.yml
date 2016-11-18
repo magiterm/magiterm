@@ -1,10 +1,11 @@
-environment:
-  APP_ENV: test
-  APP_URL: 127.0.0.1
-  DB_HOST: 127.0.0.1
-  DB_URL: 127.0.0.1
-  DB_NAME: picodb
-  DB_USER: root
+machine:
+  environment:
+    APP_ENV: test
+    APP_URL: 127.0.0.1
+    DB_HOST: 127.0.0.1
+    DB_URL: 127.0.0.1
+    DB_NAME: picodb
+    DB_USER: root
 
 database:
   override:
