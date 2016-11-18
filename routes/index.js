@@ -114,7 +114,6 @@ router.post('/sendInvite', function(req, res) {
 });
 
 router.get('/infodashboard', function(req, res) {
-  console.log(req);
   const username = req.query.username;
   User.findOne({
     where: {

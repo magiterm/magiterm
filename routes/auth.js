@@ -17,6 +17,7 @@ router.post('/signup', function(req, res) {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
+  const githubHandle = req.body.githubHandle;
 
   bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
     const salty = salt;
@@ -34,7 +35,8 @@ router.post('/signup', function(req, res) {
         email: email,
         salt: salty,
         bio: 'bio',
-        authenticatedWith: 'local'
+        authenticatedWith: 'local',
+        githubHandle: githubHandle
       })
       .then(function(userResponse) {
         Container.create({

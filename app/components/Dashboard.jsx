@@ -57,7 +57,8 @@ class Dashboard extends React.Component {
             email: user.email,
             createdAt: user.createdAt,
             commandHistory: history,
-            profilePictureUrl: user.profilePicture
+            profilePictureUrl: user.profilePicture,
+            github: user.githubHandle
           })
         })
       });

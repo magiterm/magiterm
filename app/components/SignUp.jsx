@@ -11,6 +11,7 @@ class Signup extends React.Component {
     this.changeFirstNameInput = this.changeFirstNameInput.bind(this);
     this.changeLastNameInput = this.changeLastNameInput.bind(this);
     this.changeEmailInput = this.changeEmailInput.bind(this);
+    this.changeGithubInput = this.changeGithubInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
@@ -19,11 +20,13 @@ class Signup extends React.Component {
         firstname: '',
         lastname: '',
         email: '',
+        github: '',
         usernameExists: false,
         usernameValid: false,
         passwordValid: false,
         firstnameValid: false,
         lastnameValid: false,
+        githubValid: false,
         emailValid: false
     };
   }
@@ -105,6 +108,24 @@ class Signup extends React.Component {
     }
   }
 
+  changeGithubInput(event) {
+    this.setState({
+      github: event.target.value
+    });
+
+    console.log(this.state.github);
+
+    if (utils.isValidName(event.target.value)) {
+      this.setState({
+        githubValid: true
+      });
+    } else {
+      this.setState({
+        githubValid: false
+      });
+    }
+  }
+
   changeEmailInput(event) {
     this.setState({
       email: event.target.value
@@ -121,17 +142,20 @@ class Signup extends React.Component {
     }
   }
 
-  handleSubmit(e, user, pass, firstname, lastname, email) {
+  handleSubmit(e, user, pass, firstname, lastname, email, github) {
     const context = this;
     e.preventDefault();
 
-    if (this.state.usernameValid && this.state.firstnameValid && this.state.lastnameValid && this.state.emailValid && this.state.passwordValid) {
+    console.log('submitting', github);
+
+    if (this.state.usernameValid && this.state.firstnameValid && this.state.githubValid && this.state.lastnameValid && this.state.emailValid && this.state.passwordValid) {
       axios.post('/auth/signup', {
          username: user,
          password: pass,
          firstname: firstname,
          lastname: lastname,
-         email: email
+         email: email,
+         githubHandle: github
        })
        .then(function (response) {
          axios.post('/authenticate', {
@@ -165,7 +189,7 @@ class Signup extends React.Component {
     return (
 			<div className="signup-container">
 				<form onSubmit={function(e) {
-          this.handleSubmit(e, this.state.username, this.state.password, this.state.firstname, this.state.lastname, this.state.email);
+          this.handleSubmit(e, this.state.username, this.state.password, this.state.firstname, this.state.lastname, this.state.email, this.state.github);
         }.bind(this)}>
           <div className="form-inputs">
             <input 
@@ -199,6 +223,14 @@ class Signup extends React.Component {
               />
               <span id="lastname"></span>
               {this.state.lastnameValid ? <i className="glyphicon glyphicon-ok"></i> : null}
+              <input 
+                onChange={this.changeGithubInput}
+                className="login-input"
+                type='text' 
+                placeholder='github'
+                />
+                <span id="github"></span>
+                {this.state.githubValid ? <i className="glyphicon glyphicon-ok"></i> : null}
             <input 
               onChange={this.changeEmailInput}
               className="login-input"
