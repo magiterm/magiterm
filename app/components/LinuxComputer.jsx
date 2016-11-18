@@ -23,7 +23,6 @@ class LinuxComputer extends React.Component {
 componentWillMount() {
   var context = this;
   const user = JSON.parse(localStorage['user']);
-
   context.setState({
     containerName: user.username,
     username: user.username,
@@ -48,7 +47,6 @@ componentWillMount() {
         
    // }
 } 
- 
 
   selectChange(event) {
     //alert(event.target.value);

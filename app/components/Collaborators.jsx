@@ -17,7 +17,7 @@ class Collaborators extends React.Component {
     };
 
 
-    axios.post('/pendingInvites', {username: this.state.username})
+    axios.post('/users/pendingInvites', {username: this.state.username})
     .then(function(res) {
       const pendingUsernames = res.data.map(function(pending) {
         return pending.requesterUsername;
@@ -27,7 +27,7 @@ class Collaborators extends React.Component {
       });
     });
 
-    axios.post('/myCollaborators', {username: this.state.username})
+    axios.post('/users/myCollaborators', {username: this.state.username})
     .then(function(res) {
       const acceptedUsernames = res.data.map(function(accepted) {
         return accepted.recieverUsername;
@@ -37,7 +37,7 @@ class Collaborators extends React.Component {
       });
     });
 
-    axios.post('/collaboratingWith', {username: this.state.username})
+    axios.post('/users/collaboratingWith', {username: this.state.username})
     .then(function(res) {
       const acceptedUsernames = res.data.map(function(accepted) {
         return accepted.requesterUsername;
@@ -77,7 +77,7 @@ class Collaborators extends React.Component {
   }
 
   handleAcceptCollab(username) {
-    axios.post('/acceptInvite', {invited: username, accepter: this.state.username})
+    axios.post('/users/acceptInvite', {invited: username, accepter: this.state.username})
     .then(function(res) {
       console.log(res);
     });

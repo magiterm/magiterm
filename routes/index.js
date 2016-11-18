@@ -24,123 +24,13 @@ router.get('/dashboard', function(req, res) {
   res.render('index', { title: 'picoShell' });
 });
 
-
-router.post('/collaboratingWith', function(req, res) {
-  Collaborator.findAll({
-    where: {
-      recieverUsername: req.body.username,
-      confirmed: 'confirmed'
-    }
-  }).then(function(resp) {
-    res.status(200).send(resp);
-  });
-});
-
-router.post('/myCollaborators', function(req, res) {
-  Collaborator.findAll({
-    where: {
-      requesterUsername: req.body.username,
-      confirmed: 'confirmed'
-    }
-  }).then(function(resp) {
-    res.status(200).send(resp);
-  });
-});
-
-router.post('/acceptInvite', function(req, res) {
-  const reciever = req.body.invited;
-  const accepter = req.body.accepter;
-
-  Collaborator.update({
-    confirmed: 'confirmed'
-  }, {
-    where: {
-      requesterUsername: reciever,
-      recieverUsername: accepter
-    }
-  }).then(function (resp) {
-    console.log('ACCEPT RESP', resp);
-    res.status(200).send(resp);
-  });
-});
-
-router.post('/rejectInvite', function(req, res) {
-
-});
-
-router.post('/pendingInvites', function(req, res) {
-  Collaborator.findAll({
-    where: {
-      recieverUsername: req.body.username,
-      confirmed: 'unconfirmed'
-    }
-  }).then(function(resp) {
-    res.status(200).send(resp);
-  });
-});
-
-router.post('/sendInvite', function(req, res) {
-  User.findOne({
-    where: {
-      username: req.body.usernameToInvite
-    }
-  })
-  .then(function(resp) {
-    if(!resp) {
-      res.status(200).send({fail: 'Username not found!'});
-    } else
-    {
-      const inviter = req.body.username;
-      const user = req.body.usernameToInvite;
-      Collaborator.find({
-        where: {
-          requesterUsername: inviter,
-          recieverUsername: user
-        }
-      }).then(function(resp1) {
-        if(resp1) {
-          res.status(200).send({fail: 'You already sent that user an invite, or they are already collaborating with you!'});
-        } else {
-          Collaborator.create({
-            requesterUsername: inviter,
-            recieverUsername: user,
-            confirmed: 'unconfirmed'
-          }).then(function(resp2) {
-            res.status(200).send({success: 'Collaboration invitation sent!'});
-          });
-        }
-      }).catch(function(err1) {
-        console.log('ERR', err1);
-        res.status(500).send(err1);
-      });
-    }
-  });
-
-  //res.status(200).send('Hello!');
-});
-
-router.get('/infodashboard', function(req, res) {
-  const username = req.query.username;
-  User.findOne({
-    where: {
-      username: username
-    }
-  })
-  .then(function(response) {
-    console.log(response);
-    res.send(200, response);
-  })
-  .catch(function(err){
-    res.send(500, err);
-  })
-})
-
 router.get('/decode', function(req, res) {
   const decoded = jwtDecode(req.query.token);
   res.send(200, decoded);
 });
 
 
+<<<<<<< 5eabf89e679a36196ab00521640434115e9836f7
 router.post('/handleCodeSave', function (req, res) {
   const fileName = req.body.fileName;
   const containerName = req.body.containerName;
@@ -262,6 +152,35 @@ router.post('/cmd', function (req, res) {
     }) 
   }
 });
+=======
+function generateToken(req, res, next) {
+  var info = req.user;
+    console.log('here at generate', info)
+  var tokenUser = info.username.slice(info.username.length - 1);
+  var tokenMail = info.email.slice(info.email.indexOf('@'));
+  var tokenBio = info.bio.slice(6);
+    console.log('generating a token');
+  req.token = jwt.sign({ 
+    id: (tokenUser + tokenMail + tokenBio),
+    username: info.username
+  }, 'server secret', {
+    expiresIn: 7200
+  });
+  next();
+}
+
+function serialize(req, res, next) {
+  console.log('serializing userrrrrdffasdfasdfasdfasdfasdfasdfasdfasdr', res.req.authInfo)
+  var user = res.req.authInfo;
+  User.updateOrCreate(user, function(err, user) {
+    if (err) {
+      next(err);
+    }
+    req.user = user;
+    next();
+  });
+}
+>>>>>>> Modify routes
 
 router.post('/authenticate', 
   passport.authenticate('local', {

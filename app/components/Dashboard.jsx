@@ -62,6 +62,7 @@ class Dashboard extends React.Component {
           bio: user.bio
         });
         context.forceUpdate();
+
       });
     }
   }

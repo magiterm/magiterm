@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+var Collaborator = require('../models/Collaborator');
 
 
 router.post('/collaboratingWith', function(req, res) {
@@ -118,6 +119,22 @@ router.post('/updateuser', function(req, res) {
     res.status(500).send(err);
   })
 });
+
+router.get('/infodashboard', function(req, res) {
+  const username = req.query.username;
+  User.findOne({
+    where: {
+      username: username
+    }
+  })
+  .then(function(response) {
+    console.log(response);
+    res.send(200, response);
+  })
+  .catch(function(err){
+    res.send(500, err);
+  })
+})
 
 module.exports = router;
   

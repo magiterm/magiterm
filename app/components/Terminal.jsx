@@ -101,7 +101,7 @@ class Terminal extends React.Component {
     $(function($, undefined) {
       $('#terminal').terminal(function(command, term) {
         if (command !== '') {
-          axios.post('/cmd', { cmd: command, containerName: context.state.containerName })
+          axios.post('/docker/cmd', { cmd: command, containerName: context.state.containerName })
             .then(function(res) {
               if(typeof res.data === 'object') {
                 if(res.data.fileOpen) {
@@ -150,7 +150,7 @@ class Terminal extends React.Component {
           prompt: prompt,
           tabcompletion: true,
           completion: function(terminal, command, callback) {
-            axios.post('/cmd', { cmd: 'ls', containerName: containerName })
+            axios.post('/docker/cmd', { cmd: 'ls', containerName: containerName })
               .then(function(res) {
                 console.log(res.data);
                 const possibilities = (res.data.split('\n'));
@@ -160,7 +160,7 @@ class Terminal extends React.Component {
           onInit: function(term) {
             context.terminal = term;
             var command = 'cd /picoShell';
-            axios.post('/cmd', { cmd: command, containerName: containerName })
+            axios.post('/docker/cmd', { cmd: command, containerName: containerName })
               .then(function(res) {
                 console.log(res);
                 term.echo(String(res.data.res));
