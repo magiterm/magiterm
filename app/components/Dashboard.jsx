@@ -33,43 +33,36 @@ class Dashboard extends React.Component {
     var context = this;
     const user = localStorage['user'];
     const history = JSON.parse(localStorage['0_commands']);
-    if (user) {
-      axios.get('/oAuth')
+    axios.get('/oAuth')
+    .then(function(response) {
+      console.log('1111111111111111',response);
+      const user = response.data;
+      context.setState({
+        containerName: user.username,
+        username: user.username
+      });
+      axios.get('/infodashboard', {
+        params: {
+          username: user.username
+        }
+      })
       .then(function(response) {
-        console.log('1111111111111111',response);
+        console.log('222222222222222222',response);
         const user = response.data;
         context.setState({
-          containerName: user.username,
-          username: user.username
-        });
-        axios.get('/infodashboard', {
-          params: {
-            username: user.username
-          }
-        })
-        .then(function(response) {
-          console.log('222222222222222222',response);
-          const user = response.data;
-          context.setState({
-            bio:user.bio,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            createdAt: user.createdAt,
-            commandHistory: history,
-            profilePictureUrl: user.profilePicture,
-            github: user.githubHandle,
-            bio: user.bio
-          })
-          console.log('3333333333333333333', context.state);
-          context.forceUpdate()
+          bio:user.bio,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          createdAt: user.createdAt,
+          commandHistory: history,
+          profilePictureUrl: user.profilePicture,
+          github: user.githubHandle,
+          bio: user.bio
         });
       });
-    }
+    })
   }
-
-
-
   render() {
    if (localStorage['user'] && localStorage['user'].length) {
       return (
@@ -113,11 +106,11 @@ class Dashboard extends React.Component {
         </div>
        );
     } else {
-     return (
-       <div>
-         Loading...
-       </div>
-     )
+      return(
+        <div>
+          Loading...
+        </div>
+      )
     }
   }
 }
