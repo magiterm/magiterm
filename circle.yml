@@ -9,7 +9,7 @@ machine:
 
 database:
   override:
-    - mysql -u root -p root picodb
+    - mysql -u root -e 'CREATE DATABASE picodb'
 
 test:
   override:
