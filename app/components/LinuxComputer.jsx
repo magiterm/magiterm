@@ -12,7 +12,8 @@ class LinuxComputer extends React.Component {
 
     this.state = {
       username: '',
-      containerName: ''
+      containerName: '',
+      collabWith: []
     }
 
     this.selectChange = this.selectChange.bind(this);

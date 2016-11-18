@@ -36,21 +36,22 @@ class Dashboard extends React.Component {
     if (user) {
       axios.get('/oAuth')
       .then(function(response) {
-        console.log(response);
+        console.log('1111111111111111',response);
         const user = response.data;
         context.setState({
           containerName: user.username,
           username: user.username
         });
-
         axios.get('/infodashboard', {
           params: {
             username: user.username
           }
         })
-        .then(function(response){
+        .then(function(response) {
+          console.log('222222222222222222',response);
           const user = response.data;
           context.setState({
+            bio:user.bio,
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
@@ -60,7 +61,9 @@ class Dashboard extends React.Component {
             github: user.githubHandle,
             bio: user.bio
           })
-        })
+          console.log('3333333333333333333', context.state);
+          context.forceUpdate()
+        });
       });
     }
   }
@@ -87,6 +90,9 @@ class Dashboard extends React.Component {
               <div className="col-md-4 contain">
                 <div className="card">
                   <Bio username={this.state.username} bio={this.state.bio}/>
+                {console.log('44444444444444444444444', this.state)}
+                <div className="card">                                
+                  <Bio firstName={this.state.firstName} lastName={this.state.lastName}/>
                 </div>
               </div>
             </div>
@@ -104,6 +110,7 @@ class Dashboard extends React.Component {
             </div>
            </div>
          </div>
+        </div>
        );
     } else {
      return (

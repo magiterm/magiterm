@@ -3,7 +3,7 @@ const axios = require('axios');
 import InlineEdit from 'react-edit-inline';
 
 class Bio extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
 
     this.style = {
@@ -24,6 +24,7 @@ class Bio extends React.Component {
       bio: this.props.bio,
       username: this.props.username
     }
+    console.log('5555555555555555555555555', this.props)
   }
 
   dataChanged(data) {
@@ -59,6 +60,8 @@ class Bio extends React.Component {
                 change={this.dataChanged}
                 style = {this.style}
               />
+              {console.log('66666666666666666666',this.state)}
+              {this.props.firstName + ' ' + this.props.lastName}
             </div>
           </div>
         </div>
