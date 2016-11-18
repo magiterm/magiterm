@@ -21,7 +21,8 @@ class Dashboard extends React.Component {
       createdAt: null,
       github: '',
       commandHistory: [],
-      profilePictureUrl: ''
+      profilePictureUrl: '',
+      bio: ''
     }
   }
 
@@ -58,7 +59,8 @@ class Dashboard extends React.Component {
             createdAt: user.createdAt,
             commandHistory: history,
             profilePictureUrl: user.profilePicture,
-            github: user.githubHandle
+            github: user.githubHandle,
+            bio: user.bio
           })
         })
       });
@@ -85,7 +87,7 @@ class Dashboard extends React.Component {
               </div>
               <div className="col-md-4 contain">
                 <div className="card">
-                  <Bio firstName={this.state.firstName} lastName={this.state.lastName}/>
+                  <Bio username={this.state.username} bio={this.state.bio}/>
                 </div>
               </div>
             </div>

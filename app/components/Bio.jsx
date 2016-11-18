@@ -1,13 +1,47 @@
 const React = require('react');
+const axios = require('axios');
+import InlineEdit from 'react-edit-inline';
 
 class Bio extends React.Component {
 	constructor(props) {
     super(props);
 
-    this.state = {
-      firstName: this.props.firstName,
-      lastName: this.props.lastName
+    this.style = {
+      backgroundColor: '#191919',
+      minWidth: 300,
+      fontFamily: 'Roboto-Regular',
+      display: 'inline-block',
+      margin: 0,
+      padding: 0,
+      fontSize: 15,
+      outline: 0,
+      border: 0
     }
+
+    this.dataChanged = this.dataChanged.bind(this);
+
+    this.state = {
+      bio: this.props.bio,
+      username: this.props.username
+    }
+  }
+
+  dataChanged(data) {
+      this.setState({
+        bio: data.bio
+      });
+
+      const toUpdate = {
+        bio: data.bio
+      }
+
+      axios.post('/updateUser', { username: this.state.username, toUpdate: toUpdate})
+        .then(function(res) {
+          console.log(res);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
   }
 
   render() {
@@ -18,11 +52,17 @@ class Bio extends React.Component {
               Bio
             </div>
             <div className="info">
-              {this.state.firstName + ' ' + this.state.lastName}
+              <InlineEdit
+                activeClassName="editing"
+                text={this.state.bio ? this.state.bio : 'Tell others about yourself!'}
+                paramName="bio"
+                change={this.dataChanged}
+                style = {this.style}
+              />
             </div>
           </div>
         </div>
-      );
+      )
   }
 }
 

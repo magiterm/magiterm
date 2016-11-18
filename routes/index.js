@@ -121,6 +121,7 @@ router.get('/infodashboard', function(req, res) {
     }
   })
   .then(function(response) {
+    console.log(response);
     res.send(200, response);
   })
   .catch(function(err){
@@ -307,31 +308,28 @@ router.get('/github/callback', passport.authenticate('github', {
     });
   });
 
-router.post('/profilepicture', function(req, res) {
-
-  const pictureUrl = req.body.profilePictureUrl;
-  const username = req.body.username;
-
+router.post('/updateuser', function(req, res) {
+  const user = req.body;
 
   User.findOne({
     where: {
-      username: username
+      username: user.username
     }
   })
   .then(function(user) {
-    user.update({
-      profilePicture: pictureUrl
+      user.update(req.body.toUpdate);
     })
     .then(function() {
-      res.status(200).send('Successfully saved picture in DB');
+      res.status(200).send('Successfully updated user');
     })
-  })
+    .catch(function(err) {
+      res.status(500).send('Wasn\'t able to save to database');
+    })
   .catch(function(err) {
-    console.log(err);
+    console.error(err);
     res.status(500).send(err);
-  });
-});
-
+  })
+})
 
 router.get('*', function(req, res, next) {
   console.log('rendering bullshit');  
