@@ -333,11 +333,6 @@ router.post('/updateuser', function(req, res) {
     console.error(err);
     res.status(500).send(err);
   })
-})
-
-router.get('*', function(req, res, next) {
-  console.log('rendering bullshit');  
-  res.render('index', { title: 'picoShell' });
 });
 
 module.exports = router;

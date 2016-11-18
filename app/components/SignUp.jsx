@@ -93,7 +93,7 @@ class Signup extends React.Component {
     }
   }
 
-  handleSubmit(e, user, pass, firstName, lastName, email, github) {
+  handleSubmit(e) {
     const context = this;
     e.preventDefault();
 
@@ -101,17 +101,17 @@ class Signup extends React.Component {
 
     if (this.state.usernameValid && this.state.firstNameValid && this.state.githubValid && this.state.lastNameValid && this.state.emailValid && this.state.passwordValid) {
       axios.post('/auth/signup', {
-         username: user,
-         password: pass,
-         firstname: firstName,
-         lastname: lastName,
-         email: email,
-         githubHandle: github
+         username: this.state.username,
+         password: this.state.password,
+         firstname: this.state.firstName,
+         lastname: this.state.lastName,
+         email: this.state.email,
+         githubHandle: this.state.github
        })
        .then(function (response) {
          axios.post('/authenticate', {
-           username: user,
-           password: pass
+           username: this.state.username,
+           password: this.state.password
          })
          .then(function(response) {
            if (response.data.token) {
@@ -139,14 +139,12 @@ class Signup extends React.Component {
   render() {
     return (
       <div className="signup-container">
-        <form onSubmit={function(e) {
-          this.handleSubmit(e, this.state.username, this.state.password, this.state.firstName, this.state.lastName, this.state.email, this.state.github);
-        }.bind(this)}>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <div className="form-inputs">
             <input 
               onChange={this.changeUserNameInput}
               className="login-input"
-              type='text' 
+              type='text'
               placeholder='username'
               data-type='username'
               />
