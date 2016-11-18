@@ -2,8 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const exec = require('child_process').exec;
-// const kue = require('kue');
-// const jobs = kue.createQueue();
 var bcrypt = require('bcrypt');
 const docker = require('../utils/dockerAPI');
 var db = require('../db/config');
@@ -18,6 +16,15 @@ const jwtDecode = require('jwt-decode')
 router.get('/', function(req, res) {
   res.render('index', { title: 'picoShell' });
 });
+
+router.get('/linuxcomputer', function(req, res) {
+  res.render('index', { title: 'picoShell' });
+});
+
+router.get('/dashboard', function(req, res) {
+  res.render('index', { title: 'picoShell' });
+});
+
 
 router.post('/collaboratingWith', function(req, res) {
   Collaborator.findAll({
