@@ -273,6 +273,11 @@ router.post('/authenticate',
     res.send(req.user.dataValues);
   }
 );
+router.get('/logout', function(req, res) {
+  req.session.destroy(function(err) {
+    res.redirect('/')
+  })
+})
 
 
 router.get('/oAuth', function(req, res) {
@@ -288,7 +293,7 @@ router.get('/github/callback', passport.authenticate('github', {
   function(req, res) {
     console.log('trying to send statuskjhafdskjhadsfkjlhdaskjldafskjldsafkljadsfkljh', req.user);
     req.session.user = req.user;
-    res.redirect('/dashboard');
+    res.redirect('/');
   });
 
 router.post('/updateuser', function(req, res) {

@@ -29,14 +29,17 @@ class App extends React.Component {
     const context = this;
 
     if (user) {
+        console.log('we have a usr', user)
         context.setState({
          authenticated: true,
          username: user.username,
          containerName: user.containerName,
        });
+    } else {
+      console.log('we do not have a user')
+      authenticated: false;
     }
   }
-
   GoToLogin() {
     this.setState({
       authenticate: 'login'
