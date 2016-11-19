@@ -46,7 +46,6 @@ class App extends React.Component {
       console.log('no user');
       console.log(err);
     });
-   
   }
 
   GoToLogin() {
