@@ -91,7 +91,7 @@ router.get('/github/callback', passport.authenticate('github', {
   function(req, res) {
     console.log('trying to send statuskjhafdskjhadsfkjlhdaskjldafskjldsafkljadsfkljh', req.user);
     req.session.user = req.user;
-    console.log('helloasdfkjadsklfdas')
+    console.log('helloasdfkjadsklfdas');
     res.redirect('/');
   });
 
@@ -103,8 +103,8 @@ router.post('/updateUser', function(req, res) {
     }
   })
   .then(function(user) {
-    console.log('found a user user usr found a user user usr')
-    console.log(req.body, 'bodddydydydydydydydydyd')
+    console.log('found a user user usr found a user user usr');
+    console.log(req.body, 'bodddydydydydydydydydyd');
     user.update(req.body.toUpdate)
     .then(function() {
       res.status(200).send('Successfully updated user');
