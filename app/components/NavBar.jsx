@@ -5,14 +5,13 @@ const axios = require('axios');
 class NavBar extends React.Component {
 	constructor (props) {
 		super(props);
-
     this.handleLogOut = this.handleLogOut.bind(this);
 	}
 
 componentWillMount() {
   if (!localStorage['user']) {
     var context = this;
-    axios.get('/oAuth')
+    axios.get('/auth/oAuth')
     .then(function(response) {
       if (response.data.username) {
         localStorage['user'] = JSON.stringify(response.data);
