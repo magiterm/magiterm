@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 const port = process.env.PORT || 3000;
 const host = `http://localhost:${port}`;
-const request  = require("request");
+const request = require('request');
 
 describe('Local Signup/Login test', function () {
   const requestWithSession = request.defaults({jar: true});
