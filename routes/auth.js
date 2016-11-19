@@ -96,7 +96,7 @@ router.post('/authenticate',
       profilePicture: fullUser.profilePicture
     };
     req.session.user = user;
-    res.send(user);
+    res.send(req.session.user);
   }
 );
 
