@@ -109,7 +109,7 @@ class Signup extends React.Component {
          githubHandle: context.state.github
        })
        .then(function (response) {
-         axios.post('/authenticate', {
+         axios.post('/auth/authenticate', {
            username: username,
            password: password
          })

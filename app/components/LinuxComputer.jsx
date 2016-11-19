@@ -37,15 +37,6 @@ componentWillMount() {
       collabWith: acceptedUsernames
     });
   });
-
-   // if (user) {
-   //   axios.get('/oAuth', {
-   //   })
-   //   .then (function(response) {
-   //      const user = response.data;
-   //      console.log('setting state!');
-        
-   // }
 } 
 
   selectChange(event) {

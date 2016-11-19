@@ -27,15 +27,6 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount() {
-    // axios.get('/oAuth').then(response => {
-    //   var context = this;
-    //   const user = response.data;
-    //   console.log('storage in Dashboard', localStorage['user']);
-
-    //   context.setState({
-    //     containerName: user.username,
-    //     username: user.username
-    //   });
     var context = this;
     console.log(localStorage['user']);
     if (localStorage['user']) {

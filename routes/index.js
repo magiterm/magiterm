@@ -36,51 +36,15 @@ router.get('/infodashboard', function(req, res) {
     console.log(response);
     res.send(200, response);
   })
-  .catch(function(err){
+  .catch(function(err) {
     res.send(500, err);
-  })
-})
-
-router.get('/decode', function(req, res) {
-  const decoded = jwtDecode(req.query.token);
-  res.send(200, decoded);
+  });
 });
 
-
-
-
-router.post('/authenticate', 
-  passport.authenticate('local', {
-    session: true
-  }),
-  function(req, res) {
-    console.log('trying to send status', req.user);
-    var user = req.user;
-    var userNoPw = {
-      username: user.username,
-      id: user.id,
-      bio: user.bio,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      authenticatedWith: user.authenticatedWith,
-      githubHandle: user.githubHandle,
-      profilePicture: user.profilePicture
-    };
-    req.session.user = userNoPw;
-    res.send(userNoPw);
-  }
-);
 router.get('/logout', function(req, res) {
   req.session.destroy(function(err) {
     res.redirect('/');
   });
-});
-
-
-router.get('/oAuth', function(req, res) {
-  console.log('useruser useruser useruser useruser useruser', req.user, 'sess sess sess sess sess sess sess sess', req.session.user)
-  res.json(req.session.user);
 });
 
 router.get('/github', passport.authenticate('github'));
@@ -91,32 +55,8 @@ router.get('/github/callback', passport.authenticate('github', {
   function(req, res) {
     console.log('trying to send statuskjhafdskjhadsfkjlhdaskjldafskjldsafkljadsfkljh', req.user);
     req.session.user = req.user;
-    console.log('helloasdfkjadsklfdas')
+    console.log('helloasdfkjadsklfdas');
     res.redirect('/');
   });
-
-router.post('/updateUser', function(req, res) {
-  const user = req.body;
-  User.findOne({
-    where: {
-      username: user.username
-    }
-  })
-  .then(function(user) {
-    console.log('found a user user usr found a user user usr')
-    console.log(req.body, 'bodddydydydydydydydydyd')
-    user.update(req.body.toUpdate)
-    .then(function() {
-      res.status(200).send('Successfully updated user');
-    })
-    .catch(function(err) {
-      res.status(500).send('Wasn\'t able to save to database');
-    });
-  })
-  .catch(function(err) {
-    console.error(err);
-    res.status(500).send(err);
-  });
-});
 
 module.exports = router;
