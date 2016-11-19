@@ -56,7 +56,6 @@ class Dashboard extends React.Component {
           lastName: user.lastName,
           email: user.email,
           createdAt: user.createdAt,
-          commandHistory: JSON.parse(localStorage['0_commands']),
           profilePictureUrl: user.profilePicture,
           github: user.githubHandle,
           bio: user.bio
@@ -66,56 +65,52 @@ class Dashboard extends React.Component {
       });
     }
   }
-  render() {
-   if (this.state.containerName.length) {
-      return (
-         <div>
-          <NavBar username={this.state.username} />
-          <div className="dashboard-container">
-            <div className="row">
-              <div className="col-md-4 contain">
-              
-                <div className="card">
-                  <ProfilePicture profilePicture={this.state.profilePictureUrl} username={this.state.username}/>
-                </div>
-              </div>
-              <div className="col-md-4 contain">
-                <div className="card">
-                  <UserInfo username={this.state.username} email={this.state.email} github={this.state.github}/>
-                </div>
-              </div>
-              <div className="col-md-4 contain">
-                <div className="card">
-                  <Bio username={this.state.username} bio={this.state.bio}/>
-                <div className="card">                                
-                  <Bio firstName={this.state.firstName} lastName={this.state.lastName} username={this.state.username}/>
-                </div>
+    render() {
+      if (this.state.lastName.length) {
+         return (
+            <div>
+             <NavBar username={this.state.username} />
+             <div className="dashboard-container">
+               <div className="row">
+                 <div className="col-md-4 contain">
+                   <div className="card">
+                     <ProfilePicture profilePicture={this.state.profilePictureUrl} username={this.state.username}/>
+                   </div>
+                 </div>
+                 <div className="col-md-4 contain">
+                   <div className="card">
+                     <UserInfo username={this.state.username} email={this.state.email} github={this.state.github}/>
+                   </div>
+                 </div>
+                 <div className="col-md-4 contain">
+                   <div className="card">
+                     <Bio username={this.state.username} bio={this.state.bio}/>
+                   </div>
+                 </div>
+               </div>
+               <div className="row">
+                 <div className="col-md-7 contain">
+                   <div className="card">
+                     <Collaborators curCollab="Hobo Jim" collabWith={["Mr. Cool", "Some Guy"]} username={this.state.username}/>
+                   </div>
+                 </div>
+                 <div className="col-md-5 contain">
+                   <div className="card">
+                     <Stats containerName={this.state.username} commandHistory={this.state.commandHistory} username={this.state.username} email={this.state.email} github="somegithub"/>
+                   </div>
+                 </div> 
+               </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-7 contain">
-                <div className="card">
-                  <Collaborators curCollab="Hobo Jim" collabWith={["Mr. Cool", "Some Guy"]} username={this.state.username}/>
-                </div>
-              </div>
-              <div className="col-md-5 contain">
-                <div className="card">
-                  <Stats containerName={this.state.username} commandHistory={this.state.commandHistory} username={this.state.username} email={this.state.email} github={this.state.github}/>
-                </div>
-              </div> 
-            </div>
-           </div>
-         </div>
-        </div>
-       );
-    } else {
-      return(
-        <div>
-          Loading...
-        </div>
-      )
-    }
-  }
+          );
+       } else {
+        return (
+          <div>
+            Loading...
+          </div>
+        )
+       }
+     }
 }
 
 module.exports = Dashboard;

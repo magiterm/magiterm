@@ -75,7 +75,7 @@ class UserInfo extends React.Component {
               Username
             </div>
             <div className="info">
-              {this.state.username}
+              {this.props.username}
             </div>
             <div className="title">
               Email

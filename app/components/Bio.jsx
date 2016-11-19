@@ -3,7 +3,7 @@ const axios = require('axios');
 import InlineEdit from 'react-edit-inline';
 
 class Bio extends React.Component {
-  constructor(props) {
+	constructor(props) {
     super(props);
 
     this.style = {
@@ -23,7 +23,7 @@ class Bio extends React.Component {
     this.state = {
       bio: this.props.bio,
       username: this.props.username
-    };
+    }
   }
 
   dataChanged(data) {
@@ -34,7 +34,7 @@ class Bio extends React.Component {
       const toUpdate = {
         bio: data.bio
       }
-      console.log('toupdatetoupdatetoupdatetoupdate', this.state.username)
+
       axios.post('/updateUser', { username: this.state.username, toUpdate: toUpdate})
         .then(function(res) {
           console.log(res);
