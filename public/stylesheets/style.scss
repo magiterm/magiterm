@@ -6,6 +6,7 @@ $purpleblue: #b2baef;
 $white: #FFFFFF;
 $brightgreen: #03CEA1;
 $lightgrey: #7B7373;
+$darkgrey: #262626;
 
 $themedarkpurple: #271F42;
 $themewhite: #FEFEFE;
@@ -18,6 +19,8 @@ $themered: #e15b69;
 $themeyellow: #e1d35b;
 $themelightblue:  #5bace1;
 $thememiddarkpurple: #5b69e1;
+$themebrightblue: #3AC4FF;
+$themebrightpurple: #7156FB;
 
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 @import url('https://fonts.googleapis.com/css?family=Advent+Pro|Dosis');
@@ -28,12 +31,25 @@ $thememiddarkpurple: #5b69e1;
 
 $work: 'Work Sans', sans-serif;
 $franklin: 'Libre Franklin', sans-serif;
+$dosis: "Dosis", Helvetica, Arial, sans-serif;
 
 body {
   font: 14px "Dosis", Helvetica, Arial, sans-serif;
   background-color: $offblack;
   margin: 0;
   padding: 0;
+}
+
+.centered {
+   text-align: center;
+   font-size: 0;
+
+   div {
+    float: none;
+    display: inline-block;
+    text-align: left;
+    font-size: 13px;
+   }
 }
 
 #terminal {
@@ -71,6 +87,7 @@ body {
 .profile-picture-container {
   .img-container {
     text-align: center;
+    padding-top: 25px;
     img {
       text-align: center;
       padding: 20px 20px 0 20px;
@@ -79,7 +96,6 @@ body {
   }
   .username{
     color: $offwhite;
-    font-family: Roboto-regular;
     text-align: center;
     padding: 10px;
     font-size: 1.3em;
@@ -88,47 +104,54 @@ body {
 
 .card-container {
   .header {
-    padding: 10px;
+    padding: 10px 0 0 10px;
+    border-bottom: 1px solid $offblack;
     margin: 0px;
-    background-color: $themelightblue;
-    font-family: Roboto-Regular;
+    background-color: $darkgrey;
     text-align: center;
-    color: $offwhite;
+    color: $themewhite;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding-bottom: 12px;
   }
   .information {
     padding: 20px;
+    color: $themewhite;
     .title {
-      color: $themedarkpurple;
+      color: $themewhite;
       font-size: 16px;
-      font-family: $work;
       padding-top: 7px;
     }
 
     .info {
       font-size: 15px;
-      color: #EDF3F3;
+      color: $themewhite;
       padding-bottom: 10px;
-      font-family: Roboto-Regular;
     }
 
     .collaborators {
-      font-size: 25px; 
-      font-family: Roboto-Condensed;
+      font-size: 25px;
+      float: none;
     }
 
     .none {
       font-size: 25px;
-      font-family: RobotoCondensed-Regular;
-      color: $lightgrey;
+      color: $offwhite;
     }
 
+    form {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
     .collaborators-input {
       margin: 5px;
       background: rgba(36, 35, 39, 0.6);
       border: 0;
-      color: $offwhite;
+      color: $themewhite;
       width: 90%;
       padding: 5px;
+      text-align: center;
 
       &:focus {
         outline: none;
@@ -137,13 +160,64 @@ body {
 
     .collaborators {
       font-size: 25px;
-      font-family: RobotoCondensed-Regular;
-      color: $offwhite;
+      color: $themewhite;
+    }
+
+    .collab-card-top {
+      padding: 15px 15px 30px 15px;
+      .left {
+        background-color: $themedarkpurple;
+        padding: 20px;
+        .title {
+          color: $themewhite;
+        }
+        .info {
+          color: $themewhite;
+        }
+      }
+
+      .right {
+        background-color: $themebrightpurple;
+        padding: 20px;
+        .title {
+          color: $themewhite;
+        }
+        .info {
+          color: $themewhite;
+        }
+      }
+    }
+
+    .collab-card-bottom {
+      padding: 0px 15px 30px 15px;
+
+      .left {
+        background-color: $themebrightpurple;
+        padding: 20px;
+        .title {
+          color: $themewhite;
+        }
+        .info {
+          color: $themewhite;
+        }
+      }
+
+      .right {
+        background-color: $themedarkpurple;
+        padding: 20px;
+        .title {
+          color: $themewhite;
+        }
+        .info {
+          color: $themewhite;
+        }
+      }
     }
 
     .inline-edit {
       width: 100px;
       word-wrap: break-word;
+      font-weight: none;
     }
 
     .center {
@@ -170,17 +244,19 @@ body {
   height: 100%;
   width: 100%;
   color: $offwhite;
-  background-color: $themeyellow;
+  background-color: $offblack;
 
   .contain {
-    padding: 20px;
+    padding: 10px 10px 10px 10px;
 
     .card {
+      text-align: center; 
       height: 100%;
-      background-color: $thememiddarkpurple;
+      background-color: $darkblack;
       border-radius: 0;
       width: 100%;
-      margin: 10px, 20px, 5px, 5px
+      margin: 10px, 20px, 5px, 5px;
+      box-shadow: 3px 3px 1px rgba(0, 0, 0,0.5);
     }
   }
 }
@@ -356,7 +432,7 @@ body {
       margin-right: 100px;
       padding: 10px;
       height: 100%;
-      font-family: 'Work Sans', sans-serif;
+      font-family: $work;
       font-size: 20px;
       box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2); 
     }
@@ -367,7 +443,7 @@ body {
       height: 100%;
       background: rgba(36, 35, 39, 0.4);
       box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-      font-family: 'Work Sans', sans-serif;
+      font-family: $work;
 
       .login {
         .login-input {

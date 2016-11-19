@@ -49,7 +49,7 @@ class Bio extends React.Component {
         <div>
           <div className="card-container">
             <div className="header">
-              About Me
+              ABOUT ME
             </div>
             <div className="information">
               <div className="info center">

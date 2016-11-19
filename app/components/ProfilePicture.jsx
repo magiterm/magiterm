@@ -3,7 +3,7 @@ const ReactDOM = require('react-dom');
 const Dropzone = require('react-dropzone');
 const request = require('superagent');
 const axios = require('axios');
-const CLOUDINARY_UPLOAD_PRESET = 'oildchia';
+const CLOUDINARY_UPLOAD_PRESET = 'z14cfu0d';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/picoshell/upload';
 
 class ProfilePicture extends React.Component {
@@ -47,7 +47,7 @@ class ProfilePicture extends React.Component {
 					profilePicture: response.body.secure_url
 				}
 
-				axios.post('/updateUser', { username: this.state.username, toUpdate: toUpdate})
+				axios.post('/users/updateUser', { username: this.state.username, toUpdate: toUpdate})
 				.then(function(res) {
 					console.log(res);
 				})
@@ -61,11 +61,15 @@ class ProfilePicture extends React.Component {
 	render() {
 		if (!this.state.profilePictureUrl) {
 			return (
+				<div className="row">
+				<div className="col-md-3 col-md-offset-3">
 				<div className="profile-picture-container">
-  				<div className="img-container">
-    				<Dropzone multiple={false} accept="image/*" onDrop={this.onImageDrop}>
-    				  <p>Drop an image or click to select a file to upload.</p>
-    				</Dropzone>
+  				<div className="img-container center">
+		    				<Dropzone multiple={false} accept="image/*" onDrop={this.onImageDrop}>
+		    				  <p>Drop an image or click to select a file to upload.</p>
+		    				</Dropzone>
+	    				</div>
+    				</div>
   				</div>
 				</div>
 			)	

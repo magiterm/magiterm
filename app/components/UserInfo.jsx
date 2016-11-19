@@ -9,7 +9,7 @@ class UserInfo extends React.Component {
 
     this.dataChanged = this.dataChanged.bind(this);
     this.style = {
-      backgroundColor: '#e1d35b',
+      backgroundColor: '#191919',
       minWidth: 300,
       fontFamily: 'Roboto-Regular',
       display: 'inline-block',
@@ -68,7 +68,7 @@ class UserInfo extends React.Component {
     return (
         <div className="card-container user-info-container">
           <div className="header">
-            Information
+            USER INFORMATION
           </div>
           <div className="information">
             <div className="title">

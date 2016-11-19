@@ -78,12 +78,12 @@ class Stats extends React.Component {
               {
                   data: [used, free],
                   backgroundColor: [
-                      "#47F0CA",
-                      "#f0476d"
+                      "#e15b69",
+                      "#7156FB"
                   ],
                   hoverBackgroundColor: [
-                      "#47F0CA",
-                      "#f0476d",
+                      "#e15b69",
+                      "#7156FB",
                   ]
               }]
       };
