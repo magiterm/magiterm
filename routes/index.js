@@ -297,27 +297,28 @@ router.get('/github/callback', passport.authenticate('github', {
     res.redirect('/');
   });
 
-router.post('/updateuser', function(req, res) {
+router.post('/updateUser', function(req, res) {
   const user = req.body;
-
   User.findOne({
     where: {
       username: user.username
     }
   })
   .then(function(user) {
-      user.update(req.body.toUpdate);
-    })
+    console.log('found a user user usr found a user user usr')
+    console.log(req.body, 'bodddydydydydydydydydyd')
+    user.update(req.body.toUpdate)
     .then(function() {
       res.status(200).send('Successfully updated user');
     })
     .catch(function(err) {
       res.status(500).send('Wasn\'t able to save to database');
-    })
+    });
+  })
   .catch(function(err) {
     console.error(err);
     res.status(500).send(err);
-  })
+  });
 });
 
 module.exports = router;

@@ -86,7 +86,7 @@ class Dashboard extends React.Component {
                 <div className="card">
                   <Bio username={this.state.username} bio={this.state.bio}/>
                 <div className="card">                                
-                  <Bio firstName={this.state.firstName} lastName={this.state.lastName}/>
+                  <Bio firstName={this.state.firstName} lastName={this.state.lastName} username={this.state.username}/>
                 </div>
               </div>
             </div>

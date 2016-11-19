@@ -34,7 +34,7 @@ class Bio extends React.Component {
       const toUpdate = {
         bio: data.bio
       }
-
+      console.log('toupdatetoupdatetoupdatetoupdate', this.state.username)
       axios.post('/updateUser', { username: this.state.username, toUpdate: toUpdate})
         .then(function(res) {
           console.log(res);
