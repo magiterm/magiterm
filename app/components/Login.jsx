@@ -20,18 +20,6 @@ class Login extends React.Component {
         password: ''
     };
   }
-  componentWillMount() {
-    // if (localStorage['user']) {
-    //   axios.get('/oAuth')
-    //   .then(function(response) {
-    //     console.log(response);
-    //     localStorage['user'] = response.data
-    //   })
-    //   .catch(function(err) {
-    //     console.log(err);
-    //   });
-    // }
-  }
   changeUserNameInput(event) {
     this.setState({
       username: event.target.value
@@ -47,7 +35,7 @@ class Login extends React.Component {
   handleSubmit(e, user, pass) {
     const context = this;
     e.preventDefault();
-    axios.post('/authenticate', {
+    axios.post('/auth/authenticate', {
       username: this.state.username,
       password: this.state.password
     })
