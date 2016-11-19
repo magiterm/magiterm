@@ -3,7 +3,7 @@ machine:
     APP_ENV: test
     APP_URL: 127.0.0.1
     DB_HOST: 127.0.0.1
-    DB_URL: "https://circleci.com/api/v1.1/"
+    DB_URL: mysql://root@127.0.0.1:3306/picodb
     DB_NAME: picodb
     DB_USER: root
 
