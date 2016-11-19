@@ -15,7 +15,7 @@ class CodeEditor extends React.Component {
       fileNamePath: ''
     }
     this.recievedCEChange = this.recievedCEChange.bind(this);
-    this.username = localStorage['user'];
+    this.username = JSON.parse(localStorage['user']).username;
   }
 
   componentWillReceiveProps(nextProps) {

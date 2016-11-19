@@ -26,24 +26,24 @@ class App extends React.Component {
 
   componentWillMount() {
     const context = this;
-    console.log('mountingmountingmounting')
     axios.get('/oAuth', {
     })
     .then(function(response) {
       if (response.data) {
         var myUser = response.data;
-        localStorage['user'] = myUser;
+        localStorage['user'] = JSON.stringify(myUser);
         if (myUser) {
           context.setState({
             authenticated: true,
             username: myUser.username,
             containerName: myUser.containerName,
           });
+          console.log('state in app', context.state);
         }
       }
     })
     .catch(function(err) {
-      console.log('no user')
+      console.log('no user');
       console.log(err);
     });
    
@@ -121,33 +121,31 @@ class App extends React.Component {
   }
 }
 
-function requireAuth(nextState, replace) {
-  const user = localStorage['user'];
-  if (user) {
-    axios.get('/oAuth', {
-    })
-    .then(function(response) {
-      if (response.data) {
-        var myUser = response.data;
-        localStorage['user'] = myUser;
-      }
-    })
-    .catch(function(err) {
-      console.log('no user')
-      console.log(err);
-    });
-  } else {
-          console.log('no user2')
-
-    window.location = '/';
-  }
-}
+// function requireAuth(nextState, replace) {
+//   const user = localStorage['user'];
+//   if (user) {
+//     axios.get('/oAuth', {
+//     })
+//     .then(function(response) {
+//       if (response.data) {
+//         localStorage['user'] = JSON.parse(response.data);
+//       }
+//     })
+//     .catch(function(err) {
+//       console.log('no user');
+//       console.log(err);
+//     });
+//   } else {
+//     console.log('no user2');
+//     window.location = '/';
+//   }
+// }
 
 
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}></Route>
-    <Route path="/linuxcomputer" component = {LinuxComputer} onEnter={requireAuth}></Route>
-    <Route path="/dashboard" component={Dashboard} onEnter={requireAuth}></Route>
+    <Route path="/linuxcomputer" component = {LinuxComputer} ></Route>
+    <Route path="/dashboard" component={Dashboard} ></Route>
   </Router>
 ), document.getElementById('app'))

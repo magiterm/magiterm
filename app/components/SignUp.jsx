@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const axios = require('axios');
-const utils = require('../../utils/validationHelpers')
+const utils = require('../../utils/validationHelpers');
 
 class Signup extends React.Component {
   constructor (props) {
@@ -96,19 +96,17 @@ class Signup extends React.Component {
   handleSubmit(e) {
     const context = this;
     e.preventDefault();
-
     console.log('submitting', github);
-
     if (this.state.usernameValid && this.state.firstNameValid && this.state.githubValid && this.state.lastNameValid && this.state.emailValid && this.state.passwordValid) {
       var username = this.state.username;
       var password = this.state.password;
       axios.post('/auth/signup', {
-         username: this.state.username,
-         password: this.state.password,
-         firstname: this.state.firstName,
-         lastname: this.state.lastName,
-         email: this.state.email,
-         githubHandle: this.state.github
+         username: context.state.username,
+         password: context.state.password,
+         firstname: context.state.firstName,
+         lastname: context.state.lastName,
+         email: context.state.email,
+         githubHandle: context.state.github
        })
        .then(function (response) {
          axios.post('/authenticate', {

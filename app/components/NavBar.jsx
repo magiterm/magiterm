@@ -7,23 +7,16 @@ class NavBar extends React.Component {
 		super(props);
 
     this.handleLogOut = this.handleLogOut.bind(this);
-
-		this.state = {
-			username: this.props.username,
-      name: ''
-		};	
 	}
 
 componentWillMount() {
-  var context = this;
+  if (!localStorage['user']) {
+    var context = this;
     axios.get('/oAuth')
     .then(function(response) {
       if (response.data.username) {
-        console.log('navbarrrrrrrrrr', response);
-        localStorage['user'] = response.data
-        context.setState({
-          name: response.data.username
-        });
+        localStorage['user'] = JSON.stringify(response.data);
+        console.log('this is the state', this.state);
       } else {
         context.handleLogOut();
       }
@@ -31,19 +24,20 @@ componentWillMount() {
     .catch(function(err) {
       console.log(err);
     });
-  }
+  }  
+}
 
-	handleLogOut() {
-		localStorage.removeItem('user');
-    axios.get('/logout')
-    .then(function(response) {
-      console.log('logging them out')
-      window.location = '/'; 
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
-	}
+handleLogOut() {
+	localStorage.removeItem('user');
+  axios.get('/logout')
+  .then(function(response) {
+    console.log('logging them out');
+    window.location = '/'; 
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+}
 
 	render() {
 		return (
@@ -53,7 +47,7 @@ componentWillMount() {
       			<li> <a href="/"> Home </a> </li>
       			<li> <a href="/linuxcomputer"> Computer </a> </li>
       			<li> <a href="/dashboard"> Dashboard </a> </li>
-            <li className="username">{this.state.name}</li>
+            <li className="username">{this.props.username}</li>
     			</ul>
   			</div>	
 			)
