@@ -74,6 +74,7 @@ class Dashboard extends React.Component {
           <div className="dashboard-container">
             <div className="row">
               <div className="col-md-4 contain">
+              
                 <div className="card">
                   <ProfilePicture profilePicture={this.state.profilePictureUrl} username={this.state.username}/>
                 </div>

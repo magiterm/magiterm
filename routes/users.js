@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require('../models/User');
 var Collaborator = require('../models/Collaborator');
 
-
 router.post('/collaboratingWith', function(req, res) {
   Collaborator.findAll({
     where: {

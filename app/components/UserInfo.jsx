@@ -67,36 +67,40 @@ class UserInfo extends React.Component {
   render() {
     return (
         <div className="card-container user-info-container">
-          <div className="title">
-            Username
+          <div className="header">
+            Information
           </div>
-          <div className="info">
-            {this.props.username}
-          </div>
-          <div className="title">
-            Email
-          </div>
-          <div className="info">
-            <InlineEdit
-              activeClassName="editing"
-              text={this.state.email}
-              paramName="email"
-              change={this.dataChanged}
-              style = {this.style}
-            />
-          </div>
-          <div className="title">
-            Github
-          </div>
-          <div className="info">
-            <InlineEdit
-              activeClassName="editing"
-              text={this.state.github}
-              paramName="github"
-              change={this.dataChanged}
-              style = {this.style}
-            />
-            {this.props.github}
+          <div className="information">
+            <div className="title">
+              Username
+            </div>
+            <div className="info">
+              {this.state.username}
+            </div>
+            <div className="title">
+              Email
+            </div>
+            <div className="info">
+              <InlineEdit
+                activeClassName="editing"
+                text={this.state.email}
+                paramName="email"
+                change={this.dataChanged}
+                style = {this.style}
+              />
+            </div>
+            <div className="title">
+              Github
+            </div>
+            <div className="info">
+              <InlineEdit
+                activeClassName="editing"
+                text={this.state.github}
+                paramName="github"
+                change={this.dataChanged}
+                style = {this.style}
+              />
+            </div>
           </div>
         </div>
       );

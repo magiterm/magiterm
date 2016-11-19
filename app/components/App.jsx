@@ -75,21 +75,21 @@ class App extends React.Component {
                       <div className="title"> picoShell</div>
                     </div>
                   </div>
-                  <div className="col-md-6">
-                    <div className="logo-container">
-                      <div className="login-header">
-                        <div className="login">
-                          Reinvent the Interview Process
-                        </div>
+                </div>
+              </div>
+                <div className="col-md-6">
+                  <div className="logo-container">
+                    <div className="login-header">
+                      <div className="login">
+                        Reinvent the Interview Process
                       </div>
-                      <div className="login-box">
-                        <div className="login">
-                         {authenticate}
-                        </div>
+                    </div>
+                    <div className="login-box">
+                      <div className="login">
+                       {authenticate}
                       </div>
                     </div>
                   </div>
-                </div>
               </div>
             </div>
           </div>
@@ -101,20 +101,19 @@ class App extends React.Component {
           <div className="homepage-container">
           <div>
             <NavBar username={this.state.username}/>
-          </div>
             <div className="header">
               <div className="overlay">
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-xs-12">
                     <div className="logo-container">
                       <div className="title"> picoShell</div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-
+            </div> 
           </div>
+        </div>
         </div>
       )
     }

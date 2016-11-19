@@ -1,7 +1,7 @@
 const React = require('react');
 const axios = require('axios');
-// const BarChart = require('react-d3-basic').BarChart;
-const PieChart = require('react-chartjs').Pie;
+import { defaults } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 const Chart = require('chartjs');  
 
 class Stats extends React.Component {
@@ -68,10 +68,25 @@ class Stats extends React.Component {
     if (this.state.usage >= 0) {
       const used = this.state.usage;
       const free = 100 - this.state.usage;
-      var data = [
-          {color:"#b2baef", label:"used",value:used},
-          {color:"#03CEA1", label:"free", value:free}
-      ];
+
+      var data = {
+          labels: [
+              "Used",
+              "Free"
+          ],
+          datasets: [
+              {
+                  data: [used, free],
+                  backgroundColor: [
+                      "#47F0CA",
+                      "#f0476d"
+                  ],
+                  hoverBackgroundColor: [
+                      "#47F0CA",
+                      "#f0476d",
+                  ]
+              }]
+      };
 
       var options = {
           animateRotate:true
@@ -79,14 +94,16 @@ class Stats extends React.Component {
       return (
           <div>
             <div className="card-container">
-              <div className="title">
+              <div className="header">
                 STATS
               </div>
-              <div className="title">
-                Usage
-              </div>
-              <div className="info">
-                <PieChart data={data} options={options} />
+              <div className="information">
+                <div className="center">
+                  Usage
+                </div>
+                <div className="info">
+                  <Pie data={data} />
+                </div>
               </div>
             </div>
           </div>

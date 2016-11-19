@@ -48,17 +48,20 @@ class Bio extends React.Component {
     return (
         <div>
           <div className="card-container">
-            <div className="title">
-              Bio
+            <div className="header">
+              About Me
             </div>
-            <div className="info">
-              <InlineEdit
-                activeClassName="editing"
-                text={this.state.bio ? this.state.bio : 'Tell others about yourself!'}
-                paramName="bio"
-                change={this.dataChanged}
-                style = {this.style}
-              />
+            <div className="information">
+              <div className="info center">
+                <InlineEdit
+                  activeClassName="editing"
+                  className="inline-edit"
+                  text={this.state.bio ? this.state.bio : 'Tell others about yourself!'}
+                  paramName="bio"
+                  change={this.dataChanged}
+                  style = {this.style}
+                />
+              </div>
             </div>
           </div>
         </div>

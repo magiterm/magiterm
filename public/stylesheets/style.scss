@@ -6,10 +6,21 @@ $purpleblue: #b2baef;
 $white: #FFFFFF;
 $brightgreen: #03CEA1;
 $lightgrey: #7B7373;
+
+$themedarkpurple: #271F42;
+$themewhite: #FEFEFE;
+$thememidpurple: #90728C;
+$themelightpurple: #DCDAED;
+$themeorange: #E1905B;
+$themegrey: #CFCED6;
+$themetan: #DFC2A8;
+
+
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 @import url('https://fonts.googleapis.com/css?family=Advent+Pro|Dosis');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
 
 body {
   font: 14px "Dosis", Helvetica, Arial, sans-serif;
@@ -62,58 +73,84 @@ body {
 }
 
 .card-container {
-  padding: 20px;
-  .title {
-    color: $lightgrey;
-    font-size: 16px;
+  .header {
+    padding: 10px;
+    margin: 0px;
+    background-color: #323232;
     font-family: Roboto-Regular;
-    padding-top: 7px;
-  }
-
-  .info {
-    font-size: 15px;
-    color: #EDF3F3;
-    padding-bottom: 10px;
-    font-family: Roboto-Regular;
-  }
-
-  .collaborators {
-    font-size: 25px; 
-    font-family: Roboto-Condensed;
-  }
-
-  .none {
-    font-size: 25px;
-    font-family: RobotoCondensed-Regular;
+    text-align: center;
     color: $lightgrey;
   }
+  .information {
+    padding: 20px;
+    .title {
+      color: $lightgrey;
+      font-size: 16px;
+      font-family: Roboto-Regular;
+      padding-top: 7px;
+    }
 
-  .collaborators-input {
-    margin: 5px;
-    background: rgba(36, 35, 39, 0.6);
-    border: 0;
-    color: $offwhite;
-    width: 90%;
-    padding: 5px;
+    .info {
+      font-size: 15px;
+      color: #EDF3F3;
+      padding-bottom: 10px;
+      font-family: Roboto-Regular;
+    }
 
-    &:focus {
-      outline: none;
+    .collaborators {
+      font-size: 25px; 
+      font-family: Roboto-Condensed;
+    }
+
+    .none {
+      font-size: 25px;
+      font-family: RobotoCondensed-Regular;
+      color: $lightgrey;
+    }
+
+    .collaborators-input {
+      margin: 5px;
+      background: rgba(36, 35, 39, 0.6);
+      border: 0;
+      color: $offwhite;
+      width: 90%;
+      padding: 5px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .collaborators {
+      font-size: 25px;
+      font-family: RobotoCondensed-Regular;
+      color: $offwhite;
+    }
+
+    .inline-edit {
+      width: 100px;
+      word-wrap: break-word;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .btn-success {
+      background-color: $brightgreen;
+      border-color: $brightgreen;
+      border-radius: 0;
+      width: 90%;
+      padding: 2px 6px 2px 2px;
+      margin: 2px;
+
+      &:hover {
+       background-color: $purpleblue;
+       border-color: $purpleblue; 
+      }
     }
   }
 
-  .btn-success {
-    background-color: $brightgreen;
-    border-color: $brightgreen;
-    border-radius: 0;
-    width: 90%;
-    padding: 2px 6px 2px 2px;
-    margin: 2px;
-
-    &:hover {
-     background-color: $purpleblue;
-     border-color: $purpleblue; 
-    }
-  }
 }
 
 .dashboard-container {
@@ -138,7 +175,7 @@ body {
 
 .navbar {
   height: 100%;
-  background-color: $brightgreen;
+  background-color: $themedarkpurple;
   border-radius: 0;
   padding: 2px;
   margin: 0;
@@ -178,22 +215,20 @@ body {
 	.header {
 		background-image: url('/images/background.svg');
 		width: 100%;
-		height: 455px;
+		height: 498px;
     padding: 0;
     margin: 0;
 		overflow: hidden;
-
 		.overlay {
-			background: rgba(9,227,123,0.2);
 			text-align: center;
-      height: 455px;
-
 			.logo-container {
         padding-top: 120px;
+        text-align: center;
 				.title {
           font-family: Dosis-Regular;
           font-size: 120px;
           color: #FFFFFF;
+          text-align: center;
 				}
         .login-header {
           background: rgba(36, 35, 39, 0.6);

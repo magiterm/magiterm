@@ -91,59 +91,64 @@ class Collaborators extends React.Component {
     var context = this;
     return (
       <div className = "card-container">
-        <div className="title">
-          Currently Collaborating With
+        <div className="header">
+          Collaborators
         </div>
-        <div>
-          {this.state.collabWith.length ? this.state.collabWith.map(function(accepted) {
-            return (<div className="collaborators">{accepted}</div>)
-          }) : <div className="none"> None </div>}
-        </div>
-        <div className="title">
-          Collaborators on Your Computer
-        </div>
-        <div>
-          {this.state.collabWith.length ? this.state.collaborators.map(function(accepted) {
-            return (<div className="collaborators">{accepted}</div>)
-          }) : <div className="none"> None </div>}
-        </div>
-        <div className="title">
-        Invite a New Collaborator To Your Computer
-        </div>
-      <div className="row">
-        <form onSubmit={
-          function(e) {
-            this.handleSubmit(e, this.state.invUsername)
-          }.bind(this)}>
-          <div className="form-inputs col-md-8">
-            <input 
-            onChange={this.changeUserNameInput}
-            id="inviteUsernameInput"
-            type='text' 
-            placeholder='username'
-            className="collaborators-input"
-            />
+        <div className="information">
+          <div className="title">
+            Currently Collaborating With
           </div>
-          <div className="col-md-4">
-            <button type="submit" className="btn btn-success">Send Invite</button>
+          <div>
+            {this.state.collabWith.length ? this.state.collabWith.map(function(accepted) {
+              return (<div className="collaborators">{accepted}</div>)
+            }) : <div className="none"> None </div>}
           </div>
-        </form>
-      </div>
-      <div>
-        <div className="title">
-        Pending Collaboration Invites
-        </div>
-        {
-          this.state.pendingInvites.length ? this.state.pendingInvites.map(function(pending) {
-          return (
-            <div className="collaborator">{pending} 
-            <span onClick={() => {context.handleAcceptCollab(pending)}}> Accept </span>
-            <span onClick={() => {context.handleRejectCollab(pending)}}> Reject </span>           
+          <div className="title">
+            Collaborators on Your Computer
+          </div>
+          <div>
+            {this.state.collaborators.length ? this.state.collaborators.map(function(accepted) {
+              return (<div className="collaborators">{accepted}</div>)
+            }) : <div className="none"> None </div>}
+          </div>
+          <div className="title">
+          Invite a New Collaborator To Your Computer
+          </div>
+        <div className="row">
+          <form onSubmit={
+            function(e) {
+              this.handleSubmit(e, this.state.invUsername)
+            }.bind(this)}>
+            <div className="form-inputs col-md-8">
+              <input 
+              onChange={this.changeUserNameInput}
+              id="inviteUsernameInput"
+              type='text' 
+              placeholder='username'
+              className="collaborators-input"
+              />
             </div>
-            );
-        }) : 
-          <div className="none"> None </div>
-        }
+            <div className="col-md-4">
+              <button type="submit" className="btn btn-success">Send Invite</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <div className="title">
+          Pending Collaboration Invites
+          </div>
+          {
+            this.state.pendingInvites.length ? this.state.pendingInvites.map(function(pending) {
+            return (
+              <div className="collaborator">{pending} 
+              <span onClick={() => {context.handleAcceptCollab(pending)}}> Accept </span>
+              <span onClick={() => {context.handleRejectCollab(pending)}}> Reject </span>           
+              </div>
+              );
+          }) : 
+            <div className="none"> None </div>
+          }
+        </div>
       </div>
     </div>
     );
