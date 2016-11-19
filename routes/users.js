@@ -105,10 +105,9 @@ router.post('/sendInvite', function(req, res) {
     }
   })
   .then(function(resp) {
-    if(!resp) {
+    if (!resp) {
       res.status(200).send({fail: 'Username not found!'});
-    } else
-    {
+    } else {
       const inviter = req.body.username;
       const user = req.body.usernameToInvite;
       Collaborator.find({
@@ -117,7 +116,7 @@ router.post('/sendInvite', function(req, res) {
           recieverUsername: user
         }
       }).then(function(resp1) {
-        if(resp1) {
+        if (resp1) {
           res.status(200).send({fail: 'You already sent that user an invite, or they are already collaborating with you!'});
         } else {
           Collaborator.create({
@@ -136,27 +135,27 @@ router.post('/sendInvite', function(req, res) {
   });
 });
 
-router.post('/updateuser', function(req, res) {
+router.post('/updateUser', function(req, res) {
   const user = req.body;
-
   User.findOne({
     where: {
       username: user.username
     }
   })
   .then(function(user) {
-      user.update(req.body.toUpdate);
-    })
+    console.log('found a user user usr found a user user usr');
+    user.update(req.body.toUpdate)
     .then(function() {
       res.status(200).send('Successfully updated user');
     })
     .catch(function(err) {
       res.status(500).send('Wasn\'t able to save to database');
-    })
+    });
+  })
   .catch(function(err) {
     console.error(err);
     res.status(500).send(err);
-  })
+  });
 });
 
 router.get('/infodashboard', function(req, res) {
@@ -170,10 +169,10 @@ router.get('/infodashboard', function(req, res) {
     console.log(response);
     res.send(200, response);
   })
-  .catch(function(err){
+  .catch(function(err) {
     res.send(500, err);
-  })
-})
+  });
+});
 
 module.exports = router;
   

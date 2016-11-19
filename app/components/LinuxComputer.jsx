@@ -37,7 +37,6 @@ componentWillMount() {
       collabWith: acceptedUsernames
     });
   });
-
   this.socket.on('/DASH/REMOVE/COLLABWITH/' + user.username, function(rejection) {
     if(rejection.remover === context.state.containerName) {
       window.location.reload();

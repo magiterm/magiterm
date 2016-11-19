@@ -20,15 +20,14 @@ passport.use(new Strategy({
   passReqToCallback : true
 },
   function(req, username, password, done) {
-    console.log('authenticateauthenticateauthenticateauthenticateauthenticateauthenticateauthenticateauthenticateauthenticate')
-    console.log('username', username)
     User.findOne({where: { username: username }})
     .then( function(user) { 
+      console.log('useruseruserusersuer', user)
       if (!user) {
         console.log('No user found');
         return done(null, false, { message: 'No User Found.' });        
       } else {
-        console.log('Found one user', user);
+        console.log('Found one user');
         bcrypt.compare(password, user.dataValues.password, function(err, isMatch) {
           if (err) {
             console.log('bycrupt match error');

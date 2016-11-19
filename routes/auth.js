@@ -10,12 +10,6 @@ const Container = require('../models/Container');
 const passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy;
 
-
-router.get('/decode', function(req, res) {
-  const decoded = jwtDecode(req.query.token);
-  res.send(200, decoded);
-});
-
 router.post('/signup', function(req, res) {
   console.log('signing up: ', req.body);
   const username = req.body.username;
@@ -79,58 +73,31 @@ router.post('/signup', function(req, res) {
   });
 });
 
-function generateToken(req, res, next) {
-  var info = req.user;
-    console.log('here at generate', info)
-  var tokenUser = info.username.slice(info.username.length - 1);
-  var tokenMail = info.email.slice(info.email.indexOf('@'));
-  var tokenBio = info.bio.slice(6);
-    console.log('generating a token');
-  req.token = jwt.sign({ 
-    id: (tokenUser + tokenMail + tokenBio),
-    username: info.username
-  }, 'server secret', {
-    expiresIn: 7200
-  });
-  next();
-}
 
-function serialize(req, res, next) {
-  console.log('serializing userrrrrdffasdfasdfasdfasdfasdfasdfasdfasdr', res.req.authInfo)
-  var user = res.req.authInfo;
-  User.updateOrCreate(user, function(err, user) {
-    if (err) {
-      next(err);
-    }
-    req.user = user;
-    next();
-  });
-}
+router.get('/oAuth', function(req, res) {
+  res.json(req.session.user);
+});
 
 router.post('/authenticate', 
   passport.authenticate('local', {
-    session: false
-  }), serialize, generateToken,
+    session: true
+  }),
   function(req, res) {
-    console.log('trying to send status', req.user, req.token);
-    res.status(200).json({
-      user: req.user,
-      token: req.token
-    });
+    var fullUser = req.user;
+    var user = {
+      username: fullUser.username,
+      id: fullUser.id,
+      bio: fullUser.bio,
+      firstName: fullUser.firstName,
+      lastName: fullUser.lastName,
+      email: fullUser.email,
+      authenticatedWith: fullUser.authenticatedWith,
+      githubHandle: fullUser.githubHandle,
+      profilePicture: fullUser.profilePicture
+    };
+    req.session.user = user;
+    res.send(req.session.user);
   }
 );
-
-router.get('/github', passport.authenticate('github'));
-
-router.get('/github/callback', passport.authenticate('github', {
-  session: false,
-}), serialize, generateToken,
-  function(req, res) {
-    console.log('trying to send status', req.user, req.token);
-    res.redirect('/dashboard').json({
-      user: req.user,
-      token: req.token
-    });
-  });
 
 module.exports = router;  

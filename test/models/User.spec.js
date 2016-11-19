@@ -7,7 +7,7 @@ describe('Users table', function() {
   before(function(done) {
     User.find({username: 'steve'})
       .then(function(user) {
-        if(user) {
+        if (user) {
           return user.destroy();
         }
         return;

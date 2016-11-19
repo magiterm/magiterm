@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "mocha --require test/helpers/setup.js test/**/*",
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "dev-start": "nodemon ./bin/www",
     "dev-react": "webpack -d --watch",
     "coverage": "nyc --reporter=lcov --reporter=text --reporter=html --require babel-register --extension .jsx npm test"
@@ -68,11 +68,13 @@
     "sequelize": "^3.24.5",
     "sequelize-cli": "^2.4.0",
     "serve-favicon": "^2.3.0",
+    "should": "^11.1.1",
     "socket.io": ">= 1.0.0",
     "socket.io-adapter": "0.4.0",
     "socket.io-client": "1.5.1",
     "socket.io-parser": "2.3.1",
-    "superagent": "^2.3.0"
+    "superagent": "^2.3.0",
+    "supertest": "^2.0.1"
   },
   "devDependencies": {
     "babel": "^6.5.2",

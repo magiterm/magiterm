@@ -26,7 +26,7 @@ class App extends React.Component {
 
   componentWillMount() {
     const context = this;
-    axios.get('/oAuth', {
+    axios.get('/auth/oAuth', {
     })
     .then(function(response) {
       if (response.data) {
@@ -46,7 +46,6 @@ class App extends React.Component {
       console.log('no user');
       console.log(err);
     });
-   
   }
 
   GoToLogin() {
@@ -117,30 +116,10 @@ class App extends React.Component {
           </div>
         </div>
         </div>
-      )
+      );
     }
   }
 }
-
-// function requireAuth(nextState, replace) {
-//   const user = localStorage['user'];
-//   if (user) {
-//     axios.get('/oAuth', {
-//     })
-//     .then(function(response) {
-//       if (response.data) {
-//         localStorage['user'] = JSON.parse(response.data);
-//       }
-//     })
-//     .catch(function(err) {
-//       console.log('no user');
-//       console.log(err);
-//     });
-//   } else {
-//     console.log('no user2');
-//     window.location = '/';
-//   }
-// }
 
 
 ReactDOM.render((
