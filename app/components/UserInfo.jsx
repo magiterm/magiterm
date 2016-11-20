@@ -9,7 +9,6 @@ class UserInfo extends React.Component {
 
     this.dataChanged = this.dataChanged.bind(this);
     this.style = {
-      backgroundColor: '#191919',
       minWidth: 300,
       fontFamily: 'Roboto-Regular',
       display: 'inline-block',

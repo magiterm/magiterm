@@ -50,9 +50,9 @@ body {
   padding: 10px 0 0 10px;
   border-bottom: 1px solid #242327;
   margin: 0px;
-  background-color: #262626;
+  background-color: rgba(38, 38, 38, 0.6);
   text-align: center;
-  color: #FEFEFE;
+  color: rgba(255, 255, 255, 0.4);
   font-size: 1.3em;
   font-weight: bold;
   padding-bottom: 12px; }
@@ -93,14 +93,14 @@ body {
   .card-container .information .collab-card-top {
     padding: 15px 15px 30px 15px; }
     .card-container .information .collab-card-top .left {
-      background-color: #271F42;
+      background-color: rgba(91, 105, 225, 0.5);
       padding: 20px; }
       .card-container .information .collab-card-top .left .title {
         color: #FEFEFE; }
       .card-container .information .collab-card-top .left .info {
         color: #FEFEFE; }
     .card-container .information .collab-card-top .right {
-      background-color: #7156FB;
+      background-color: rgba(113, 86, 251, 0.5);
       padding: 20px; }
       .card-container .information .collab-card-top .right .title {
         color: #FEFEFE; }
@@ -109,14 +109,14 @@ body {
   .card-container .information .collab-card-bottom {
     padding: 0px 15px 30px 15px; }
     .card-container .information .collab-card-bottom .left {
-      background-color: #7156FB;
+      background-color: rgba(113, 86, 251, 0.5);
       padding: 20px; }
       .card-container .information .collab-card-bottom .left .title {
         color: #FEFEFE; }
       .card-container .information .collab-card-bottom .left .info {
         color: #FEFEFE; }
     .card-container .information .collab-card-bottom .right {
-      background-color: #271F42;
+      background-color: rgba(91, 105, 225, 0.5);
       padding: 20px; }
       .card-container .information .collab-card-bottom .right .title {
         color: #FEFEFE; }
@@ -142,18 +142,20 @@ body {
 .dashboard-container {
   height: 100%;
   width: 100%;
-  color: #F4F6F7;
-  background-color: #242327; }
-  .dashboard-container .contain {
-    padding: 10px 10px 10px 10px; }
-    .dashboard-container .contain .card {
-      text-align: center;
-      height: 100%;
-      background-color: #191919;
-      border-radius: 0;
-      width: 100%;
-      margin: 10px, 20px, 5px, 5px;
-      box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5); }
+  background-image: url("/images/geometric.png");
+  background-color: #FFFFFF; }
+  .dashboard-container .overlay {
+    background: rgba(0, 0, 0, 0.6); }
+    .dashboard-container .overlay .contain {
+      padding: 10px 10px 10px 10px; }
+      .dashboard-container .overlay .contain .card {
+        text-align: center;
+        height: 100%;
+        background: rgba(36, 35, 39, 0.8);
+        border-radius: 0;
+        width: 100%;
+        margin: 10px, 20px, 5px, 5px;
+        box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5); }
 
 .navbar {
   height: 100%;

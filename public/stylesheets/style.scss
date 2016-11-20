@@ -21,6 +21,9 @@ $themelightblue:  #5bace1;
 $thememiddarkpurple: #5b69e1;
 $themebrightblue: #3AC4FF;
 $themebrightpurple: #7156FB;
+$translucentdarkpurple: rgba(91,105,225,0.5);
+$translucentbrightpurple: rgba(113,86,251,0.5);
+$translucentred: rgba(225,91,105,0.95);
 
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 @import url('https://fonts.googleapis.com/css?family=Advent+Pro|Dosis');
@@ -107,9 +110,9 @@ body {
     padding: 10px 0 0 10px;
     border-bottom: 1px solid $offblack;
     margin: 0px;
-    background-color: $darkgrey;
+    background-color: rgba(38,38,38,0.6);
     text-align: center;
-    color: $themewhite;
+    color: rgba(255,255,255, 0.4);;
     font-size: 1.3em;
     font-weight: bold;
     padding-bottom: 12px;
@@ -166,7 +169,7 @@ body {
     .collab-card-top {
       padding: 15px 15px 30px 15px;
       .left {
-        background-color: $themedarkpurple;
+        background-color: $translucentdarkpurple;
         padding: 20px;
         .title {
           color: $themewhite;
@@ -177,7 +180,7 @@ body {
       }
 
       .right {
-        background-color: $themebrightpurple;
+        background-color: $translucentbrightpurple;
         padding: 20px;
         .title {
           color: $themewhite;
@@ -192,7 +195,7 @@ body {
       padding: 0px 15px 30px 15px;
 
       .left {
-        background-color: $themebrightpurple;
+        background-color: $translucentbrightpurple;
         padding: 20px;
         .title {
           color: $themewhite;
@@ -203,7 +206,7 @@ body {
       }
 
       .right {
-        background-color: $themedarkpurple;
+        background-color: $translucentdarkpurple;
         padding: 20px;
         .title {
           color: $themewhite;
@@ -243,22 +246,28 @@ body {
 .dashboard-container {
   height: 100%;
   width: 100%;
-  color: $offwhite;
-  background-color: $offblack;
+  background-image: url('/images/geometric.png');
+  background-color: $white;
 
-  .contain {
-    padding: 10px 10px 10px 10px;
+  .overlay {
+    background: rgba(0,0,0,0.6);
 
-    .card {
-      text-align: center; 
-      height: 100%;
-      background-color: $darkblack;
-      border-radius: 0;
-      width: 100%;
-      margin: 10px, 20px, 5px, 5px;
-      box-shadow: 3px 3px 1px rgba(0, 0, 0,0.5);
+    .contain {
+      padding: 10px 10px 10px 10px;
+
+      .card {
+        text-align: center; 
+        height: 100%;
+        background: rgba(36,35,39,0.8);
+        border-radius: 0;
+        width: 100%;
+        margin: 10px, 20px, 5px, 5px;
+        box-shadow: 3px 3px 1px rgba(0, 0, 0,0.5);
+      }
     }
   }
+
+
 }
 
 

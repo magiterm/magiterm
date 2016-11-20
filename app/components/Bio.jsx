@@ -7,7 +7,6 @@ class Bio extends React.Component {
     super(props);
 
     this.style = {
-      backgroundColor: '#191919',
       minWidth: 300,
       fontFamily: 'Roboto-Regular',
       display: 'inline-block',
