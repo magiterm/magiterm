@@ -17,8 +17,9 @@ test:
     - sequelize db:migrate
     - npm test
 
-# deployment:
-#   staging:
-#     branch: master
-#     heroku:
-#       appname: picoshell
+deployment:
+  staging:
+    branch: master
+    commands:
+      - git push -f ssh://root@162.243.142.111/root/repo/site.git master
+      
