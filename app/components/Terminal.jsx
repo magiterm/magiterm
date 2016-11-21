@@ -54,9 +54,9 @@ class Terminal extends React.Component {
   }
 
   recievedTermResponse(code) {
-    console.log('TR', code);
+    //console.log('TR', code);
     if(code.username !== this.state.username) {
-      console.log('in term response');
+      console.log('in term response', code);
       this.terminal.echo(this.terminal.get_prompt() + code.cmd);
       this.terminal.echo(code.res);
       this.terminal.set_command('');
@@ -135,8 +135,6 @@ class Terminal extends React.Component {
   }
 
   renderTerminal() {
-    // console.log($);
-    // console.log($.terminal);
     var context = this;
     var prompt = this.state.prompt;
     var containerName = this.state.containerName;
