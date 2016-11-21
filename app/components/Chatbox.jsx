@@ -14,13 +14,23 @@ class Chatbox extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const context = this;
     this.socket.off('/CHAT/' + this.state.containerName);
     this.setState({
       containerName: nextProps.containerName
     });
     this.socket.on('/CHAT/' + nextProps.containerName, function(msg) {
-
+      if(context.state.username !== msg.sender) {
+        if(!msg.joined) {
+          document.getElementById('chatText').value = msg.sender + ': ' + msg.msg + '\n' + document.getElementById('chatText').value;
+        } else {
+          document.getElementById('chatText').value = msg.msg + document.getElementById('chatText').value;
+        }
+      }
     });
+
+    document.getElementById('chatText').value = '---' + this.props.username + ' Joined /' + nextProps.containerName + '---\n' + document.getElementById('chatText').value;
+    this.socket.emit('/CHAT/', {joined: true, sender: this.props.username, msg: '---' + this.props.username + ' Joined /' + nextProps.containerName + '---\n', containerName: nextProps.containerName});
   }
 
   changeMessageInput(event) {
@@ -32,6 +42,8 @@ class Chatbox extends React.Component {
   handleSubmit(e, message) {
     e.preventDefault();
     document.getElementById('chatText').value = this.state.username + ': ' + message + '\n' + document.getElementById('chatText').value;
+    document.getElementById('messageText').value = '';
+    this.socket.emit('/CHAT/', {msg: message, sender: this.state.username, containerName: this.state.containerName});
   }
 
   render() {
