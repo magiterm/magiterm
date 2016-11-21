@@ -95,6 +95,7 @@ io.on('connection', function(socket) {
             if (err) {
               io.sockets.emit('/CMD/' + containerName, err);
             } else {
+              console.log('this is newdir', newdir);
               io.sockets.emit('/CMD/' + containerName, {res: res1, pwd: newdir});
             }
           });
@@ -106,6 +107,8 @@ io.on('connection', function(socket) {
           if(picoRes[picoRes.length - 1] === '\n') picoRes = picoRes.slice(0, picoRes.length - 1);
           if(picoRes[picoRes.length - 1] === '/') picoRes = picoRes.slice(0, picoRes.length - 1);
           const dir = picoRes + '/' + newdir;
+          console.log('this is the new path', dir);
+
           docker.directoryExists(containerName, dir, function(dirRes) {
             if(dirRes.indexOf('Directory exists') !== -1) {
               const command = 'bash -c "echo ' + dir + ' > /picoShell/.pico' + '"'; 
@@ -118,7 +121,7 @@ io.on('connection', function(socket) {
                 }
               });
             } else {
-              io.sockets.emit('/CMD/' + containerName, err);
+              io.sockets.emit('/CMD/' + containerName, 'Error: Directory not found\n');
             }
           });
         });
