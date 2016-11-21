@@ -144,11 +144,54 @@ class Terminal extends React.Component {
     $(function($, undefined) {
       $('#terminal').terminal(function(command, term) {
         if (command !== '') {
-          context.setState({
-            curCommand: command
-          })
-          context.socket.emit('/ANALYZE/', {command: command, containerName: context.state.containerName});
-        }
+          // context.setState({
+          //   curCommand: command
+          // })
+          // context.socket.emit('/ANALYZE/', {command: command, containerName: context.state.containerName});
+
+            axios.post('/docker/cmd', { cmd: command, containerName: context.state.containerName })
+              .then(function(res) {
+                if(typeof res.data === 'object') {
+                  if(res.data.fileOpen) {
+                    console.log(res.data);
+                    context.socket.emit('/TE/', {filePath: res.data.filePath, fileOpen: res.data.fileOpen, fileName: res.data.fileName, code: res.data.termResponse, username: context.state.username, containerName: context.state.containerName});
+                    context.socket.emit('/TERM/RES/', {cmd: command, res: '', username: context.state.username, containerName: context.state.containerName});
+                  } else if(res.data.pwd) {
+                    console.log('CD', res.data.pwd);
+                    if (res.data.pwd[res.data.pwd.length - 1] === '\n') res.data.pwd = res.data.pwd.slice(0, res.data.pwd.length - 1);
+                    context.setState({
+                      curDir: res.data.pwd,
+                      prompt: res.data.pwd + ' >> '
+                    });
+                    context.terminal.set_prompt(res.data.pwd + ' >> ');
+                    console.log('PROMPT', context.terminal.get_prompt());
+                    context.socket.emit('/TERM/CD/', {dir: res.data.pwd, username: context.state.username, containerName: context.state.containerName});
+                    context.socket.emit('/TERM/RES/', {cmd: command, res: res.data.res, username: context.state.username, containerName: context.state.containerName});
+                  } else {
+                    term.echo(String(JSON.stringify(res.data)));
+                    context.socket.emit('/TERM/RES/', {cmd: command, res: JSON.stringify(res.data), username: context.state.username, containerName: context.state.containerName});
+                  }
+                  context.terminal.set_command('', false);
+                  context.setState({
+                    curCommand: ''
+                  });
+                } else {
+                  term.echo(String(res.data));
+                  context.socket.emit('/TERM/RES/', {cmd: command, res: res.data, username: context.state.username, containerName: context.state.containerName});
+                  context.terminal.set_command('', false);
+                  context.setState({
+                    curCommand: ''
+                  });
+                }
+              })
+              .catch(function(err) {
+                console.error(err);
+                term.echo(String(err));
+                context.socket.emit('/TERM/RES/', {cmd: command, res: err, username: context.state.username, containerName: context.state.containerName});
+              });
+
+              // var result = window.eval(command);
+          }
       }, {
           greetings: 'Welcome to ' + context.state.containerName + '\'s computer.',
           name: '',
@@ -165,7 +208,16 @@ class Terminal extends React.Component {
           onInit: function(term) {
             context.terminal = term;
             var command = 'cd /picoShell';
-            context.socket.emit('/ANALYZE/', {command: command, containerName: context.state.containerName});
+            // context.socket.emit('/ANALYZE/', {command: command, containerName: context.state.containerName});
+            axios.post('/docker/cmd', { cmd: command, containerName: containerName })
+              .then(function(res) {
+                console.log(res);
+                term.echo(String(res.data.res));
+              })
+              .catch(function(err) {
+                console.error(err);
+                term.echo(String(err));
+              });
           },
           onCommandChange: function(command, term) {
             if(command !== context.state.curCommand) {
