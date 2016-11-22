@@ -80,6 +80,38 @@ class FileBrowser extends React.Component {
   }
 
 
+  componentWillReceiveProps(nextProps) {
+    const context = this;
+    this.setState({
+      containerName: nextProps.containerName
+    });
+    axios.post('/docker/cmd', { cmd: 'ls -al', containerName: nextProps.containerName })
+    .then(function(res) {
+      const contents = res.data.split('\n');
+
+      let contentsArr = [];
+
+      for (var i = 0; i < contents.length; i++) {
+        const arr = contents[i].split(" ");
+        let type;
+        if (arr[0].substring(0, 1) === "d") {
+          type = "folder"
+        } else if (arr[0].substring(0, 2) === "-r") {
+          type = "file"
+        }
+        const name = arr[arr.length - 1];
+        contentsArr.push({type: type, name: name});
+      }
+      //remove the last element, which is ''
+      //remove the first element, which is '.'
+      contentsArr.shift();
+      contentsArr.pop();
+      context.setState({
+        contents: contentsArr
+      });
+    });
+  }
+
   doubleClick(e, entry) {
     const context = this;
     axios.post('/docker/handleFileBrowserChange', {containerName: this.state.containerName, dir: this.state.curDir, entry: entry})
@@ -116,8 +148,6 @@ class FileBrowser extends React.Component {
             //remove the first element, which is '.'
             contentsArr.shift();
             contentsArr.pop();
-
-            
             context.setState({
               contents: contentsArr,
               curDir: sliced

@@ -679,6 +679,23 @@ html {
     flex-wrap: wrap;
     overflow-y: auto;
     color: $offwhite;
+    cursor: default;
+    padding: 2px;
+    font-size: 15px;
+
+    .fileBrowser {
+      &:hover {
+        background-color: $offblack
+      }
+    }
+    .ion-ios-arrow-down {
+      color: $offwhite;
+      font-size: 15px;
+    }
+    .ion-ios-arrow-up {
+      color: $offwhite;
+      font-size: 15px;
+    }
   }
 
   .terminal-menu {
@@ -690,7 +707,8 @@ html {
       color: white;
       float: right;
       padding-right: 20px;
-      font-size: 20px
+      font-size: 20px;
+      cursor: pointer;
     }
   }
 

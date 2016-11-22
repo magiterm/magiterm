@@ -23,15 +23,6 @@ html {
   height: 100%;
   width: 100%; }
 
-.modalDiv {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-bottom: 10;
-  margin-top: 20;
-}
-
 .centered {
   text-align: center;
   font-size: 0; }
@@ -40,32 +31,6 @@ html {
     display: inline-block;
     text-align: left;
     font-size: 13px; }
-
-
-#terminal {
-  width: 100%;
-  height: 400px; }
-
-.code-editor-container {
-  padding: 0;
-  margin: 0;
-  height: 620px; }
-  .code-editor-container .current-file {
-    color: #03CEA1;
-    font-weight: bold;
-    text-align: right;
-    padding: 0;
-    margin: 0; }
-  .code-editor-container .code-saved-indicator {
-    color: #03CEA1;
-    font-weight: bold;
-    padding: 0;
-    margin: 0; }
-  .code-editor-container .code-modified-indicator {
-    color: #E1905B;
-    font-weight: bold;
-    padding: 0;
-    margin: 0; }
 
 .profile-picture-container .img-container {
   text-align: center;
@@ -482,7 +447,18 @@ html {
     flex-direction: row;
     flex-wrap: wrap;
     overflow-y: auto;
-    color: #F4F6F7; }
+    color: #F4F6F7;
+    cursor: default;
+    padding: 2px;
+    font-size: 15px; }
+    .linux-computer-container .file-browser-container .fileBrowser:hover {
+      background-color: #242327; }
+    .linux-computer-container .file-browser-container .ion-ios-arrow-down {
+      color: #F4F6F7;
+      font-size: 15px; }
+    .linux-computer-container .file-browser-container .ion-ios-arrow-up {
+      color: #F4F6F7;
+      font-size: 15px; }
   .linux-computer-container .terminal-menu {
     height: 30px;
     width: 100%;
@@ -492,7 +468,8 @@ html {
       color: white;
       float: right;
       padding-right: 20px;
-      font-size: 20px; }
+      font-size: 20px;
+      cursor: pointer; }
   .linux-computer-container .terminal-container {
     height: 100%;
     max-height: 600px;
