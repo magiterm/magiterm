@@ -1,4 +1,5 @@
 const React = require('react');
+const Messages = require('./Messages.jsx');
 
 class Chatbox extends React.Component {
   constructor(props) {
@@ -7,7 +8,9 @@ class Chatbox extends React.Component {
     this.state = {
       username: this.props.username,
       curMessage: '',
-      containerName: this.props.containerName
+      containerName: this.props.containerName,
+      active: false,
+      messages: []
     };
     this.changeMessageInput = this.changeMessageInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,16 +24,29 @@ class Chatbox extends React.Component {
     });
     this.socket.on('/CHAT/' + nextProps.containerName, function(msg) {
       if(context.state.username !== msg.sender) {
-        if(!msg.joined) {
-          document.getElementById('chatText').value = msg.sender + ': ' + msg.msg + '\n' + document.getElementById('chatText').value;
-        } else {
-          document.getElementById('chatText').value = msg.msg + document.getElementById('chatText').value;
-        }
+        const messageFromSender = msg.sender + ': ' + msg.msg;
+        const messageArray = context.state.messages.slice();
+        messageArray.push(messageFromSender);
+
+
+        context.setState({
+          messages: messageArray
+        });
+
+        // if(!msg.joined) {
+
+        //   context.setState({
+        //     messages: messages
+        //   })
+        //   // document.getElementById('chatText').value = msg.sender + ': ' + msg.msg + '\n' + document.getElementById('chatText').value;
+        // } else {
+        //   document.getElementById('chatText').value = msg.msg + document.getElementById('chatText').value;
+        // }
       }
     });
 
-    document.getElementById('chatText').value = '---' + this.props.username + ' Joined /' + nextProps.containerName + '---\n' + document.getElementById('chatText').value;
-    this.socket.emit('/CHAT/', {joined: true, sender: this.props.username, msg: '---' + this.props.username + ' Joined /' + nextProps.containerName + '---\n', containerName: nextProps.containerName});
+    // document.getElementById('chatText').value = '---' + this.props.username + ' Joined /' + nextProps.containerName + '---\n' + document.getElementById('chatText').value;
+    // this.socket.emit('/CHAT/', {joined: true, sender: this.props.username, msg: '---' + this.props.username + ' Joined /' + nextProps.containerName + '---\n', containerName: nextProps.containerName});
   }
 
   changeMessageInput(event) {
@@ -41,34 +57,57 @@ class Chatbox extends React.Component {
 
   handleSubmit(e, message) {
     e.preventDefault();
-    document.getElementById('chatText').value = this.state.username + ': ' + message + '\n' + document.getElementById('chatText').value;
+    const messageToSend = this.state.username + ': ' + message
     document.getElementById('messageText').value = '';
+    console.log(message);
+    const messageArray = this.state.messages.slice();
+    messageArray.push(messageToSend);
+
+    this.setState({
+      messages: messageArray
+    });
+
     this.socket.emit('/CHAT/', {msg: message, sender: this.state.username, containerName: this.state.containerName});
   }
 
+  handleChangeActive(e) {
+    e.preventDefault();
+    this.setState({
+      active: !this.state.active
+    });
+  }
+
   render() {
-    return (
-        <div>
-          <textarea readOnly="true" id="chatText" rows="10" cols="50"></textarea>
-          <form onSubmit={
-            function(e) {
-              this.handleSubmit(e, this.state.curMessage)
-            }.bind(this)}>
-            <div className="col-md-12">
-              <div className="form-inputs">
-                <input 
-                onChange={this.changeMessageInput}
-                id="messageText"
-                type='text' 
-                placeholder='message'
-                className="collaborators-input"
-                />
-                <button type="submit">Send</button>
+    if (this.state.active) {
+      return (
+          <div className="chat-box-container">
+            <div className="minimize" ><i className="ion-minus" onClick={this.handleChangeActive.bind(this)}></i></div>
+            <Messages messages={this.state.messages} />
+            <form onSubmit={
+              function(e) {
+                this.handleSubmit(e, this.state.curMessage)
+              }.bind(this)}>
+                <div className="form-inputs">
+                  <input 
+                  onChange={this.changeMessageInput}
+                  autocomplete="off"
+                  id="messageText"
+                  type='text' 
+                  placeholder='message'
+                  className="collaborators-input"
+                  />
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
+        );
+    } else {
+      return (
+        <div className="chat-box-mini" onClick={this.handleChangeActive.bind(this)}>
+          Group Chat
+          
         </div>
-      );
+      )
+    }
   }
 }
 

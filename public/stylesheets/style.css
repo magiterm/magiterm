@@ -32,27 +32,6 @@ html {
     text-align: left;
     font-size: 13px; }
 
-.code-editor-container {
-  padding: 0;
-  margin: 0;
-  height: 620px; }
-  .code-editor-container .current-file {
-    color: #03CEA1;
-    font-weight: bold;
-    text-align: right;
-    padding: 0;
-    margin: 0; }
-  .code-editor-container .code-saved-indicator {
-    color: #03CEA1;
-    font-weight: bold;
-    padding: 0;
-    margin: 0; }
-  .code-editor-container .code-modified-indicator {
-    color: #E1905B;
-    font-weight: bold;
-    padding: 0;
-    margin: 0; }
-
 .profile-picture-container .img-container {
   text-align: center;
   padding-top: 25px; }
@@ -430,27 +409,137 @@ html {
   flex: 1;
   flex-wrap: wrap;
   background-color: black;
-  background-size: cover;
-  overflow: auto; }
+  background-size: cover; }
   .linux-computer-container .code-editor-container {
     height: 620px;
     width: 100%;
     padding: 0;
     margin: 0;
     flex: 1;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    overflow-y: auto; }
+    .linux-computer-container .code-editor-container .code-editor-menu {
+      padding: 0;
+      margin: 0;
+      flex: 1;
+      flex-wrap: wrap; }
+      .linux-computer-container .code-editor-container .code-editor-menu .current-file {
+        color: #03CEA1;
+        font-weight: bold;
+        flex: 1;
+        flex-wrap: wrap;
+        float: right; }
+      .linux-computer-container .code-editor-container .code-editor-menu .code-saved-indicator {
+        color: #03CEA1;
+        font-weight: bold;
+        flex: 1;
+        flex-wrap: wrap; }
+      .linux-computer-container .code-editor-container .code-editor-menu .code-modified-indicator {
+        color: #E1905B;
+        font-weight: bold;
+        flex: 1;
+        flex-wrap: wrap; }
   .linux-computer-container .terminal-container {
-    height: 620px;
+    height: 100%;
+    max-height: 600px;
     width: 100%;
     padding: 0;
     margin: 0;
     flex: 1;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    overflow-y: auto; }
     .linux-computer-container .terminal-container #terminal {
       width: 100%;
       height: 100%;
       padding: 10px;
+      padding-top: 25px;
       margin: 0; }
+  .linux-computer-container .footer {
+    background-color: #271F42;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 6; }
+
+.chat-box-mini {
+  width: 100px;
+  background-color: rgba(225, 91, 105, 0.95);
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  padding: 10px;
+  margin: 0;
+  z-index: 7;
+  color: #F4F6F7;
+  cursor: pointer; }
+  .chat-box-mini .chatText {
+    color: white; }
+
+.message {
+  color: white; }
+
+.chat-box-container {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  padding: 0;
+  margin: 0;
+  z-index: 7;
+  height: 200px;
+  width: 300px;
+  background-color: rgba(225, 91, 105, 0.95); }
+  .chat-box-container .minimize {
+    color: #F4F6F7;
+    text-align: left;
+    background-color: rgba(225, 91, 105, 0.95);
+    position: absolute;
+    overflow: hidden;
+    padding: 5px;
+    cursor: pointer;
+    width: 100%; }
+  .chat-box-container .chatText {
+    padding: 0;
+    margin-top: 27px;
+    margin-left: 5px;
+    height: 146px;
+    width: 295px;
+    background-color: rgba(225, 91, 105, 0.95);
+    text-decoration: none;
+    border: 0px;
+    color: #F4F6F7;
+    overflow: auto; }
+  .chat-box-container .collaborators-input {
+    width: 295px;
+    background-color: rgba(225, 91, 105, 0.95);
+    text-decoration: none;
+    border: 0px;
+    color: #F4F6F7;
+    margin-left: 5px; }
+    .chat-box-container .collaborators-input:focus {
+      text-decoration: none;
+      outline: none; }
+  .chat-box-container ::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #F4F6F7; }
+  .chat-box-container :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #F4F6F7; }
+  .chat-box-container ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #F4F6F7; }
+  .chat-box-container :-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: #F4F6F7; }
+  .chat-box-container form {
+    padding: 0;
+    margin: 0;
+    color: #F4F6F7;
+    bottom: 0;
+    width: 100%;
+    form-inputs-height: 100%;
+    form-inputs-width: 100%; }
 
 /* BASICS */
 .CodeMirror {

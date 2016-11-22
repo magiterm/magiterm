@@ -23,6 +23,7 @@ class LinuxComputer extends React.Component {
 
 
 componentWillMount() {
+
   var context = this;
   const user = JSON.parse(localStorage['user']);
   context.setState({
@@ -75,12 +76,13 @@ componentWillMount() {
               </select>
               <div className="row">
                    <CodeEditor username={this.state.username} containerName={this.state.containerName}/>
+                   <div id="vertical" className="resizer ui-draggable ui-draggable-handle"></div>
                   <Terminal username={this.state.username} containerName={this.state.containerName}/>
               </div>
-              <div>
                 <FileBrowser containerName={this.state.containerName}/>
-                <Chatbox username={this.state.username} containerName={this.state.containerName}/>
-              </div>
+
+              <Chatbox username={this.state.username} containerName={this.state.containerName}/>
+              <footer> className="footer" </footer>
             </div>
           );
    } else {

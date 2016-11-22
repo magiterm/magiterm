@@ -54,6 +54,11 @@ class CodeEditor extends React.Component {
   }
   
   componentDidMount() {
+
+    $(".code-editor-container").resizable({
+      handleSelector: ".splitter",
+      resizeHeight: false
+    });
     const context = this;
     var codeEditor = document.getElementById("code-editor")
     var editor = CodeMirror.fromTextArea(codeEditor, {
@@ -142,20 +147,18 @@ class CodeEditor extends React.Component {
   render() {
     return (
       <div className="code-editor-container" onKeyDown={this.handleOnKeyDown.bind(this)}>
+        <div className="code-editor-menu">
+            <button onClick={this.handleCodeSave.bind(this)}> Save </button>
+            <span className={this.state.codeSaved ? "code-saved-indicator" : "code-modified-indicator"}>
+              {this.state.codeSaved ? "Saved" : "Modified"}
+            </span>
+          <span className="current-file">
+            {this.state.fileName ? this.state.filePath + '/' + this.state.fileName : <span> No File </span> }
+          </span>
+        </div>
         <textarea id="code-editor">
           {this.state.codeValue}
           </textarea><br/>
-          <div className="row">
-            <div>
-            <button onClick={this.handleCodeSave.bind(this)}> Save </button>
-            <div className={this.state.codeSaved ? "code-saved-indicator" : "code-modified-indicator"}>
-              {this.state.codeSaved ? "Saved" : "Modified"}
-            </div>
-          </div>
-          <div className="current-file">
-            {this.state.fileName ? this.state.filePath + '/' + this.state.fileName : <p> No File </p>}
-          </div>
-        </div>
       </div>
     )
   }
