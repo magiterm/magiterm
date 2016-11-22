@@ -13,7 +13,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       }
-    })
+    }).then(function() {
+      console.log('seeding default roles...');
+      queryInterface.bulkInsert('collaboratorroles', 
+        [
+          { name: 'read' },
+          { name: 'write' },
+          { name: 'admin' }
+        ])
+    });
   },
 
   down: function (queryInterface, Sequelize) {
