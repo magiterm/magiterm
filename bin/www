@@ -8,6 +8,7 @@ const app = require('../app');
 const debug = require('debug')('magiterm:server');
 const http = require('http');
 const User = require('../models/User');
+const Messages = require('../models/messages');
 const docker = require('../utils/dockerAPI');
 
 const crypto = require('crypto'),
@@ -236,6 +237,17 @@ io.on('connection', function(socket) {
 
   socket.on('/CHAT/', function(msg) {
     io.sockets.emit('/CHAT/' + msg.containerName, msg);
+    Messages.create({
+      userID: msg.username,
+      containerID: msg.containerName,
+      message: msg.msg, 
+    })
+    .then(function(results) {
+      console.log('Successfully saved message to the database');
+    })
+    .catch(function(err) {
+      console.log('Failed to send message to the database', err);
+    })
   });
 });
 

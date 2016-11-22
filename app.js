@@ -16,6 +16,7 @@ const routes = require('./routes/index');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
 const docker = require('./routes/docker');
+const messages = require('./routes/messages');
 
 const app = express();
 
@@ -44,7 +45,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
-app.use('/docker', docker)
+app.use('/docker', docker);
+app.use('/messages', messages);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
