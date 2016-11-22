@@ -146,13 +146,13 @@ class CodeEditor extends React.Component {
           {this.state.codeValue}
           </textarea><br/>
           <div className="row">
-            <div className="col-md-6">
+            <div>
             <button onClick={this.handleCodeSave.bind(this)}> Save </button>
             <div className={this.state.codeSaved ? "code-saved-indicator" : "code-modified-indicator"}>
               {this.state.codeSaved ? "Saved" : "Modified"}
             </div>
           </div>
-          <div className="col-md-6 current-file">
+          <div className="current-file">
             {this.state.fileName ? this.state.filePath + '/' + this.state.fileName : <p> No File </p>}
           </div>
         </div>

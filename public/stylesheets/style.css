@@ -6,9 +6,22 @@
 @import url("https://fonts.googleapis.com/css?family=Libre+Franklin");
 body {
   font: 14px "Dosis", Helvetica, Arial, sans-serif;
-  background-color: #242327;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; }
+
+#app {
+  height: 100%;
+  width: 100%; }
+
+[data-reactroot] {
+  height: 100% !important; }
+
+html {
+  height: 100%;
+  width: 100%; }
 
 .centered {
   text-align: center;
@@ -18,10 +31,6 @@ body {
     display: inline-block;
     text-align: left;
     font-size: 13px; }
-
-#terminal {
-  width: 100%;
-  height: 400px; }
 
 .code-editor-container {
   padding: 0;
@@ -102,33 +111,47 @@ body {
     font-size: 25px;
     color: #FEFEFE; }
   .card-container .information .collab-card-top {
-    padding: 15px 15px 30px 15px; }
+    padding: 15px 15px 30px 15px;
+    flex: 1;
+    align-items: stretch; }
     .card-container .information .collab-card-top .left {
       background-color: rgba(91, 105, 225, 0.5);
-      padding: 20px; }
+      padding: 20px;
+      flex: 1;
+      align-items: stretch; }
       .card-container .information .collab-card-top .left .title {
         color: #FEFEFE; }
       .card-container .information .collab-card-top .left .info {
         color: #FEFEFE; }
     .card-container .information .collab-card-top .right {
       background-color: rgba(113, 86, 251, 0.5);
-      padding: 20px; }
+      padding: 20px;
+      flex: 1;
+      align-items: stretch; }
       .card-container .information .collab-card-top .right .title {
         color: #FEFEFE; }
       .card-container .information .collab-card-top .right .info {
         color: #FEFEFE; }
   .card-container .information .collab-card-bottom {
-    padding: 0px 15px 30px 15px; }
+    padding: 0px 15px 30px 15px;
+    flex: 1;
+    align-items: stretch; }
     .card-container .information .collab-card-bottom .left {
       background-color: rgba(113, 86, 251, 0.5);
-      padding: 20px; }
+      padding: 20px;
+      flex: 1;
+      align-items: stretch; }
       .card-container .information .collab-card-bottom .left .title {
         color: #FEFEFE; }
       .card-container .information .collab-card-bottom .left .info {
         color: #FEFEFE; }
     .card-container .information .collab-card-bottom .right {
       background-color: rgba(91, 105, 225, 0.5);
-      padding: 20px; }
+      padding: 20px;
+      flex: 1;
+      height: 100%;
+      width: 100%;
+      align-items: stretch; }
       .card-container .information .collab-card-bottom .right .title {
         color: #FEFEFE; }
       .card-container .information .collab-card-bottom .right .info {
@@ -136,7 +159,9 @@ body {
   .card-container .information .inline-edit {
     width: 100px;
     word-wrap: break-word;
-    font-weight: none; }
+    font-weight: none;
+    flex: 1;
+    align-items: stretch; }
   .card-container .information .center {
     text-align: center; }
   .card-container .information .btn-success {
@@ -154,27 +179,40 @@ body {
   height: 100%;
   width: 100%;
   background-image: url("/images/geometric.png");
-  background-color: #FFFFFF; }
+  background-color: #FFFFFF;
+  position: relative;
+  background-size: cover;
+  align-items: center;
+  overflow: auto; }
   .dashboard-container .overlay {
-    background: rgba(0, 0, 0, 0.6); }
+    background: rgba(0, 0, 0, 0.6);
+    background-size: cover;
+    overflow: auto; }
     .dashboard-container .overlay .contain {
       padding: 10px 10px 10px 10px; }
       .dashboard-container .overlay .contain .card {
+        flex: 1;
+        align-items: stretch;
         text-align: center;
         height: 100%;
         background: rgba(36, 35, 39, 0.8);
         border-radius: 0;
         width: 100%;
         margin: 10px, 20px, 5px, 5px;
-        box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5); }
+        box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
+        background-size: cover;
+        overflow: auto;
+        height: 100%;
+        width: 100%; }
 
 .navbar {
-  height: 100%;
+  height: 32px;
   background-color: #271F42;
   border-radius: 0;
   padding: 2px;
   margin: 0;
-  min-height: 0; }
+  min-height: 0;
+  width: 100%; }
   .navbar ul {
     list-style-type: none;
     padding: 0;
@@ -206,18 +244,80 @@ body {
       width: 25px;
       margin-bottom: 4px; }
 
-.homepage-container {
+.index-block {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 1080px;
   width: 100%;
-  background-color: #FFFFFF; }
-  .homepage-container .header {
-    background-image: url("/images/background.svg");
+  margin: 0px;
+  position: relative;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  background-size: cover; }
+  .index-block .block2-block {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 50%;
     width: 100%;
-    height: 720px;
+    position: relative;
+    flex-wrap: wrap;
+    background-size: cover;
+    background-image: url(http://oxygennacdn3.oxygenna.com/wp-content/uploads/2014/08/bg8-1024x640.jpg); }
+    .index-block .block2-block .logo-container {
+      padding-top: 10px;
+      text-align: center; }
+      .index-block .block2-block .logo-container .title {
+        font-family: Dosis-Regular;
+        font-size: 120px;
+        color: #FFFFFF;
+        text-align: center; }
+      .index-block .block2-block .logo-container img {
+        padding-top: 100px;
+        width: 100%;
+        max-width: 75%; }
+  .index-block .block3-block {
+    flex: 1;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 50%;
+    width: 100%;
+    margin-top: 60px;
+    position: relative;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    background-size: cover; }
+
+.homepage-container {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-image: url("/images/geometric.png");
+  background-size: cover;
+  height: 100%;
+  align-items: center;
+  flex: 1;
+  flex-wrap: wrap;
+  box-sizing: border-box; }
+  .homepage-container .header {
+    width: 100%;
     padding: 0;
     margin: 0;
-    overflow: hidden; }
+    overflow: auto; }
+    .homepage-container .header svg {
+      height: auto;
+      width: 100%; }
     .homepage-container .header img {
-      width: 500px; }
+      width: 35%; }
   .homepage-container .subtitle {
     color: #FEFEFE;
     text-align: center;
@@ -253,26 +353,36 @@ body {
       font-size: 120px;
       color: #FFFFFF;
       text-align: center; }
+  .homepage-container .login-div {
+    padding: 0;
+    margin: 0;
+    background-color: #F4F6F7;
+    padding: 50px;
+    align-items: center;
+    justify-content: center; }
   .homepage-container .login-container {
     text-align: center;
-    max-width: 600px;
     width: 100%;
-    position: relative;
-    margin: auto;
-    height: 100%; }
+    align-items: center;
+    flex: 1;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    background-color: #F4F6F7;
+    overflow: hidden; }
     .homepage-container .login-container .login-header {
       background: rgba(36, 35, 39, 0.6);
       color: #FEFEFE;
-      margin-left: 100px;
-      margin-right: 100px;
+      margin-left: 200px;
+      margin-right: 200px;
+      min-width: 479px;
       padding: 10px;
       height: 100%;
       font-family: "Work Sans", sans-serif;
       font-size: 20px;
       box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2); }
     .homepage-container .login-container .login-box {
-      margin-left: 100px;
-      margin-right: 100px;
+      margin-left: 200px;
+      margin-right: 200px;
       margin-bottom: 100px;
       height: 100%;
       background: rgba(36, 35, 39, 0.4);
@@ -311,6 +421,36 @@ body {
 .error {
   color: #FFFFFF;
   font-size: 120px; }
+
+.linux-computer-container {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  flex-wrap: wrap;
+  background-color: black;
+  background-size: cover;
+  overflow: auto; }
+  .linux-computer-container .code-editor-container {
+    height: 620px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    flex-wrap: wrap; }
+  .linux-computer-container .terminal-container {
+    height: 620px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    flex-wrap: wrap; }
+    .linux-computer-container .terminal-container #terminal {
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      margin: 0; }
 
 /* BASICS */
 .CodeMirror {
@@ -509,7 +649,9 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 .CodeMirror {
   position: relative;
   overflow: hidden;
-  background: white; }
+  background: white;
+  width: 100%;
+  min-width: 500px; }
 
 .CodeMirror-scroll {
   overflow: scroll !important;

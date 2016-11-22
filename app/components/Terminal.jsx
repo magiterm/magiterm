@@ -241,7 +241,7 @@ class Terminal extends React.Component {
 
 	render() {
 		return (
-      <div>
+      <div className="terminal-container">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/0.11.13/css/jquery.terminal.min.css" rel="stylesheet"></link>
         <div id="terminal"></div><br/>
 			</div>

@@ -38,9 +38,24 @@ $dosis: "Dosis", Helvetica, Arial, sans-serif;
 
 body {
   font: 14px "Dosis", Helvetica, Arial, sans-serif;
-  background-color: $offblack;
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+}
+
+[data-reactroot] 
+        {height: 100% !important; }
+
+html {
+  height: 100%;
+  width: 100%;
 }
 
 .centered {
@@ -55,10 +70,7 @@ body {
    }
 }
 
-#terminal {
-  width: 100%;
-  height: 400px;
-}
+
 
 
 
@@ -181,9 +193,13 @@ body {
 
     .collab-card-top {
       padding: 15px 15px 30px 15px;
+      flex: 1;
+      align-items: stretch;
       .left {
         background-color: $translucentdarkpurple;
         padding: 20px;
+        flex: 1;
+        align-items: stretch;
         .title {
           color: $themewhite;
         }
@@ -195,6 +211,8 @@ body {
       .right {
         background-color: $translucentbrightpurple;
         padding: 20px;
+        flex: 1;
+        align-items: stretch;
         .title {
           color: $themewhite;
         }
@@ -206,10 +224,15 @@ body {
 
     .collab-card-bottom {
       padding: 0px 15px 30px 15px;
+      flex: 1;
+      align-items: stretch;
+
 
       .left {
         background-color: $translucentbrightpurple;
         padding: 20px;
+        flex: 1;
+        align-items: stretch;
         .title {
           color: $themewhite;
         }
@@ -221,6 +244,10 @@ body {
       .right {
         background-color: $translucentdarkpurple;
         padding: 20px;
+        flex: 1;
+        height: 100%;
+        width: 100%;
+        align-items: stretch;
         .title {
           color: $themewhite;
         }
@@ -234,6 +261,8 @@ body {
       width: 100px;
       word-wrap: break-word;
       font-weight: none;
+      flex: 1;
+      align-items: stretch;
     }
 
     .center {
@@ -261,14 +290,22 @@ body {
   width: 100%;
   background-image: url('/images/geometric.png');
   background-color: $white;
+  position: relative;
+  background-size: cover;
+  align-items: center;
+  overflow: auto;
 
   .overlay {
     background: rgba(0,0,0,0.6);
+    background-size: cover;
+    overflow: auto;
 
     .contain {
       padding: 10px 10px 10px 10px;
 
       .card {
+        flex: 1;
+        align-items: stretch;
         text-align: center; 
         height: 100%;
         background: rgba(36,35,39,0.8);
@@ -276,11 +313,13 @@ body {
         width: 100%;
         margin: 10px, 20px, 5px, 5px;
         box-shadow: 3px 3px 1px rgba(0, 0, 0,0.5);
+        background-size: cover;
+        overflow: auto;
+        height: 100%;
+        width: 100%;
       }
     }
   }
-
-
 }
 
 
@@ -304,12 +343,13 @@ body {
 
 //NAVBAR
 .navbar {
-  height: 100%;
+  height: 32px;
   background-color: $themedarkpurple;
   border-radius: 0;
   padding: 2px;
   margin: 0;
   min-height: 0;
+  width: 100%;
   ul {
     list-style-type: none;
     padding: 0;
@@ -365,6 +405,74 @@ body {
 
 
 
+//MATT
+.index-block {
+  flex: 1;
+  background-color: rgba(255,255,255,.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 1080px;
+  width: 100%;
+  margin: 0px;
+  position: relative;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  background-size: cover;
+
+
+  .block2-block {
+    flex: 1;
+    background-color: rgba(255,255,255,.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 50%;
+    width: 100%;
+    position: relative;
+    flex-wrap: wrap;
+    background-size: cover;
+    background-image: url(http://oxygennacdn3.oxygenna.com/wp-content/uploads/2014/08/bg8-1024x640.jpg);
+
+    .logo-container {
+      padding-top: 10px;
+      text-align: center;
+      .title {
+        font-family: Dosis-Regular;
+        font-size: 120px;
+        color: #FFFFFF;
+        text-align: center;
+      }
+
+      img {
+        padding-top: 100px;
+        width: 100%;
+        max-width: 75%;
+      }
+    }
+  }
+
+  .block3-block {
+    flex: 1;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 50%;
+    width: 100%;
+    margin-top: 60px;
+    position: relative;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    background-size: cover;
+  }
+}
+
+
+
 
 
 
@@ -376,18 +484,29 @@ body {
 //HOMEPAGE
 
 .homepage-container {
-	width: 100%;
-	background-color: $white;
-	.header {
-		background-image: url('/images/background.svg');
-		width: 100%;
-		height: 720px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-image: url('/images/geometric.png');
+  background-size: cover;
+  height: 100%;
+  align-items:center;
+  flex: 1;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+
+  .header {
+    width: 100%;
+
+    svg {
+      height: auto;
+      width: 100%;
+    }
     padding: 0;
     margin: 0;
-		overflow: hidden;
+    overflow: auto;
 
     img {
-      width: 500px;
+      width: 35%;
 
     }
   }
@@ -438,20 +557,31 @@ body {
       color: #FFFFFF;
       text-align: center;
     }
-	}
+  }
 
+  .login-div {
+    padding: 0;
+    margin: 0;
+    background-color: $offwhite;
+    padding: 50px;
+    align-items: center;
+    justify-content: center;
+  }
   .login-container {
     text-align: center;
-    max-width: 600px;
     width: 100%;
-    position: relative;
-    margin: auto;
-    height: 100%;
+    align-items:center;
+    flex: 1;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    background-color: $offwhite;
+    overflow: hidden;
     .login-header {
       background: rgba(36, 35, 39, 0.6);
       color: $themewhite;
-      margin-left: 100px;
-      margin-right: 100px;
+      margin-left: 200px;
+      margin-right: 200px;
+      min-width: 479px;
       padding: 10px;
       height: 100%;
       font-family: $work;
@@ -459,8 +589,8 @@ body {
       box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2); 
     }
     .login-box {
-      margin-left: 100px;
-      margin-right: 100px;
+      margin-left: 200px;
+      margin-right: 200px;
       margin-bottom: 100px;
       height: 100%;
       background: rgba(36, 35, 39, 0.4);
@@ -515,6 +645,43 @@ body {
 .error {
   color: $white;
   font-size: 120px;
+}
+
+.linux-computer-container {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  flex-wrap: wrap;
+  // background-image: url('/images/geometric.png');
+  background-color: black;
+  background-size: cover;
+  overflow: auto;
+
+  .code-editor-container {
+    height: 620px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+  .terminal-container {
+    height: 620px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    flex-wrap: wrap;
+
+    #terminal {
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      margin: 0;
+    }
+  }
 }
 
 
@@ -689,6 +856,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   position: relative;
   overflow: hidden;
   background: white;
+  width: 100%;
+  min-width: 500px;
 }
 
 .CodeMirror-scroll {
