@@ -669,6 +669,33 @@ html {
       }
     }
   }
+
+  .file-browser-container {
+    height: 100%;
+    max-height: 600px;
+    width: 100%;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    color: $offwhite;
+  }
+
+  .terminal-menu {
+    height: 30px;
+    width: 100%;
+    flex: 1;
+    flex-wrap: wrap;
+    .ion-ios-folder-outline{
+      color: white;
+      float: right;
+      padding-right: 20px;
+      font-size: 20px
+    }
+  }
+
+
+
   .terminal-container {
     height: 100%;
     max-height: 600px;
@@ -676,15 +703,16 @@ html {
     padding: 0;
     margin: 0;
     flex: 1;
+    flex-direction: row;
     flex-wrap: wrap;
     overflow-y: auto;
 
     #terminal {
       width: 100%;
       height: 100%;
-      padding: 10px;
-      padding-top: 25px;
+      padding: 0;
       margin: 0;
+      padding-left: 10px;
     }
   }
 
@@ -757,7 +785,6 @@ html {
   }
 
   .collaborators-input {
-    width: 295px;
     background-color: $translucentred;
     text-decoration: none;
     border: 0px;
@@ -797,6 +824,8 @@ html {
     }
   }
 }
+
+
 
 
 
@@ -1160,3 +1189,4 @@ div.CodeMirror-dragcursors {
 
 /* Help users use markselection to safely style text background */
 span.CodeMirror-selectedtext { background: none; }
+

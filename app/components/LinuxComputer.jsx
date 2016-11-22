@@ -15,7 +15,8 @@ class LinuxComputer extends React.Component {
     this.state = {
       username: '',
       containerName: '',
-      collabWith: []
+      collabWith: [],
+      toggle: false
     }
 
     this.selectChange = this.selectChange.bind(this);
@@ -60,6 +61,12 @@ componentWillMount() {
     });
   }
 
+  handleToggle() {
+    this.setState({
+      toggle: !this.state.toggle
+    });
+  }
+
     render() {
       if (this.state.containerName.length) {
            return (
@@ -75,13 +82,26 @@ componentWillMount() {
               </select>
               <div className="row">
                 <SplitPane split="vertical" defaultSize='50%'>
-                   <div><CodeEditor username={this.state.username} containerName={this.state.containerName}/></div>
-                  <div><Terminal username={this.state.username} containerName={this.state.containerName}/></div>
-                </SplitPane>        
+                 <CodeEditor username={this.state.username} containerName={this.state.containerName}/>
+                 <div id="vertical" className="resizer ui-draggable ui-draggable-handle"></div>
+                {this.state.toggle ? 
+                  <div className="file-browser-container">
+                    <div className="terminal-menu">
+                     <i className="ion-ios-folder-outline" onClick={this.handleToggle.bind(this)}></i>
+                    </div>
+                    <FileBrowser containerName={this.state.containerName}/>
+                  </div>
+                  :
+                  <div className="terminal-container">
+                  <div className="terminal-menu">
+                   <i className="ion-ios-folder-outline" onClick={this.handleToggle.bind(this)}></i>
+                  </div>
+                  <Terminal username={this.state.username} containerName={this.state.containerName}/>
+                  </div> 
+                }
+                </SplitPane>
               </div>
-                <FileBrowser containerName={this.state.containerName}/>
-
-              <Chatbox username={this.state.username} containerName={this.state.containerName}/>
+                <Chatbox username={this.state.username} containerName={this.state.containerName}/>
               <footer></footer>
             </div>
           );

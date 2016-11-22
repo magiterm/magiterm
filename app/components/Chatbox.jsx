@@ -96,9 +96,9 @@ class Chatbox extends React.Component {
 
   updateScroll() {
     const element = document.getElementById("chatText");
-    console.log('this is the element', element);
-    console.log(element.scrollHeight);
-    element.scrollTop = element.scrollHeight
+    if (element) {
+      element.scrollTop = element.scrollHeight
+    }
   }
 
   // componentWillUpdate() {

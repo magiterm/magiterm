@@ -22,7 +22,6 @@ class Terminal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const context = this;
-    console.log('GOT PROPS', nextProps);
     this.socket.off('/TERM/' + this.state.containerName);
     this.socket.off('/TERM/RES/' + this.state.containerName);
     this.socket.off('/TERM/CD/' + this.state.containerName);
@@ -45,11 +44,13 @@ class Terminal extends React.Component {
   }
 
   recievedTermInput(code) {
-    if(code.username !== this.state.username) {
-      this.terminal.set_command(code.cmd, false);
-      this.setState({
-        curCommand: code.cmd
-      });
+    if (code) {
+      if(code.username !== this.state.username) {
+        this.terminal.set_command(code.cmd, false);
+        this.setState({
+          curCommand: code.cmd
+        });
+      }
     }
   }
 
@@ -209,7 +210,6 @@ class Terminal extends React.Component {
             // context.socket.emit('/ANALYZE/', {command: command, containerName: context.state.containerName});
             axios.post('/docker/cmd', { cmd: command, containerName: containerName })
               .then(function(res) {
-                console.log(res);
                 term.echo(String(res.data.res));
               })
               .catch(function(err) {
@@ -241,7 +241,7 @@ class Terminal extends React.Component {
 
 	render() {
 		return (
-      <div className="terminal-container">
+      <div>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/0.11.13/css/jquery.terminal.min.css" rel="stylesheet"></link>
         <div id="terminal"></div><br/>
 			</div>
