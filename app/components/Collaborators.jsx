@@ -13,7 +13,8 @@ class Collaborators extends React.Component {
       username: this.props.username,
       pendingInvites: [],
       collaborators: [],
-      collabWith: []
+      collabWith: [],
+      allRoles: {}
     };
 
 
@@ -29,9 +30,11 @@ class Collaborators extends React.Component {
 
     axios.post('/users/myCollaborators', {username: this.state.username})
     .then(function(res) {
-      const acceptedUsernames = res.data.map(function(accepted) {
-        return accepted.recieverUsername;
-      });
+      // const acceptedUsernames = res.data.map(function(accepted) {
+      //   return accepted.recieverUsername;
+      // });
+      const acceptedUsernames = res.data;
+      console.log('accepted users', acceptedUsernames);
       context.setState({
         collaborators: acceptedUsernames
       });
@@ -44,6 +47,19 @@ class Collaborators extends React.Component {
       });
       context.setState({
         collabWith: acceptedUsernames
+      });
+    });
+
+    axios.get('/users/roles')
+    .then(function(res) {
+      // console.log('rolesssssssssssssss', res.data);
+      const allRoles = {};
+      res.data.forEach(function(role) {
+        allRoles[role.id] = role.name;
+      });
+      // console.log(allRoles);
+      context.setState({
+        allRoles: allRoles
       });
     });
 
@@ -161,6 +177,17 @@ class Collaborators extends React.Component {
     });
   }
 
+  handleSelectRoleChange(event, username) {
+    // console.log('select role change event', event);
+    // console.log('select role change value', event.target.value);
+    // console.log('select role change user', username);
+
+    axios.post('/users/changeRole', {collaborator: username, host: this.state.username, newRole: event.target.value})
+      .then(function(res) {
+        console.log('changed role', res);
+      });
+  }
+
   render() {
     var context = this;
     return (
@@ -178,11 +205,11 @@ class Collaborators extends React.Component {
                   Currently Collaborating With
                 </div>
                 <div>
-                {this.state.collabWith.length ? this.state.collabWith.map(function(accepted) {
+                {this.state.collabWith.length ? this.state.collabWith.map(function(accepted, i) {
                   return (
-                    <div className="collaborators">
+                    <div className="collaborators" key={i}>
                       {accepted}
-                      <span onClick={() => {context.handleRemoveCollabWith(accepted)}}>  [ X ]  </span>
+                      <span onClick={() => {context.handleRemoveCollabWith(accepted)}} key={i}>  [ X ]  </span>
                     </div>)
                 }) : <div className="none"> None </div>}
                 </div>
@@ -195,11 +222,18 @@ class Collaborators extends React.Component {
                 Collaborators on Your Computer
               </div>
               <div>
-              {this.state.collaborators.length ? this.state.collaborators.map(function(accepted) {
+              {this.state.collaborators.length ? this.state.collaborators.map(function(collaboration, i) {
+                console.log('collaboration', collaboration);
                 return (
-                  <div className="collaborators">
-                    {accepted}
-                    <span onClick={() => {context.handleRemoveCollaborator(accepted)}}>  [ X ]  </span>
+                  <div className="collaborators" key={i}>
+                    {collaboration.recieverUsername}
+                    <select onChange={(e) => {context.handleSelectRoleChange(e, collaboration.recieverUsername)} }>
+                      <option> {context.state.allRoles[collaboration.role]} </option>
+                      { Object.keys(context.state.allRoles).map(function(key, i) {
+                        return <option key={i} > {context.state.allRoles[key]} </option>
+                      })}
+                    </select>
+                    <span onClick={() => {context.handleRemoveCollaborator(collaboration.recieverUsername)}}>  [ X ]  </span>
                   </div>)
               }) : <div className="none"> None </div>}
               </div>

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 var Collaborator = require('../models/Collaborator');
+var CollaboratorRoles = require('../models/CollaboratorRoles');
 
 router.post('/removeCollaborator', function(req, res) {
   Collaborator.destroy({
@@ -58,7 +59,8 @@ router.post('/acceptInvite', function(req, res) {
   const accepter = req.body.accepter;
 
   Collaborator.update({
-    confirmed: 'confirmed'
+    confirmed: 'confirmed',
+    role: 1
   }, {
     where: {
       requesterUsername: reciever,
@@ -172,6 +174,17 @@ router.get('/infodashboard', function(req, res) {
   .catch(function(err) {
     res.send(500, err);
   });
+});
+
+router.get('/roles', function(req, res) {
+  CollaboratorRoles.findAll()
+  .then(function(response) {
+    res.send(200, response);
+  })
+})
+
+router.post('/changeRole', function(req, res) {
+  console.log('changeRole', req.body);
 });
 
 module.exports = router;
