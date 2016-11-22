@@ -185,6 +185,29 @@ router.get('/roles', function(req, res) {
 
 router.post('/changeRole', function(req, res) {
   console.log('changeRole', req.body);
+  CollaboratorRoles.findOne({
+    where: {
+      name: req.body.newRole
+    }
+  })
+  .then(function(response) {
+    console.log(response);
+    console.log(response.dataValues);
+    Collaborator.update({
+      role: response.dataValues.id
+    }, {
+      where: {
+        requesterUsername: req.body.host,
+        recieverUsername: req.body.collaborator,
+        confirmed: 'confirmed'
+      }
+    })
+    .then(function(response) {
+      res.status(200).send(response);
+    });
+    
+  })
+
 });
 
 module.exports = router;

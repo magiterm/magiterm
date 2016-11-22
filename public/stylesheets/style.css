@@ -69,6 +69,10 @@ html {
   .card-container .information .collaborators {
     font-size: 25px;
     float: none; }
+    .card-container .information .collaborators select {
+      color: #f5f5f5;
+      background-color: rgba(36, 35, 39, 0.8);
+      font-size: 15px; }
   .card-container .information .none {
     font-size: 25px;
     color: #F4F6F7; }

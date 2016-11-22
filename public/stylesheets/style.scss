@@ -137,6 +137,12 @@ html {
     .collaborators {
       font-size: 25px;
       float: none;
+
+      select {
+        color: #f5f5f5;
+        background-color: rgba(36, 35, 39, 0.8);
+        font-size: 15px;
+      }
     }
 
     .none {
