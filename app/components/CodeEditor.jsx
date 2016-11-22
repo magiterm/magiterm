@@ -123,7 +123,7 @@ class CodeEditor extends React.Component {
 
   handleOnKeyDown(e) {
     const context = this;
-    if(e.ctrlKey && e.key === 'Enter') {
+    if((e.ctrlKey && e.key === 'Enter') || (e.metaKey && e.key === 'Enter')) {
       this.handleFileRun();
     }
 
@@ -181,9 +181,7 @@ class CodeEditor extends React.Component {
             {this.state.fileName ? this.state.filePath + '/' + this.state.fileName : <span> No File </span> }
           </span>
         </div>
-        <textarea id="code-editor">
-          {this.state.codeValue}
-          </textarea><br/>
+        <textarea id="code-editor" >{this.state.codeValue}</textarea><br/>
       </div>
     )
   }
