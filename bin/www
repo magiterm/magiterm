@@ -237,8 +237,9 @@ io.on('connection', function(socket) {
 
   socket.on('/CHAT/', function(msg) {
     io.sockets.emit('/CHAT/' + msg.containerName, msg);
+    console.log('THIS IS MESSAGE', msg);
     Messages.create({
-      userID: msg.username,
+      userID: msg.sender,
       containerID: msg.containerName,
       message: msg.msg, 
     })

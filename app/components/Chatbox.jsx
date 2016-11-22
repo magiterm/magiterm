@@ -44,6 +44,25 @@ class Chatbox extends React.Component {
     this.setState({
       containerName: nextProps.containerName
     });
+
+    axios.get('/messages', {params: {containerName: nextProps.containerName}})
+      .then(function(res) {
+        console.log('this is the container name in chat box', nextProps.containerName);
+        console.log('these are the results', res);
+        let arr = [];
+
+        for (var i = res.data.length - 1; i >= 0; i--) {
+          arr.push(res.data[i].userID + ': ' + res.data[i].message);
+        }
+
+        context.setState({
+          messages: arr
+        });
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+
     this.socket.on('/CHAT/' + nextProps.containerName, function(msg) {
       if(context.state.username !== msg.sender) {
         const messageFromSender = msg.sender + ': ' + msg.msg;
@@ -93,6 +112,11 @@ class Chatbox extends React.Component {
 
 
   }
+
+  // componentWillUpdate() {
+  //   const node = document.getElementById("chatText");
+  //   node.scrollTop = node.scrollHeight;
+  // }
 
   handleChangeActive(e) {
     e.preventDefault();
