@@ -82,9 +82,7 @@ componentWillMount() {
               </select>
               <div className="row">
                 <SplitPane split="vertical" defaultSize='50%'>
-
                    <CodeEditor username={this.state.username} containerName={this.state.containerName}/>
-                   <div id="vertical" className="resizer ui-draggable ui-draggable-handle"></div>
 
                   {this.state.toggle ? 
                     <div className="file-browser-container">
@@ -94,13 +92,6 @@ componentWillMount() {
                       <FileBrowser containerName={this.state.containerName}/>
                     </div>
                     :
-                    <div className="terminal-container">
-                    <div className="terminal-menu">
-                     <i className="ion-ios-folder-outline" onClick={this.handleToggle.bind(this)}></i>
-                    </div>
-                    <FileBrowser containerName={this.state.containerName}/>
-                  </div>
-                  :
                   <div className="terminal-container">
                   <div className="terminal-menu">
                    <i className="ion-ios-folder-outline" onClick={this.handleToggle.bind(this)}></i>

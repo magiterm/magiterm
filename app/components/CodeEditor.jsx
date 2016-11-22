@@ -165,7 +165,7 @@ class CodeEditor extends React.Component {
         <div className="code-editor-menu">
             <button onClick={this.handleCodeSave.bind(this)}> Save </button>
             <span className={this.state.codeSaved ? "code-saved-indicator" : "code-modified-indicator"}>
-              {this.state.codeSaved ? "Saved" : "Modified"}
+              {this.state.codeSaved  ? "Saved" : "Modified"}
             </span>
           <span className="current-file">
             {this.state.fileName ? this.state.filePath + '/' + this.state.fileName : <span> No File </span> }
