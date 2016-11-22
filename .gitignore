@@ -4,6 +4,7 @@ node_modules
 public/dist/
 test/dist/
 .sass-cache/
+public/stylesheets/style.css.map
 dump.rdb
 npm-debug*
 db/config/config.json
