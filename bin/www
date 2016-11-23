@@ -254,6 +254,10 @@ io.on('connection', function(socket) {
   socket.on('/TERM/SHOW/', function(show) {
     io.sockets.emit('/TERM/SHOW/' + show.containerName, show);
   });
+
+  socket.on('/TE/JOIN/', function(code) {
+    io.sockets.emit('/TE/JOIN/' + code.containerName, code);
+  })
 });
 
 /**

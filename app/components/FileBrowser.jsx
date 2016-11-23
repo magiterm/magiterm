@@ -88,8 +88,9 @@ class FileBrowser extends React.Component {
         }
       } else if (resp.data.type === 'file') {
         //alert(resp.data.fileContents);
-
-        context.socket.emit('/TE/', {filePath: context.state.curDir, fileName: entry, fileOpen: true, containerName: context.state.containerName, username: 'FILEBROWSER', code: resp.data.fileContents});
+        var newCode = resp.data.fileContents;
+        if(newCode.endsWith('\n')) newCode = newCode.slice(0, newCode.length - 1);
+        context.socket.emit('/TE/', {filePath: context.state.curDir, fileName: entry, fileOpen: true, containerName: context.state.containerName, username: 'FILEBROWSER', code: newCode});
       }
     });
   }
