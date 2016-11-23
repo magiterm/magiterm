@@ -32,7 +32,7 @@ class Terminal extends React.Component {
       containerName: nextProps.containerName,
       hidden: nextProps.hidden
     })
-    this.terminal.clear();
+    //this.terminal.clear();
     if(nextProps.containerName !== this.props.containerName) this.terminal.echo('Welcome to ' + nextProps.containerName + '\'s computer.');
     this.socket.on('/TERM/' + nextProps.containerName, function(code) {
       context.recievedTermInput(code);
@@ -46,6 +46,7 @@ class Terminal extends React.Component {
       context.recievedTermCD(path);
     });
     this.renderTerminal();
+    this.terminal.focus();
   }
 
   recievedTermInput(code) {
