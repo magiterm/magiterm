@@ -9,13 +9,12 @@ const NavBar = require('./NavBar.jsx');
 const axios = require('axios');
 const Modal = require('react-modal');
 const customStyles = {
+
   content : {
-    top                   : '50%',
-    left                  : '50%',
     right                 : 'auto',
     bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
+    marginLeft          : '26%',
+    marginTop: 200,
     height: 300,
     width: 600,
     backgroundColor:'rgba(72,72,72,0.55)',
@@ -42,7 +41,9 @@ class App extends React.Component {
       containerName: '',
       render: false,
       modalIsOpen: false,
-      email: ''
+      email: '',
+      successMessage: 'displayNone',
+      failureMessage: 'displayNone'
     };
   }
 
@@ -93,18 +94,35 @@ class App extends React.Component {
   SendEmail(e) {
     e.preventDefault();
     var context = this;
+    context.setState({
+      diplayMessage: 'displayNone',
+      failureMessage: 'displayNone'
+    });
     var email = this.state.email;
     console.log('emial', this.state.email, 'nonstate', email, this.state);
     axios.post('/email', {
       email: email
     })
     .then(function(response) {
-      context.setState({
-        email: ''
-      });
+      if (response.data.id) {
+        context.setState({
+          email: '',
+          successMessage: 'displaySuccess'
+        });
+      } else {
+        context.setState({
+          email: '',
+          failureMessage: 'displayFailure'
+        });
+      }
+      
       console.log(response);
     })
     .catch(function(err) {
+      context.setState({
+          email: '',
+          displayNone: 'displayFailure'
+        });
       console.log(err);
     });
   }
@@ -134,7 +152,7 @@ class App extends React.Component {
                 </div>
                 <Modal
                   isOpen={this.state.modalIsOpen}
-                  style={customStyles.content}
+                  style={customStyles}
                   contentLabel="Example Modal"
                   >  
                   <div className='modalDiv'>
@@ -146,6 +164,8 @@ class App extends React.Component {
                       </div>
                     </form>
                     <button style={{marginTop: 15, marginBottom: 15}} className="btn" onClick={this.CloseModal}>Close Modal</button>
+                    <div className={this.state.successMessage}>Your password was sent to your email!</div>
+                    <div className={this.state.failureMessage}>Failed to send, please check your email and try again</div>
                   </div>
                 </Modal> 
               </div>
