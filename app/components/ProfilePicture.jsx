@@ -62,10 +62,10 @@ class ProfilePicture extends React.Component {
 		if (!this.state.profilePictureUrl) {
 			return (
 				<div className="row">
-				<div className="col-md-3 col-md-offset-3">
-				<div className="profile-picture-container">
-  				<div className="img-container center">
-		    				<Dropzone multiple={false} accept="image/*" onDrop={this.onImageDrop}>
+					<div className="col-md-3 col-md-offset-3">
+						<div className="profile-picture-container">
+  						<div className="img-container center">
+    						<Dropzone multiple={false} accept="image/*" onDrop={this.onImageDrop}>
 		    				  <p>Drop an image or click to select a file to upload.</p>
 		    				</Dropzone>
 	    				</div>
@@ -77,9 +77,11 @@ class ProfilePicture extends React.Component {
 			return (
 				<div className="profile-picture-container">
   				{this.state.profilePictureUrl === '' ? null :
-  				<div className="img-container">
-  				  <img onDrop={this.onImageDrop} src={this.state.profilePictureUrl} />
-  				</div>}
+  					<div className="img-container">
+	  				  <Dropzone multiple={false} accept="image/*" onDrop={this.onImageDrop} style="color:white">
+	  				  	<img onDrop={this.onImageDrop} src={this.state.profilePictureUrl} />
+	  				  </Dropzone>
+  					</div>}
   				<div className="username">
     				{this.state.username}
   				</div>
