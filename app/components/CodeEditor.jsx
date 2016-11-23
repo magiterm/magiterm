@@ -10,7 +10,7 @@ class CodeEditor extends React.Component {
       containerName: this.props.containerName,
       username: this.props.username,
       fileName: '',
-      fileNamePath: '',
+      filePath: '',
       codeSaved: true
     }
     this.recievedCEChange = this.recievedCEChange.bind(this);
@@ -41,14 +41,18 @@ class CodeEditor extends React.Component {
     const codeValue = code.code;
     if(code.fileOpen) {
       this.setState({
-        fileName: fileName,
-        filePath: filePath,
         codeSaved: true
+      });
+    } else {
+      this.setState({
+        codeSaved: false
       });
     }
     if(code.fileOpen || code.username !== this.username) {
       this.setState({
-        codeValue: codeValue
+        codeValue: codeValue,
+        fileName: fileName,
+        filePath: filePath
       });
       //Must place the cursor back where it was after replacing contents. Otherwise weird things happen.
       this.cursorPos = this.editor.doc.getCursor();
@@ -101,7 +105,6 @@ class CodeEditor extends React.Component {
     this.socket = io();
     const context = this;
 
-    //The 1 will be replaced by container/user ID when we have sessions
     this.socket.on('/TE/' + this.props.containerName, function(code) {
       recievedCEChange(code);
     });
@@ -116,9 +119,7 @@ class CodeEditor extends React.Component {
       axios.post('/docker/executeFile', {code: document.getElementById('code-editor').value, containerName: this.state.containerName, fileName: this.state.fileName, filePath: this.state.filePath})
       .then(function(resp) {
         const exResponse = resp.data.res;
-        console.log('filePath', context.state.filePath, 'fileName', context.state.fileName);
         var filePath = context.state.filePath.endsWith('/') ? context.state.filePath + context.state.fileName : context.state.filePath + '/' + context.state.fileName;
-        //context.socket.emit('/TERM/SHOW/', {containerName: context.state.containerName});
         context.socket.emit('/TERM/RES/', {cmd: resp.data.cmd + ' ' + filePath, res: exResponse, username: 'FILEBROWSER', containerName: context.state.containerName});
         context.setState({
           codeSaved: true
@@ -148,8 +149,8 @@ class CodeEditor extends React.Component {
   }
 
   handleCodeChange() {
-      var code = document.getElementById('code-editor').value;
-      this.socket.emit('/TE/', {code: code, username: this.username, containerName: this.state.containerName});
+    var code = document.getElementById('code-editor').value;
+    this.socket.emit('/TE/', {code: code, username: this.username, containerName: this.state.containerName, fileName: this.state.fileName, filePath: this.state.filePath});
   }
 
   handleCodeSave(e) {
