@@ -124,6 +124,13 @@ html {
   .information {
     padding: 20px;
     color: $themewhite;
+
+    .editing {
+      color: black;
+      text-align: center;
+      background-color: $themelightpurple;
+    }
+
     .title {
       color: $themewhite;
       font-size: 16px;

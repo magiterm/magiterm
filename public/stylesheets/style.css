@@ -59,6 +59,10 @@ html {
 .card-container .information {
   padding: 20px;
   color: #FEFEFE; }
+  .card-container .information .editing {
+    color: black;
+    text-align: center;
+    background-color: #DCDAED; }
   .card-container .information .title {
     color: #FEFEFE;
     font-size: 16px;
