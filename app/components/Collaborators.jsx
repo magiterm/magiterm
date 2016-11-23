@@ -1,5 +1,6 @@
 const React = require('react');
 const axios = require('axios');
+const Tabs = require('react-simpletabs');
 
 class Collaborators extends React.Component {
   constructor(props) {
@@ -198,112 +199,113 @@ class Collaborators extends React.Component {
           COLLABORATORS
         </div>
         <div className="information">
-
-          <div className="row">
-
-            <div className="col-md-4 col-md-offset-2 collab-card-top">
-              <div className="left">
-                <div className="title">
-                  Currently Collaborating With
-                </div>
-                <div>
-                {this.state.collabWith.length ? this.state.collabWith.map(function(accepted, i) {
-                  return (
-                    <div className="collaborators" key={i}>
-                      {accepted}
-                      <span onClick={() => {context.handleRemoveCollabWith(accepted)}} key={i}>
-                        <i className="ion-trash-a"></i>
-                      </span>
-                    </div>)
-                }) : <div className="none"> None </div>}
-                </div>
-              </div>
-              </div>
-
-            <div className="col-md-4 collab-card-top">
-              <div className="right">
-              <div className="title">
-                Collaborators on Your Computer
-              </div>
-              <div>
-              {this.state.collaborators.length ? this.state.collaborators.map(function(collaboration, i) {
-                console.log('collaboration', collaboration);
-                return (
-                  <div className="collaborators" key={i}>
-                    {collaboration.recieverUsername}
-                    <select onChange={(e) => {context.handleSelectRoleChange(e, collaboration.recieverUsername)} }>
-                      <option> {context.state.allRoles[collaboration.role]} </option>
-                      { Object.keys(context.state.allRoles).map(function(key, i) {
-                        if(key !== collaboration.role + '') {
-                          return <option key={key} > {context.state.allRoles[key]} </option>
-                        }
-                      })}
-                    </select>
-                    <span onClick={() => {context.handleRemoveCollaborator(collaboration.recieverUsername)}}>
-                      <i className="ion-trash-a"></i>
-                    </span>
-                  </div>)
-              }) : <div className="none"> None </div>}
-              </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-
-
-            <div className="col-md-4 col-md-offset-2 collab-card-bottom">
-              <div className="left">
-                <div className="title">
-                Invite New Collaborators to Your Computer
-                </div>
+          <Tabs>
+            <Tabs.Panel title='Collaborators'>
               <div className="row">
-                <form onSubmit={
-                  function(e) {
-                    this.handleSubmit(e, this.state.invUsername)
-                  }.bind(this)}>
-                  <div className="col-md-12">
-                    <div className="form-inputs">
-                      <input 
-                      onChange={this.changeUserNameInput}
-                      id="inviteUsernameInput"
-                      type='text' 
-                      placeholder='username'
-                      className="collaborators-input"
-                      />
+               <div className="col-md-4 col-md-offset-2 collab-card-top">
+                 <div className="left">
+                   <div className="title">
+                      Your Collaboraters
+                   </div>
+                   <div>
+                   {this.state.collabWith.length ? this.state.collabWith.map(function(accepted, i) {
+                    return (
+                      <div className="collaborators" key={i}>
+                        {accepted}
+                        <span onClick={() => { context.handleRemoveCollabWith(accepted)}} key={i}>
+                          <i className="ion-trash-a"></i>
+                        </span>
+                      </div>);
+                  }) : <div className="none"> None </div>}
+                  </div>
+                </div>
+                </div>
+                <div className="col-md-4 collab-card-top">
+                  <div className="right">
+                  <div className="title">
+                    Collaborators on Your Computer
+                  </div>
+                  <div>
+                  {this.state.collaborators.length ? this.state.collaborators.map(function(collaboration, i) {
+                    console.log('collaboration', collaboration);
+                    return (
+                      <div className="collaborators" key={i}>
+                        {collaboration.recieverUsername}
+                        <select onChange={(e) => { context.handleSelectRoleChange(e, collaboration.recieverUsername); }}>
+                          <option> {context.state.allRoles[collaboration.role]} </option>
+                          { Object.keys(context.state.allRoles).map(function(key, i) {
+                            if (key !== collaboration.role + '') {
+                              return <option key={key} > {context.state.allRoles[key]} </option>;
+                            }
+                          })}
+                        </select>
+                        <span onClick={() => { context.handleRemoveCollaborator(collaboration.recieverUsername); }}>
+                          <i className="ion-trash-a"></i>
+                        </span>
+                      </div>);
+                  }) : <div className="none"> None </div>}
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </Tabs.Panel>
+            <Tabs.Panel title='Invitations'>
+              <div className="row">            
+                 <div className="col-md-4 col-md-offset-2 collab-card-bottom">
+                   <div className="left">
+                     <div className="title">
+                     Invite People to Collaborate
+                     </div>
+                     <div className="row">
+                      <form  onSubmit={
+                        function(e) {
+                          this.handleSubmit(e, this.state.invUsername);
+                        }.bind(this)}>
+                        <div className="col-md-12">
+                          <div className="form-inputs">
+                            <input 
+                            onChange={this.changeUserNameInput}
+                            id="inviteUsernameInput"
+                            type='text' 
+                            placeholder='username'
+                            className="invitation"
+                            />
+                            <input 
+                              type='submit'
+                              className='iSubmit'
+                            />
+                          </div>
+                        </div>
+                      </form>
                     </div>
                   </div>
-                </form>
-              </div>
-              </div>
-            </div>
-
-
-            <div className="col-md-4 collab-card-bottom">
-              <div className="right">
-                <div className="title">
-                Pending Collaboration Invites
                 </div>
-                {
-                  this.state.pendingInvites.length ? this.state.pendingInvites.map(function(pending) {
-                  return (
-                    <div className="collaborator">{pending} 
-                    <span onClick={() => {context.handleAcceptCollab(pending)}}> Accept </span>
-                    <span onClick={() => {context.handleRejectCollab(pending)}}> Reject </span>           
+                <div className="col-md-4 collab-card-bottom">
+                  <div className="right">
+                    <div className="title">
+                    Pending Invites
                     </div>
-                    );
-                }) : 
-                  <div className="none"> None </div>
-                }
+                    {
+                      this.state.pendingInvites.length ? this.state.pendingInvites.map(function(pending) {
+                      return (
+                        <div className="collaborator">{pending} 
+                        <span onClick={() => { context.handleAcceptCollab(pending); }}> Accept </span>
+                        <span onClick={() => { context.handleRejectCollab(pending); }}> Reject </span>           
+                        </div>
+                        );
+                      }) : 
+                      <div className="none"> None </div>
+                    }
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-
-
+            </Tabs.Panel>
+          </Tabs>
+        </div>
       </div>
-    </div>
     );
   }
 }
 
 module.exports = Collaborators;
+          

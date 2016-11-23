@@ -49,13 +49,12 @@ html {
 .card-container .header {
   padding: 10px 0 0 10px;
   border-bottom: 1px solid #242327;
-  margin: 0px;
   background-color: rgba(38, 38, 38, 0.6);
   text-align: center;
   color: rgba(255, 255, 255, 0.4);
   font-size: 1.3em;
   font-weight: bold;
-  padding-bottom: 12px; }
+  padding-bottom: 30px; }
 .card-container .information {
   padding: 20px;
   color: #FEFEFE; }
@@ -99,7 +98,6 @@ html {
     flex: 1;
     align-items: stretch; }
     .card-container .information .collab-card-top .left {
-      background-color: rgba(91, 105, 225, 0.5);
       padding: 20px;
       flex: 1;
       align-items: stretch; }
@@ -108,7 +106,6 @@ html {
       .card-container .information .collab-card-top .left .info {
         color: #FEFEFE; }
     .card-container .information .collab-card-top .right {
-      background-color: rgba(113, 86, 251, 0.5);
       padding: 20px;
       flex: 1;
       align-items: stretch; }
@@ -121,7 +118,6 @@ html {
     flex: 1;
     align-items: stretch; }
     .card-container .information .collab-card-bottom .left {
-      background-color: rgba(113, 86, 251, 0.5);
       padding: 20px;
       flex: 1;
       align-items: stretch; }
@@ -130,10 +126,9 @@ html {
       .card-container .information .collab-card-bottom .left .info {
         color: #FEFEFE; }
     .card-container .information .collab-card-bottom .right {
-      background-color: rgba(91, 105, 225, 0.5);
       padding: 20px;
       flex: 1;
-      height: 100%;
+      height: 200%;
       width: 100%;
       align-items: stretch; }
       .card-container .information .collab-card-bottom .right .title {
@@ -171,9 +166,11 @@ html {
   .dashboard-container .overlay {
     background: rgba(0, 0, 0, 0.6);
     background-size: cover;
-    overflow: auto; }
+    overflow: auto;
+    height: 100%; }
     .dashboard-container .overlay .contain {
-      padding: 10px 10px 10px 10px; }
+      padding: 10px 10px 10px 10px;
+      height: 350px; }
       .dashboard-container .overlay .contain .card {
         flex: 1;
         align-items: stretch;
@@ -188,6 +185,54 @@ html {
         overflow-x: auto;
         height: 100%;
         width: 100%; }
+
+.invitation {
+  border: 2px solid white; }
+
+.iSubmit {
+  background-color: rgba(91, 105, 225, 0.5);
+  margin-top: 10px;
+  color: white;
+  height: 6;
+  border: none; }
+
+.tabs {
+  margin-top: -50px; }
+
+.tabs-navigation {
+  padding: 0 30px; }
+
+.tabs-navigation {
+  padding: 0 0px;
+  max-height: 50px;
+  border-bottom: 1px solid #DDD; }
+
+.tabs-menu {
+  display: table;
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+.tabs-menu-item {
+  float: left; }
+
+.tabs-menu-item a {
+  display: block;
+  padding: 0 30px;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 0;
+  color: #A9A9A9; }
+
+.tabs-menu-item:not(.is-active) a:hover {
+  color: #3498db; }
+
+.tabs-menu-item.is-active a {
+  background: rgba(91, 105, 225, 0.5);
+  border: 1px solid #DDD;
+  border-top: 2px solid #3498db;
+  border-bottom: 0;
+  color: #ffffff; }
 
 .navbar {
   height: 32px;
@@ -322,22 +367,6 @@ select {
   padding: 0;
   margin: 0; }
 
-<<<<<<< 4655d6fdefea18b5c8ab8a9a16f5d03d4d5e8a4e
-=======
-.displayNone {
-  display: none; }
-
-.displaySuccess {
-  font-weight: bold;
-  font-size: 16px;
-  color: white; }
-
-.displayFailure {
-  font-weight: bold;
-  font-size: 16px;
-  color: red; }
-
->>>>>>> fix login header/box
 .modalDiv {
   display: flex;
   justify-content: center;

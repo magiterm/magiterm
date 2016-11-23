@@ -105,7 +105,7 @@ class Dashboard extends React.Component {
           <div className="dashboard-container">
             <Loader loaded={this.state.loaded}/>
           </div>
-        )
+        );
        }
      }
 }
