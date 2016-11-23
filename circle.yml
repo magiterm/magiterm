@@ -27,5 +27,6 @@ deployment:
   staging:
     branch: master
     commands:
-      - git push -f ssh://root@162.243.142.111/root/repo/site.git master
+      - GIT_PUSH_TO_STAGING
+      # - git push -f ssh://root@162.243.142.111/root/repo/site.git master
       
