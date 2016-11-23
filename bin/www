@@ -3,12 +3,12 @@
 /**
  * Module dependencies.
  */
-
+'use strict';
 const app = require('../app');
 const debug = require('debug')('magiterm:server');
 const http = require('http');
 const User = require('../models/User');
-const Messages = require('../models/messages');
+const Messages = require('../models/Messages');
 const docker = require('../utils/dockerAPI');
 
 const crypto = require('crypto'),
