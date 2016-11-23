@@ -328,7 +328,7 @@ html {
     background-size: cover; }
 
 .collaborator-bar {
-  width: 200px;
+  width: 220px;
   flex: 1;
   display: flex;
   position: relative;
@@ -338,6 +338,9 @@ html {
   padding: 0; }
   .collaborator-bar .ion-ios-monitor-outline {
     font-size: 1.7em;
+    color: #03CEA1; }
+  .collaborator-bar .permissions-indicator {
+    font-family: "Dosis", Helvetica, Arial, sans-serif;
     color: #03CEA1; }
 
 #thisSelect {

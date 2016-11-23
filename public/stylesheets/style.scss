@@ -509,7 +509,7 @@ html {
 }
 
 .collaborator-bar {
-  width: 200px;
+  width: 220px;
   flex: 1;
   display: flex;
   position: relative;
@@ -521,6 +521,12 @@ html {
   .ion-ios-monitor-outline {
     font-size: 1.7em;
     color: $brightgreen;
+  }
+
+  .permissions-indicator {
+    font-family: $dosis;
+    color: $brightgreen;
+    
   }
 }
 #thisSelect {
