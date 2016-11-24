@@ -367,6 +367,20 @@ select {
   padding: 0;
   margin: 0; }
 
+.displayNone {
+  display: none; }
+
+.displaySuccess {
+  font-weight: bold;
+  font-size: 16px;
+  color: white; }
+
+.displayFailure {
+  font-weight: bold;
+  font-size: 16px;
+  color: red; }
+>>>>>>> finish email
+
 .modalDiv {
   display: flex;
   justify-content: center;

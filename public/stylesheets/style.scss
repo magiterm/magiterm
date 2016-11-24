@@ -10,6 +10,7 @@ $darkgrey: #262626;
 
 $themedarkpurple: #271F42;
 $themewhite: #FEFEFE;
+$themewhite: #FEFEFE;
 $thememidpurple: #90728C;
 $themelightpurple: #DCDAED;
 $themeorange: #E1905B;
@@ -571,13 +572,29 @@ select {
 
 
 //HOMEPAGE
+.displayNone {
+  display: none;
+}
+
+.displaySuccess {
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+}
+
+.displayFailure {
+  font-weight: bold;
+  font-size: 16px;
+  color: red;
+}
 
 .modalDiv {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column; 
 }
+
 .homepage-container {
   overflow-x: hidden;
   overflow-y: auto;
