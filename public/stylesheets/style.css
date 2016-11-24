@@ -773,20 +773,16 @@ select {
   .video-entry-image:hover:after, .video-entry-image:hover:before {
     opacity: 1; }
 
-.navbar-container {
-  width: 100%;
-  height: 55px;
-  background: #191919; }
-  .navbar-container .logo {
-    font-family: 'Dosis-Regular';
-    padding-top: 4.5px;
-    padding-left: 10px;
-    font-size: 2.4em;
-    color: #638898; }
-
 .video-page-container {
   padding-left: 80px;
-  padding-right: 80px; }
+  padding-right: 80px;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  flex: 1; }
   .video-page-container .title {
     font-size: 1.5em;
     padding: 20px;
@@ -794,6 +790,115 @@ select {
     font-family: Dosis-Regular;
     font-size: 2em;
     color: #638898; }
+  .video-page-container .side-bar {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    justify-content: center;
+    flex: 1;
+    flex-wrap: wrap;
+    box-sizing: border-box; }
+  .video-page-container .video-player {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-sizing: border-box; }
+  .video-page-container .code-editor-container {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    flex-wrap: wrap;
+    overflow-y: auto; }
+    .video-page-container .code-editor-container .code-editor-menu {
+      padding: 0;
+      margin: 0;
+      flex: 1;
+      flex-wrap: wrap; }
+      .video-page-container .code-editor-container .code-editor-menu .ion-ios-play-outline {
+        color: #03CEA1;
+        font-size: 25px;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        float: right; }
+        .video-page-container .code-editor-container .code-editor-menu .ion-ios-play-outline:hover {
+          color: #7156FB; }
+    .video-page-container .code-editor-container .current-file {
+      color: #03CEA1;
+      font-weight: bold;
+      flex: 1;
+      flex-wrap: wrap;
+      float: right; }
+    .video-page-container .code-editor-container .code-saved-indicator {
+      color: #03CEA1;
+      font-weight: bold;
+      flex: 1;
+      flex-wrap: wrap;
+      float: left; }
+    .video-page-container .code-editor-container .code-modified-indicator {
+      color: #E1905B;
+      font-weight: bold;
+      flex: 1;
+      flex-wrap: wrap;
+      float: left; }
+  .video-page-container .file-browser-container {
+    height: 100%;
+    max-height: 600px;
+    width: 100%;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    color: #F4F6F7;
+    cursor: default;
+    padding: 0px 0px 0px 2px;
+    font-size: 15px; }
+    .video-page-container .file-browser-container .fileBrowser:hover {
+      background-color: #242327; }
+    .video-page-container .file-browser-container .ion-ios-arrow-down {
+      color: #F4F6F7;
+      font-size: 15px; }
+    .video-page-container .file-browser-container .ion-ios-arrow-up {
+      color: #F4F6F7;
+      font-size: 15px; }
+  .video-page-container .terminal-menu {
+    height: 30px;
+    width: 100%;
+    flex: 1;
+    flex-wrap: wrap; }
+    .video-page-container .terminal-menu .ion-ios-folder-outline {
+      color: #03CEA1;
+      font-weight: bold;
+      float: right;
+      padding-right: 20px;
+      font-size: 20px;
+      cursor: pointer; }
+      .video-page-container .terminal-menu .ion-ios-folder-outline:hover {
+        color: #7156FB; }
+  .video-page-container .terminal-container {
+    height: 100%;
+    max-height: 600px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: auto; }
+    .video-page-container .terminal-container #terminal {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      padding-left: 10px; }
 
 .video-description-container {
   width: 100%;

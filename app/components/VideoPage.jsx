@@ -5,6 +5,7 @@ const VideoPlayer = require('./VideoPlayer.jsx');
 const CodeEditor = require('./CodeEditor.jsx');
 const Terminal = require('./Terminal.jsx');
 const NavBar = require('./NavBar.jsx');
+const SplitPane = require('react-split-pane');
 
 class VideoPage extends React.Component {
   constructor(props) {
@@ -57,11 +58,19 @@ class VideoPage extends React.Component {
   	  			      <VideoPlayer video={this.state.currentVideo} />
               </div>
               <div className="col-md-6">
-                <CodeEditor username={this.state.username} containerName={this.state.containerName}/>
+              	 <SplitPane split="horizontal" defaultSize='50%'>
+              	 	<div className="row">
+              	 		<div className="col-md-12">
+	                		<CodeEditor username={this.state.username} containerName={this.state.containerName}/>
+                		</div>
+                	</div>
+                	<div className="row">
+                		<div className="col-md-12">
+	                		<Terminal username={this.state.username} containerName={this.state.containerName}/>
+                		</div>
+                	</div>
+                </SplitPane>
               </div>
-            <div className="col-md-4">
-              <Terminal username={this.state.username} containerName={this.state.containerName}/>
-            </div>
           </div>
 			</div>
 			</div>

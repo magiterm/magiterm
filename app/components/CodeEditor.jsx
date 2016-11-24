@@ -5,14 +5,21 @@ class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
     var context = this;
+    let obj;
+
+    if (localStorage[window.location]) {
+       obj = JSON.parse(localStorage[window.location]);      
+    } else {
+       obj = {};
+    }
+
     this.state = {
-      codeValue: '',
+      codeValue: obj.codeValue|| '',
       containerName: this.props.containerName,
       username: this.props.username,
-      fileName: '',
-      filePath: '',
-      codeSaved: true,
-      permissions: this.props.permissions
+      fileName: obj.fileName || '',
+      filePath: obj.filePath || '',
+      codeSaved: true
     }
     this.recievedCEChange = this.recievedCEChange.bind(this);
     this.username = JSON.parse(localStorage['user']).username;
@@ -36,8 +43,7 @@ class CodeEditor extends React.Component {
         containerName: nextProps.containerName,
         fileName: '',
         filePath: '',
-        codeValue: '',
-        permissions: nextProps.permissions
+        codeValue: ''
       });
 
       this.editor.getDoc().setValue('');
@@ -83,7 +89,6 @@ class CodeEditor extends React.Component {
   }
   
   componentDidMount() {
-
     $(".code-editor-container").resizable({
       handleSelector: ".splitter",
       resizeHeight: false
@@ -121,6 +126,8 @@ class CodeEditor extends React.Component {
     this.editor = editor;
     this.lastUpdate = Date.now();
     this.socket.emit('/TE/JOIN/', {containerName: this.state.containerName, username: this.username});
+
+
   }
 
   componentWillMount() {
@@ -128,7 +135,7 @@ class CodeEditor extends React.Component {
     const context = this;
 
     this.socket.on('/TE/' + this.props.containerName, function(code) {
-      recievedCEChange(code);
+      context.recievedCEChange(code);
     });
   }
 
@@ -137,10 +144,11 @@ class CodeEditor extends React.Component {
     if(!this.state.fileName) {
       alert('Please select a file before attempting to run.');
     } else {
-      context.socket.emit('/TERM/SHOW/', {containerName: context.state.containerName});
+      // context.socket.emit('/TERM/SHOW/', {containerName: context.state.containerName});
       axios.post('/docker/executeFile', {code: document.getElementById('code-editor').value, containerName: this.state.containerName, fileName: this.state.fileName, filePath: this.state.filePath})
       .then(function(resp) {
         const exResponse = resp.data.res;
+        console.log('this is the response', resp);
         var filePath = context.state.filePath.endsWith('/') ? context.state.filePath + context.state.fileName : context.state.filePath + '/' + context.state.fileName;
         context.socket.emit('/TERM/RES/', {cmd: resp.data.cmd + ' ' + filePath, res: exResponse, username: 'FILEBROWSER', containerName: context.state.containerName});
         context.setState({
@@ -181,6 +189,16 @@ class CodeEditor extends React.Component {
     if(code !== '' || sendBlank) {
       this.socket.emit('/TE/', {code: code, username: this.username, containerName: this.state.containerName, fileName: this.state.fileName, filePath: this.state.filePath});
     }
+    if (window.location !== '/linuxComputer') {
+      this.handleCodeSaveIfVideo();
+    }
+  }
+
+  handleCodeSaveIfVideo() {
+    console.log('in handle code video save');
+    const key = window.location;
+    const code = document.getElementById('code-editor').value;
+    window.localStorage.setItem(window.location, JSON.stringify({codeValue: code, fileName: this.state.fileName, filePath: this.state.filePath}));
   }
 
   handleCodeSave(e) {

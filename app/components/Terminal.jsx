@@ -3,10 +3,10 @@ const jQueryTerminal = require('jquery.terminal');
 const axios = require('axios');
 
 class Terminal extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			command: null,
+  constructor(props) {
+    super(props);
+    this.state = {
+      command: null,
       prompt: '/picoShell >> ',
       containerName: this.props.containerName, // change this to refer to user name when login is done
       curCommand: null,
@@ -15,13 +15,14 @@ class Terminal extends React.Component {
       response: '',
       hidden: false,
       permissions: this.props.permissions
-		}
+    }
     this.renderTerminal();
     this.recievedTermInput = this.recievedTermInput.bind(this);
     this.recievedTermResponse = this.recievedTermResponse.bind(this);
     this.recievedTermCD = this.recievedTermCD.bind(this);
     console.log('TERM CONSTRUCTOR');
 	}
+
 
   componentWillReceiveProps(nextProps) {
     console.log('TERM GOT PROPS', nextProps);
@@ -99,7 +100,7 @@ class Terminal extends React.Component {
     });
 
     this.socket.on('/TERM/RES/' + this.props.containerName, function(code) {
-      context.recievedTermResponse();
+      context.recievedTermResponse(code);
     });
 
     this.socket.on('/TERM/CD/' + this.props.containerName, function(path) {
@@ -274,14 +275,14 @@ class Terminal extends React.Component {
     });
   }
 
-	render() {
+  render() {
     if(!this.state.hidden) {
-  		return (
+      return (
         <div>
           <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/0.11.13/css/jquery.terminal.min.css" rel="stylesheet"></link>
           <div id="terminal"></div><br/>
-  			</div>
-  		);
+        </div>
+      );
     } else {
       return (
         <div>
@@ -289,6 +290,7 @@ class Terminal extends React.Component {
         );
     }
 	}
+
 }
 
 module.exports = Terminal;

@@ -1,4 +1,5 @@
 const exec = require('child_process').exec;
+const spawn = require('child_process').spawn;
 
 const dockex = "docker exec -i"
 const build = "docker build -t"
@@ -13,7 +14,8 @@ const runCommand = function(containerName, command, callback) {
   const runCommandCommand = dockex + ' ' + containerName + ' ' + command;
   console.log('this is the command', runCommandCommand);
 
-  //const com = exec(runCommandCommand);
+  // const com = exec(runCommandCommand);
+  // console.log(com);
 
   // com.stdout.on('data', function(data) {
   //   console.log('this is data!!!!!', data.toString('utf-8'));
