@@ -23,7 +23,6 @@ class Terminal extends React.Component {
     console.log('TERM CONSTRUCTOR');
 	}
 
-
   componentWillReceiveProps(nextProps) {
     console.log('TERM GOT PROPS', nextProps);
     const context = this;
@@ -68,6 +67,7 @@ class Terminal extends React.Component {
 
   recievedTermResponse(code) {
     //console.log('TR', code);
+    console.log('this is code', code);
     if(code.username !== this.state.username) {
       console.log('in term response', code);
       this.terminal.echo(this.terminal.get_prompt() + code.cmd);
@@ -167,7 +167,6 @@ class Terminal extends React.Component {
           //   curCommand: command
           // })
           // context.socket.emit('/ANALYZE/', {command: command, containerName: context.state.containerName});
-
             axios.post('/docker/cmd', { cmd: command, containerName: context.state.containerName })
               .then(function(res) {
                 if(typeof res.data === 'object') {
@@ -274,7 +273,6 @@ class Terminal extends React.Component {
       });
     });
   }
-
   render() {
     if(!this.state.hidden) {
       return (
