@@ -14,7 +14,7 @@ class CodeEditor extends React.Component {
     }
 
     this.state = {
-      codeValue: obj.codeValue|| '',
+      codeValue: '',
       containerName: this.props.containerName,
       username: this.props.username,
       fileName: obj.fileName || '',
@@ -66,6 +66,7 @@ class CodeEditor extends React.Component {
     const fileName = code.fileName;
     const filePath = code.filePath;
     const codeValue = code.code;
+    console.log('this is recievedCEChange', code);
     if(code.fileOpen) {
       this.setState({
         codeSaved: true
@@ -135,6 +136,7 @@ class CodeEditor extends React.Component {
     const context = this;
 
     this.socket.on('/TE/' + this.props.containerName, function(code) {
+      console.log(code);
       context.recievedCEChange(code);
     });
   }

@@ -20,6 +20,7 @@ class Terminal extends React.Component {
     this.recievedTermInput = this.recievedTermInput.bind(this);
     this.recievedTermResponse = this.recievedTermResponse.bind(this);
     this.recievedTermCD = this.recievedTermCD.bind(this);
+
     console.log('TERM CONSTRUCTOR');
 	}
 
@@ -94,6 +95,21 @@ class Terminal extends React.Component {
     this.socket = io();
     const context = this;
 
+    if (localStorage[window.location]) {
+       let obj = JSON.parse(localStorage[window.location]);
+       console.log("found")
+       const command = 'open ' + obj.fileName;
+       axios.post('/docker/cmd', {cmd: command, containerName: context.state.containerName})
+        .then(function(res) {
+          console.log(res);
+          console.log(res.termResponse);
+          context.socket.emit('/TE/', {filePath: obj.filePath, fileOpen:true, fileName: obj.fileName, code: res.data.termResponse,username: context.state.username, containerName: context.state.containerName});
+        })
+        .catch(function(err) {
+          console.error(err);
+        })
+       
+    }
     //The 1 will be replaced by container/user ID when we have sessions
     this.socket.on('/TERM/' + this.props.containerName, function(code) {
       context.recievedTermInput();

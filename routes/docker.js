@@ -196,6 +196,7 @@ router.post('/cmd', function (req, res) {
       });
     }
   } else if(cmd.split(" ")[0] === 'open') {
+    console.log('this is the command', cmd);
     docker.runCommand(containerName, 'cat /picoShell/.pico', function(err1, res1) {
       if(res1[res1.length - 1] === '\n') res1 = res1.slice(0, res1.length - 1);
       const command = 'cat ' + res1 + '/' + cmd.split(" ")[1];
