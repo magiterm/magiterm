@@ -11,7 +11,7 @@ class CodeEditor extends React.Component {
       username: this.props.username,
       fileName: '',
       filePath: '',
-      codeSaved: true
+      codeSaved: true,
       permissions: this.props.permissions
     }
     this.recievedCEChange = this.recievedCEChange.bind(this);
