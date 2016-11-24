@@ -47,6 +47,25 @@ router.post('/executeFile', function(req,res) {
         });
       }
     });
+  } else if (fileType === '.py') {
+    var code = req.body.code;
+    var newCode = code.replace(/\n/g, '\\n');
+    newCode = newCode.replace(/\"/g, '\\\"');
+    newCode = newCode.replace(/'/g, "\\\"");
+    var command = 'bash -c "echo -e \'' + newCode + '\' > ' + req.body.filePath + '/' + fileName + '"'
+    docker.runCommand(req.body.containerName, command, function(err, response) {
+      if(err) {
+        res.status(500).send(err);
+      } else {
+        docker.runCommand(req.body.containerName, 'python ' + req.body.filePath + '/' + fileName, function(err1, response1) {
+          if(err1) {
+            res.status(500).send(err);
+          } else {
+            res.status(200).send({res: response1, cmd: 'python'});
+          }
+        });
+      }
+    });
   } else {
     res.status(500).send({msg: "Cannot execute filetype '" + fileType + "'"});
   }
@@ -208,6 +227,31 @@ router.post('/cmd', function (req, res) {
             res.status(500).send(err2);
           } else {
             res.status(200).send({termResponse: res2, fileName: fileName, filePath: res1, fileOpen: true});
+          }
+        });
+      });
+    }
+  } else if (cmd.split(" ")[0] === 'download') {
+    console.log('IN DOWNLOAD');
+    var fileName = cmd.split(" ")[1];
+    if(fileName.startsWith('/')) {
+      const command = 'cat ' + fileName;
+      docker.runCommand(containerName, command, function(err2, res2) {
+        if(err2) {
+          res.status(200).send(err2);
+        } else {
+          res.status(200).send({download: true, fileContents: res2, fileName: fileName});
+        }
+      });
+    } else {
+      docker.runCommand(containerName, 'cat /picoShell/.pico', function(err1, res1) {
+        if(res1[res1.length - 1] === '\n') res1 = res1.slice(0, res1.length - 1);
+        const command = 'cat ' + res1 + '/' + fileName;
+        docker.runCommand(containerName, command, function(err2, res2) {
+          if(err2) {
+            res.status(200).send(err2);
+          } else {
+            res.status(200).send({download: true, fileContents: res2, fileName: fileName});
           }
         });
       });

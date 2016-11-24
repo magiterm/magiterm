@@ -13,6 +13,7 @@ class FileBrowser extends React.Component {
       hidden: true
     };
     this.doubleClick = this.doubleClick.bind(this);
+    this.downloadClick = this.downloadClick.bind(this);
     this.updateFileBrowser = this.updateFileBrowser.bind(this);
   }
 
@@ -65,6 +66,29 @@ class FileBrowser extends React.Component {
     this.updateFileBrowser('/picoShell', nextProps.containerName);
   }
 
+  downloadClick(e, entry) {
+    console.log(this.state.curDir, entry);
+    const file = this.state.curDir.endsWith('/') ? this.state.curDir + entry : this.state.curDir + '/' + entry;
+    console.log(file);
+    axios.post('/docker/cmd', {cmd: 'download ' + file, containerName: this.state.containerName})
+    .then(function(res) {
+      var download = function(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+      };
+      console.log('downloading', res.data.fileContents, 'as', res.data.fileName);
+      download(entry, res.data.fileContents);
+    });
+  }
+
   doubleClick(e, entry) {
     const context = this;
     axios.post('/docker/handleFileBrowserChange', {containerName: this.state.containerName, dir: this.state.curDir, entry: entry})
@@ -88,8 +112,9 @@ class FileBrowser extends React.Component {
         }
       } else if (resp.data.type === 'file') {
         //alert(resp.data.fileContents);
-
-        context.socket.emit('/TE/', {filePath: context.state.curDir, fileName: entry, fileOpen: true, containerName: context.state.containerName, username: 'FILEBROWSER', code: resp.data.fileContents});
+        var newCode = resp.data.fileContents;
+        if(newCode.endsWith('\n')) newCode = newCode.slice(0, newCode.length - 1);
+        context.socket.emit('/TE/', {filePath: context.state.curDir, fileName: entry, fileOpen: true, containerName: context.state.containerName, username: 'FILEBROWSER', code: newCode});
       }
     });
   }
@@ -104,7 +129,10 @@ class FileBrowser extends React.Component {
             {this.state.contents.map(function(entry) {
               if (entry.type === "file") {
                 return (
-                  <div className="fileBrowser" onDoubleClick={(e) => {context.doubleClick(e, entry.name)}}><i className="ion-ios-paper-outline">{" " + entry.name}</i></div>
+                  <div className="fileBrowser" onDoubleClick={(e) => {context.doubleClick(e, entry.name)}}>
+                    <i className="ion-ios-paper-outline">{" " + entry.name}</i>
+                    <i onClick={(e) => {context.downloadClick(e, entry.name)}}style={{float: 'right', 'padding-right': '10px'}}className="ion-android-arrow-down">Download</i>
+                  </div>
                 )
               } else if (entry.type === "folder" && entry.name !== ".") {
                 return (

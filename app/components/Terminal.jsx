@@ -32,8 +32,10 @@ class Terminal extends React.Component {
       containerName: nextProps.containerName,
       hidden: nextProps.hidden
     })
-    this.terminal.clear();
-    if(nextProps.containerName !== this.props.containerName) this.terminal.echo('Welcome to ' + nextProps.containerName + '\'s computer.');
+    if(nextProps.containerName !== this.props.containerName) {
+      this.terminal.clear();
+      this.terminal.echo('Welcome to ' + nextProps.containerName + '\'s computer.');
+    }
     this.socket.on('/TERM/' + nextProps.containerName, function(code) {
       context.recievedTermInput(code);
     });
@@ -46,6 +48,7 @@ class Terminal extends React.Component {
       context.recievedTermCD(path);
     });
     this.renderTerminal();
+    this.terminal.focus();
   }
 
   recievedTermInput(code) {
@@ -162,7 +165,9 @@ class Terminal extends React.Component {
                 if(typeof res.data === 'object') {
                   if(res.data.fileOpen) {
                     console.log(res.data);
-                    context.socket.emit('/TE/', {filePath: res.data.filePath, fileOpen: res.data.fileOpen, fileName: res.data.fileName, code: res.data.termResponse, username: context.state.username, containerName: context.state.containerName});
+                    var newCode = res.data.termResponse;
+                    if(newCode.endsWith('\n')) newCode = newCode.slice(0, newCode.length - 1);
+                    context.socket.emit('/TE/', {filePath: res.data.filePath, fileOpen: res.data.fileOpen, fileName: res.data.fileName, code: newCode, username: context.state.username, containerName: context.state.containerName});
                     context.socket.emit('/TERM/RES/', {cmd: command, res: '', username: context.state.username, containerName: context.state.containerName});
                   } else if(res.data.pwd) {
                     console.log('CD', res.data.pwd);
@@ -175,6 +180,21 @@ class Terminal extends React.Component {
                     console.log('PROMPT', context.terminal.get_prompt());
                     context.socket.emit('/TERM/CD/', {dir: res.data.pwd, username: context.state.username, containerName: context.state.containerName});
                     context.socket.emit('/TERM/RES/', {cmd: command, res: res.data.res, username: context.state.username, containerName: context.state.containerName});
+                  } else if (res.data.download) {
+                    var download = function(filename, text) {
+                      var element = document.createElement('a');
+                      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+                      element.setAttribute('download', filename);
+
+                      element.style.display = 'none';
+                      document.body.appendChild(element);
+
+                      element.click();
+
+                      document.body.removeChild(element);
+                    };
+                    console.log('downloading', res.data.fileContents, 'as', res.data.fileName);
+                    download(res.data.fileName, res.data.fileContents);
                   } else {
                     term.echo(String(JSON.stringify(res.data)));
                     context.socket.emit('/TERM/RES/', {cmd: command, res: JSON.stringify(res.data), username: context.state.username, containerName: context.state.containerName});

@@ -67,7 +67,7 @@ router.post('/acceptInvite', function(req, res) {
       recieverUsername: accepter
     }
   }).then(function (resp) {
-    res.status(200).send(resp);
+    res.status(200).send('ACCEPTED');
   });
 });
 
@@ -82,7 +82,7 @@ router.post('/rejectInvite', function(req, res) {
       confirmed: 'unconfirmed'
     }
   }).then(function(resp) {
-    res.status(200).send(resp);
+    res.status(200).send('REJECTED');
   }).catch(function(resp) {
     console.log('REJECT_RESP', resp);
   });
