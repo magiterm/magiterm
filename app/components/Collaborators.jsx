@@ -205,7 +205,7 @@ class Collaborators extends React.Component {
                <div className="col-md-4 col-md-offset-2 collab-card-top">
                  <div className="left">
                    <div className="title">
-                      Your Collaboraters
+                      Your Collaborators
                    </div>
                    <div>
                    {this.state.collabWith.length ? this.state.collabWith.map(function(accepted, i) {
