@@ -328,7 +328,7 @@ html {
     background-size: cover; }
 
 .collaborator-bar {
-  width: 220px;
+  width: 250px;
   flex: 1;
   display: flex;
   position: relative;
@@ -336,12 +336,14 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0; }
-  .collaborator-bar .ion-ios-monitor-outline {
+  .collaborator-bar i {
     font-size: 1.7em;
     color: #03CEA1; }
   .collaborator-bar .permissions-indicator {
     font-family: "Dosis", Helvetica, Arial, sans-serif;
-    color: #03CEA1; }
+    font-size: 20px;
+    color: #03CEA1;
+    padding-left: 10px; }
 
 #thisSelect {
   width: 150px;
@@ -355,7 +357,8 @@ html {
   background-color: black;
   cursor: pointer;
   margin: 0px;
-  border: 0px; }
+  border: 0px;
+  font-size: 20px; }
   #thisSelect option {
     font-family: "Dosis", Helvetica, Arial, sans-serif; }
   #thisSelect:hover {

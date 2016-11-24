@@ -258,6 +258,12 @@ io.on('connection', function(socket) {
   socket.on('/TE/JOIN/', function(code) {
     io.sockets.emit('/TE/JOIN/' + code.containerName, code);
   })
+
+  socket.on('/DASH/UPDATE/COLLABROLE/', function(roleUpdate) {
+    console.log('/DASH/UPDATE/COLLABROLE/', roleUpdate);
+    io.sockets.emit('/DASH/UPDATE/COLLABROLE/' + roleUpdate.recipient, roleUpdate);
+  });
+
 });
 
 /**

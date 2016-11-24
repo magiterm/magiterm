@@ -184,9 +184,12 @@ class Collaborators extends React.Component {
   }
 
   handleSelectRoleChange(event, username) {
-    axios.post('/users/changeRole', {collaborator: username, host: this.state.username, newRole: event.target.value})
+    const context = this;
+    const role = event.target.value;
+    axios.post('/users/changeRole', {collaborator: username, host: this.state.username, newRole: role})
       .then(function(res) {
-        console.log('changed role', res);
+        // console.log('changed role', res);
+        context.socket.emit('/DASH/UPDATE/COLLABROLE/', {recipient: username, host: context.state.username, newRole: role});
       });
   }
 

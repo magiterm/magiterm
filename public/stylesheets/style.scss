@@ -509,7 +509,7 @@ html {
 }
 
 .collaborator-bar {
-  width: 220px;
+  width: 250px;
   flex: 1;
   display: flex;
   position: relative;
@@ -518,15 +518,16 @@ html {
   margin: 0;
   padding: 0;
 
-  .ion-ios-monitor-outline {
+  i {
     font-size: 1.7em;
     color: $brightgreen;
   }
 
   .permissions-indicator {
     font-family: $dosis;
+    font-size: 20px;
     color: $brightgreen;
-    
+    padding-left: 10px;
   }
 }
 #thisSelect {
@@ -544,8 +545,10 @@ html {
 
   margin:   0px;
   border: 0px;
+  font-size: 20px;
   option {
     font-family: $dosis;
+    // font-size: 20px;
   }
 
   &:hover {

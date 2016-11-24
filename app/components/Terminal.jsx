@@ -13,7 +13,8 @@ class Terminal extends React.Component {
       curDir: '/',
       username: this.props.username,
       response: '',
-      hidden: false
+      hidden: false,
+      permissions: this.props.permissions
 		}
     this.renderTerminal();
     this.recievedTermInput = this.recievedTermInput.bind(this);
@@ -30,11 +31,13 @@ class Terminal extends React.Component {
     this.socket.off('/TERM/CD/' + this.state.containerName);
     this.setState({
       containerName: nextProps.containerName,
-      hidden: nextProps.hidden
+      hidden: nextProps.hidden,
+      permissions: nextProps.permissions
     })
+
     if(nextProps.containerName !== this.props.containerName) {
       this.terminal.clear();
-      this.terminal.echo('Welcome to ' + nextProps.containerName + '\'s computer.');
+      this.terminal.echo('Welcome to ' + nextProps.containerName + '\'s computer. You have ' + nextProps.permissions + ' permissions.');
     }
     this.socket.on('/TERM/' + nextProps.containerName, function(code) {
       context.recievedTermInput(code);
@@ -155,6 +158,10 @@ class Terminal extends React.Component {
     $(function($, undefined) {
       $('#terminal').terminal(function(command, term) {
         if (command !== '') {
+          if(context.state.permissions === 'read') {
+            term.echo('Sorry, you have no permission to run commands on this user\'s terminal.');
+            return;
+          }
           // context.setState({
           //   curCommand: command
           // })
@@ -221,7 +228,7 @@ class Terminal extends React.Component {
               // var result = window.eval(command);
           }
       }, {
-          greetings: 'Welcome to ' + context.state.containerName + '\'s computer.',
+          greetings: 'Welcome to ' + context.state.containerName + '\'s computer. You have ' + context.state.permissions + ' permissions.',
           name: '',
           prompt: prompt,
           tabcompletion: true,

@@ -181,18 +181,37 @@ router.get('/roles', function(req, res) {
   .then(function(response) {
     res.send(200, response);
   })
-})
+});
+
+router.get('/role', function(req, res) {
+  Collaborator.findOne({
+    where: {
+      requesterUsername: req.query.host,
+      recieverUsername: req.query.collaborator,
+      confirmed: 'confirmed'
+    }
+  })
+  .then(function(response) {
+    res.status(200).send(response);
+  })
+});
+
+router.get('/roleById', function(req, res) {
+  CollaboratorRoles.findOne({
+    where: { id: req.query.id }
+  })
+  .then(function(response) {
+    res.status(200).send(response);
+  })
+});
 
 router.post('/changeRole', function(req, res) {
-  // console.log('changeRole', req.body);
   CollaboratorRoles.findOne({
     where: {
       name: req.body.newRole
     }
   })
   .then(function(response) {
-    // console.log(response);
-    // console.log(response.dataValues);
     Collaborator.update({
       role: response.dataValues.id
     }, {

@@ -12,6 +12,7 @@ class CodeEditor extends React.Component {
       fileName: '',
       filePath: '',
       codeSaved: true
+      permissions: this.props.permissions
     }
     this.recievedCEChange = this.recievedCEChange.bind(this);
     this.username = JSON.parse(localStorage['user']).username;
@@ -35,7 +36,8 @@ class CodeEditor extends React.Component {
         containerName: nextProps.containerName,
         fileName: '',
         filePath: '',
-        codeValue: ''
+        codeValue: '',
+        permissions: nextProps.permissions
       });
 
       this.editor.getDoc().setValue('');

@@ -17,63 +17,89 @@ class LinuxComputer extends React.Component {
       username: '',
       containerName: '',
       collabWith: [],
-      toggle: false
+      toggle: false,
+      permissions: ''
     }
 
     this.selectChange = this.selectChange.bind(this);
   }
 
 
-componentWillMount() {
-  var context = this;
-  const user = JSON.parse(localStorage['user']);
-  context.setState({
-    containerName: user.username,
-    username: user.username,
-    collabWith: []
-  });
-  axios.post('/users/collaboratingWith', {username: user.username})
-  .then(function(res) {
-    const acceptedUsernames = res.data.map(function(accepted) {
-    return accepted.requesterUsername;
-    });
+  componentWillMount() {
+    var context = this;
+    const user = JSON.parse(localStorage['user']);
     context.setState({
-      collabWith: acceptedUsernames
+      containerName: user.username,
+      username: user.username,
+      collabWith: [],
+      permissions: 'admin'
     });
-  });
-  this.socket.on('/DASH/REMOVE/COLLABWITH/' + user.username, function(rejection) {
-    if(rejection.remover === context.state.containerName) {
-      window.location.reload();
-    } else {
-      var collabWith = context.state.collabWith;
-      collabWith.splice(collabWith.indexOf(rejection.remover), 1);
-      context.setState({
-        collabWith: collabWith
-      });
-    }
-  });
 
-  this.socket.on('/TERM/SHOW/' + user.username, function(show) {
-    console.log('SHOWING');
-    context.setState({
-      toggle: false
+    axios.post('/users/collaboratingWith', {username: user.username})
+    .then(function(res) {
+      const acceptedUsernames = res.data.map(function(accepted) {
+      return accepted.requesterUsername;
+      });
+      context.setState({
+        collabWith: acceptedUsernames
+      });
     });
-  });
-} 
+
+    this.socket.on('/DASH/REMOVE/COLLABWITH/' + user.username, function(rejection) {
+      if(rejection.remover === context.state.containerName) {
+        window.location.reload();
+      } else {
+        var collabWith = context.state.collabWith;
+        collabWith.splice(collabWith.indexOf(rejection.remover), 1);
+        context.setState({
+          collabWith: collabWith
+        });
+      }
+    });
+
+    this.socket.on('/TERM/SHOW/' + user.username, function(show) {
+      console.log('SHOWING');
+      context.setState({
+        toggle: false
+      });
+    });
+
+    this.socket.on('/DASH/UPDATE/COLLABROLE/' + user.username, function(roleUpdate) {
+      console.log('received /DASH/UPDATE/COLLABROLE/', roleUpdate);
+      context.setState({ permissions: roleUpdate.newRole})
+    });
+
+  }
 
   selectChange(event) {
-    //alert(event.target.value);
     const context = this;
     this.socket.off('/TERM/SHOW/' + this.state.containerName);
+
+    if(event.target.value === this.state.username) {
+      this.setState({ permissions: 'admin' })
+    } else {
+      axios.get('/users/role', 
+        { params: { host: event.target.value, collaborator: this.state.username } })
+        .then(function(res) {
+          return axios.get('/users/roleById', { params: { id: res.data.role } } )
+        })
+        .then(function(role) {
+          context.setState({ permissions: role.data.name });
+        });    
+    }
+
     this.setState({
       containerName: event.target.value
     });
+
+    
     this.socket.on('/TERM/SHOW/' + event.target.value, function(show) {
       console.log('SHOWING1');
       context.setState({
         toggle: false
       });
     });
+
   }
 
   handleToggle() {
@@ -87,8 +113,9 @@ componentWillMount() {
            return (
             <div className="linux-computer-container">
               <NavBar username={this.state.username} />
-              <div className="collaborator-bar"> 
-                  <i className="ion-ios-monitor-outline"></i>
+              <div className="collaborator-bar">
+
+                <i className="ion-ios-monitor-outline"></i>
                 <select id="thisSelect" className="form-control" onChange={this.selectChange}>
                   <optgroup label="Collaborators">
                   <option value={this.state.username}>{this.state.username}</option>
@@ -100,17 +127,24 @@ componentWillMount() {
                   })}
                   </optgroup>
                 </select>
+                <i className="ion-ios-locked-outline"></i>
+                <span className="permissions-indicator">  {this.state.permissions}</span>
               </div>
 
               <div className="row">
                 <SplitPane split="vertical" defaultSize='50%'>
-                   <CodeEditor username={this.state.username} containerName={this.state.containerName}/>
+                  <CodeEditor username={this.state.username} 
+                    containerName={this.state.containerName}
+                    permissions={this.state.permissions} />
                     <div className="file-browser-container">
                       <div className="terminal-menu">
                        <i className="ion-ios-folder-outline" onClick={this.handleToggle.bind(this)}></i>
                       </div>
-                      <FileBrowser containerName={this.state.containerName} hidden={!this.state.toggle}/>
-                      <Terminal username={this.state.username} containerName={this.state.containerName} hidden={this.state.toggle}/>
+                      <FileBrowser containerName={this.state.containerName} 
+                        hidden={!this.state.toggle}
+                        permissions={this.state.permissions} />
+                      <Terminal username={this.state.username} containerName={this.state.containerName} 
+                        hidden={this.state.toggle} permissions={this.state.permissions}/>
                     </div>
                 </SplitPane>
               </div>
