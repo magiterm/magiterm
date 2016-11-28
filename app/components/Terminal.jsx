@@ -26,6 +26,10 @@ class Terminal extends React.Component {
     console.log('TERM CONSTRUCTOR');
 	}
 
+  componentDidUpdate() {
+    this.updateScroll();
+  }
+
   componentWillReceiveProps(nextProps) {
     console.log('TERM GOT PROPS', nextProps);
     const context = this;
@@ -79,6 +83,15 @@ class Terminal extends React.Component {
       this.setState({
         curCommand: ''
       });
+    }
+  }
+
+  updateScroll() {
+    const element = document.getElementById("terminal");
+
+    if (element) {
+      console.log('in here', element);
+      element.scrollTop = element.scrollHeight
     }
   }
 

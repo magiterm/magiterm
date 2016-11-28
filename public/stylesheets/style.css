@@ -10,7 +10,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  width: 100%;
+  min-width: 100%;
+  width: auto !important;
   overflow: hidden; }
 
 select {
@@ -503,55 +504,61 @@ select {
     flex-wrap: wrap;
     box-sizing: border-box;
     background-color: #F4F6F7;
-    overflow: hidden; }
+    overflow: hidden;
+    padding-top: 30px; }
     .homepage-container .login-container .login-header {
       background: rgba(36, 35, 39, 0.6);
       color: #FEFEFE;
       margin-left: 200px;
       margin-right: 200px;
-      min-width: 479px;
-      padding: 10px;
-      height: 100px;
       font-family: "Work Sans", sans-serif;
-      font-size: 20px;
+      font-size: 1.5em;
       box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2); }
+      .homepage-container .login-container .login-header .login {
+        padding: 10px;
+        margin-bottom: 0; }
     .homepage-container .login-container .login-box {
       margin-left: 200px;
       margin-right: 200px;
       margin-bottom: 100px;
-      height: 300px;
       background: rgba(36, 35, 39, 0.4);
       box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-      font-family: "Work Sans", sans-serif; }
-      .homepage-container .login-container .login-box .login .login-input {
-        margin: 5px;
-        background: rgba(36, 35, 39, 0.6);
-        border: 0;
-        color: #F4F6F7;
-        width: 90%;
-        padding: 5px; }
-        .homepage-container .login-container .login-box .login .login-input:focus {
-          outline: none; }
-      .homepage-container .login-container .login-box .login .login-query-container {
-        padding: 5px; }
-        .homepage-container .login-container .login-box .login .login-query-container .login-query {
+      font-family: "Work Sans", sans-serif;
+      font-size: 1em;
+      padding: 0; }
+      .homepage-container .login-container .login-box .login {
+        padding: 0; }
+        .homepage-container .login-container .login-box .login .login-input {
+          margin: 5px;
+          background: rgba(36, 35, 39, 0.6);
+          border: 0;
+          color: #F4F6F7;
+          width: 90%;
+          padding: 5px; }
+          .homepage-container .login-container .login-box .login .login-input:focus {
+            outline: none; }
+        .homepage-container .login-container .login-box .login .login-query-container {
+          padding: 5px; }
+          .homepage-container .login-container .login-box .login .login-query-container .login-query {
+            color: #FEFEFE;
+            cursor: pointer; }
+            .homepage-container .login-container .login-box .login .login-query-container .login-query:hover {
+              color: white;
+              text-decoration: none; }
+        .homepage-container .login-container .login-box .login .btn-success {
+          background-color: #90728C;
+          border-color: #90728C;
+          border-radius: 0;
+          width: 90%;
+          padding: 2px;
+          margin: 2px;
           color: #FEFEFE;
-          cursor: pointer; }
-          .homepage-container .login-container .login-box .login .login-query-container .login-query:hover {
-            color: white;
-            text-decoration: none; }
-      .homepage-container .login-container .login-box .login .btn-success {
-        background-color: #90728C;
-        border-color: #90728C;
-        border-radius: 0;
-        width: 90%;
-        padding: 2px;
-        margin: 2px;
-        color: #FEFEFE; }
-        .homepage-container .login-container .login-box .login .btn-success:hover {
-          background-color: #b2baef;
-          border-color: #b2baef;
-          color: #FEFEFE; }
+          word-wrap: break-word;
+          word-break: normal; }
+          .homepage-container .login-container .login-box .login .btn-success:hover {
+            background-color: #b2baef;
+            border-color: #b2baef;
+            color: #FEFEFE; }
 
 .error {
   color: #FFFFFF;
@@ -613,11 +620,11 @@ select {
     flex: 1;
     flex-direction: row;
     flex-wrap: wrap;
-    overflow-y: auto;
     color: #F4F6F7;
     cursor: default;
     padding: 0px 0px 0px 2px;
-    font-size: 15px; }
+    font-size: 15px;
+    overflow: hidden; }
     .linux-computer-container .file-browser-container .fileBrowser:hover {
       background-color: #242327; }
     .linux-computer-container .file-browser-container .ion-ios-arrow-down {
@@ -640,22 +647,14 @@ select {
       cursor: pointer; }
       .linux-computer-container .terminal-menu .ion-ios-folder-outline:hover {
         color: #7156FB; }
-  .linux-computer-container .terminal-container {
+  .linux-computer-container #terminal {
+    width: 100%;
     height: 100%;
     max-height: 600px;
-    width: 100%;
+    overflow-y: auto;
     padding: 0;
     margin: 0;
-    flex: 1;
-    flex-direction: row;
-    flex-wrap: wrap;
-    overflow-y: auto; }
-    .linux-computer-container .terminal-container #terminal {
-      width: 100%;
-      height: 100%;
-      padding: 0;
-      margin: 0;
-      padding-left: 10px; }
+    padding-left: 10px; }
   .linux-computer-container .footer {
     background-color: #271F42;
     padding: 10px;
