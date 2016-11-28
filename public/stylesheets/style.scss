@@ -41,7 +41,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  width: 100%;
+  min-width: 100%;
+  width: auto !important;
   overflow: hidden;
 }
 select {
@@ -714,28 +715,32 @@ select {
     box-sizing: border-box;
     background-color: $offwhite;
     overflow: hidden;
+    padding-top: 30px;
     .login-header {
       background: rgba(36, 35, 39, 0.6);
       color: $themewhite;
       margin-left: 200px;
       margin-right: 200px;
-      min-width: 479px;
-      padding: 10px;
-      height: 100px;
       font-family: $work;
-      font-size: 20px;
+      font-size: 1.5em;
       box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2); 
+      .login {
+        padding: 10px;
+        margin-bottom: 0;
+      }
     }
     .login-box {
       margin-left: 200px;
       margin-right: 200px;
       margin-bottom: 100px;
-      height: 300px;
       background: rgba(36, 35, 39, 0.4);
       box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
       font-family: $work;
+      font-size: 1em;
+      padding: 0;
 
       .login {
+        padding: 0;
         .login-input {
           margin: 5px;
           background: rgba(36, 35, 39, 0.6);
@@ -768,6 +773,8 @@ select {
           padding: 2px;
           margin: 2px;
           color: $themewhite;
+          word-wrap: break-word;
+          word-break: normal;
 
           &:hover {
            background-color: $purpleblue;
