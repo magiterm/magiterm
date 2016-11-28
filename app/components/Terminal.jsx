@@ -3,10 +3,10 @@ const jQueryTerminal = require('jquery.terminal');
 const axios = require('axios');
 
 class Terminal extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			command: null,
+  constructor(props) {
+    super(props);
+    this.state = {
+      command: null,
       prompt: '/picoShell >> ',
       containerName: this.props.containerName, // change this to refer to user name when login is done
       curCommand: null,
@@ -15,11 +15,12 @@ class Terminal extends React.Component {
       response: '',
       hidden: false,
       permissions: this.props.permissions
-		}
+    }
     this.renderTerminal();
     this.recievedTermInput = this.recievedTermInput.bind(this);
     this.recievedTermResponse = this.recievedTermResponse.bind(this);
     this.recievedTermCD = this.recievedTermCD.bind(this);
+
     console.log('TERM CONSTRUCTOR');
 	}
 
@@ -67,6 +68,7 @@ class Terminal extends React.Component {
 
   recievedTermResponse(code) {
     //console.log('TR', code);
+    console.log('this is code', code);
     if(code.username !== this.state.username) {
       console.log('in term response', code);
       this.terminal.echo(this.terminal.get_prompt() + code.cmd);
@@ -93,13 +95,28 @@ class Terminal extends React.Component {
     this.socket = io();
     const context = this;
 
+    if (localStorage[window.location]) {
+       let obj = JSON.parse(localStorage[window.location]);
+       console.log("found")
+       const command = 'open ' + obj.fileName;
+       axios.post('/docker/cmd', {cmd: command, containerName: context.state.containerName})
+        .then(function(res) {
+          console.log(res);
+          console.log(res.termResponse);
+          context.socket.emit('/TE/', {filePath: obj.filePath, fileOpen:true, fileName: obj.fileName, code: res.data.termResponse,username: context.state.username, containerName: context.state.containerName});
+        })
+        .catch(function(err) {
+          console.error(err);
+        })
+       
+    }
     //The 1 will be replaced by container/user ID when we have sessions
     this.socket.on('/TERM/' + this.props.containerName, function(code) {
       context.recievedTermInput();
     });
 
     this.socket.on('/TERM/RES/' + this.props.containerName, function(code) {
-      context.recievedTermResponse();
+      context.recievedTermResponse(code);
     });
 
     this.socket.on('/TERM/CD/' + this.props.containerName, function(path) {
@@ -166,7 +183,6 @@ class Terminal extends React.Component {
           //   curCommand: command
           // })
           // context.socket.emit('/ANALYZE/', {command: command, containerName: context.state.containerName});
-
             axios.post('/docker/cmd', { cmd: command, containerName: context.state.containerName })
               .then(function(res) {
                 if(typeof res.data === 'object') {
@@ -273,15 +289,14 @@ class Terminal extends React.Component {
       });
     });
   }
-
-	render() {
+  render() {
     if(!this.state.hidden) {
-  		return (
+      return (
         <div>
           <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/0.11.13/css/jquery.terminal.min.css" rel="stylesheet"></link>
           <div id="terminal"></div><br/>
-  			</div>
-  		);
+        </div>
+      );
     } else {
       return (
         <div>
@@ -289,6 +304,7 @@ class Terminal extends React.Component {
         );
     }
 	}
+
 }
 
 module.exports = Terminal;

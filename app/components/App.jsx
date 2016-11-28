@@ -8,6 +8,8 @@ const Dashboard = require('./Dashboard.jsx');
 const NavBar = require('./NavBar.jsx');
 const axios = require('axios');
 const Modal = require('react-modal');
+const VideoHome = require('./VideoHome.jsx');
+const VideoPage = require('./VideoPage.jsx');
 const customStyles = {
   content : {
     top                   : '50%',
@@ -199,5 +201,7 @@ ReactDOM.render((
     <Route path="/" component={App}></Route>
     <Route path="/linuxcomputer" component = {LinuxComputer} ></Route>
     <Route path="/dashboard" component={Dashboard} ></Route>
+    <Route path="/video" component={VideoHome}></Route>
+    <Route path="/video/:videoId" component={VideoPage}></Route>
   </Router>
 ), document.getElementById('app'))

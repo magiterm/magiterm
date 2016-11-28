@@ -27,6 +27,14 @@ router.get('/dashboard', function(req, res) {
   res.render('index', { title: 'picoShell' });
 });
 
+router.get('/video', function(req, res) {
+  res.render('index', { title: 'picoShell' });
+});
+
+router.get('/video/:video', function(req, res) {
+  res.render('index', {title: 'picoShell'});
+})
+
 
 router.post('/email', function(req, res) {
   console.log('reqreqreqreqreqrqewrqwrqw', req.body.email);

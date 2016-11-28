@@ -5,6 +5,7 @@ const docker = require('../utils/dockerAPI');
 var db = require('../db/config');
 var User = require('../models/User');
 
+
 router.post('/executeFile', function(req,res) {
   var fileName = req.body.fileName;
   var fileType = fileName.slice(fileName.lastIndexOf('.'));
@@ -23,6 +24,7 @@ router.post('/executeFile', function(req,res) {
           if(err1) {
             res.status(500).send(err);
           } else {
+            console.log('this is the file', response1);
             res.status(200).send({res: response1, cmd: 'node'});
           }
         });
@@ -194,6 +196,7 @@ router.post('/cmd', function (req, res) {
       });
     }
   } else if(cmd.split(" ")[0] === 'open') {
+    console.log('this is the command', cmd);
     docker.runCommand(containerName, 'cat /picoShell/.pico', function(err1, res1) {
       if(res1[res1.length - 1] === '\n') res1 = res1.slice(0, res1.length - 1);
       const command = 'cat ' + res1 + '/' + cmd.split(" ")[1];

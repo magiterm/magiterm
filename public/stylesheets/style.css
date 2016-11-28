@@ -693,6 +693,253 @@ select {
     form-inputs-height: 100%;
     form-inputs-width: 100%; }
 
+.video-home-page {
+  overflow: auto; }
+  .video-home-page .video-homepage-container {
+    width: 100%;
+    height: 481px;
+    background-color: #FFFFFF;
+    overflow: auto; }
+    .video-home-page .video-homepage-container .homepage-landing {
+      background-image: url("/images/homepage.svg");
+      width: 100%;
+      height: 481px;
+      overflow: hidden; }
+      .video-home-page .video-homepage-container .homepage-landing .overlay {
+        opacity: 0.85;
+        background: rgba(99, 135, 152, 0.5);
+        height: 481px;
+        text-align: center; }
+        .video-home-page .video-homepage-container .homepage-landing .overlay .logo-container {
+          padding-top: 40px; }
+          .video-home-page .video-homepage-container .homepage-landing .overlay .logo-container .title {
+            font-family: 'Dosis-Regular';
+            font-size: 8em;
+            color: #FFFFFF;
+            padding-top: 20px; }
+        .video-home-page .video-homepage-container .homepage-landing .overlay .description-container {
+          padding: 30px; }
+          .video-home-page .video-homepage-container .homepage-landing .overlay .description-container span {
+            font-family: 'AdventPro-Regular';
+            font-size: 24px;
+            color: #FFFFFF; }
+        .video-home-page .video-homepage-container .homepage-landing .overlay .homepage-form {
+          padding: 20px; }
+          .video-home-page .video-homepage-container .homepage-landing .overlay .homepage-form input {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 5px; }
+            .video-home-page .video-homepage-container .homepage-landing .overlay .homepage-form input .form-control {
+              border: 0px; }
+              .video-home-page .video-homepage-container .homepage-landing .overlay .homepage-form input .form-control:focus {
+                border: 0px; }
+  .video-home-page .video-table-container {
+    width: 100%;
+    padding: 10px;
+    background: #242327;
+    overflow: auto; }
+    .video-home-page .video-table-container .video-table {
+      padding: 30px; }
+
+.video-entry-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 5px; }
+  .video-entry-image img {
+    width: 100%;
+    vertical-align: top; }
+  .video-entry-image:after, .video-entry-image:before {
+    position: absolute;
+    opacity: 0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s; }
+  .video-entry-image:after {
+    content: '\A';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6); }
+  .video-entry-image:before {
+    width: 100%;
+    color: #fff;
+    z-index: 1;
+    bottom: 0;
+    padding: 4px 10px;
+    text-align: center;
+    background: red;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; }
+  .video-entry-image:hover:after, .video-entry-image:hover:before {
+    opacity: 1; }
+
+.video-page-container {
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  flex: 1;
+  overflow: hidden; }
+  .video-page-container .title {
+    font-size: 1.5em;
+    padding: 20px;
+    text-align: center;
+    font-family: Dosis-Regular;
+    font-size: 2em;
+    color: #638898;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 50px;
+    flex: 1;
+    box-sizing: border-box;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; }
+  .video-page-container .body-container {
+    padding-left: 80px;
+    padding-right: 80px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%; }
+    .video-page-container .body-container .video-player-container {
+      height: 100%;
+      width: 50%;
+      margin: 0;
+      padding: 0;
+      flex: 1;
+      justify-content: center;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      padding-top: 20px;
+      margin-bottom: 0;
+      flex-direction: row; }
+    .video-page-container .body-container .terminal-menu {
+      height: 30px;
+      width: 100%;
+      flex: 1;
+      flex-wrap: wrap; }
+      .video-page-container .body-container .terminal-menu .ion-ios-folder-outline {
+        color: #03CEA1;
+        font-weight: bold;
+        float: right;
+        padding-right: 20px;
+        font-size: 20px;
+        cursor: pointer; }
+        .video-page-container .body-container .terminal-menu .ion-ios-folder-outline:hover {
+          color: #7156FB; }
+    .video-page-container .body-container .terminal-container {
+      height: 100%;
+      max-height: 600px;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+      flex-direction: row;
+      flex-wrap: wrap;
+      overflow-y: auto; }
+      .video-page-container .body-container .terminal-container #terminal {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        padding-left: 10px; }
+    .video-page-container .body-container .split-pane {
+      height: 100%;
+      width: 50%;
+      flex: 1;
+      justify-content: center;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; }
+      .video-page-container .body-container .split-pane .code-editor-container {
+        height: 80%;
+        width: 100%;
+        padding: 20px;
+        margin: 0;
+        flex: 1;
+        flex-wrap: wrap;
+        overflow-y: auto; }
+        .video-page-container .body-container .split-pane .code-editor-container .code-editor-menu {
+          padding: 0;
+          margin: 0;
+          flex: 1;
+          flex-wrap: wrap; }
+          .video-page-container .body-container .split-pane .code-editor-container .code-editor-menu .ion-ios-play-outline {
+            color: #03CEA1;
+            font-size: 25px;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            float: right; }
+            .video-page-container .body-container .split-pane .code-editor-container .code-editor-menu .ion-ios-play-outline:hover {
+              color: #7156FB; }
+        .video-page-container .body-container .split-pane .code-editor-container .current-file {
+          color: #03CEA1;
+          font-weight: bold;
+          flex: 1;
+          flex-wrap: wrap;
+          float: right; }
+        .video-page-container .body-container .split-pane .code-editor-container .code-saved-indicator {
+          color: #03CEA1;
+          font-weight: bold;
+          flex: 1;
+          flex-wrap: wrap;
+          float: left; }
+        .video-page-container .body-container .split-pane .code-editor-container .code-modified-indicator {
+          color: #E1905B;
+          font-weight: bold;
+          flex: 1;
+          flex-wrap: wrap;
+          float: left; }
+      .video-page-container .body-container .split-pane .file-browser-container {
+        height: 100%;
+        max-height: 600px;
+        width: 100%;
+        flex: 1;
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow-y: auto;
+        color: #F4F6F7;
+        cursor: default;
+        padding: 0px 0px 0px 2px;
+        font-size: 15px; }
+        .video-page-container .body-container .split-pane .file-browser-container .fileBrowser:hover {
+          background-color: #242327; }
+        .video-page-container .body-container .split-pane .file-browser-container .ion-ios-arrow-down {
+          color: #F4F6F7;
+          font-size: 15px; }
+        .video-page-container .body-container .split-pane .file-browser-container .ion-ios-arrow-up {
+          color: #F4F6F7;
+          font-size: 15px; }
+
+.video-description-container {
+  width: 100%;
+  background-color: #191919; }
+  .video-description-container .description-text {
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #638898;
+    font-size: 1.5em;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+    text-overflow: ellipsis; }
+
 .Resizer {
   background: #000;
   opacity: .2;
