@@ -120,11 +120,10 @@ class App extends React.Component {
       return (
         <div> 
             <div className="homepage-container">
-              <div className="logo">
-                <a href="/"><img src="/images/logo.svg"></img></a>
-                <a href="/">picoShell</a>
-              </div>
               <div className="header">
+                <div className="title">
+                  <img className="mini-logo" src="/images/whitelogo.svg"></img> <span className="logo-text"></span>
+                </div>
                 <div className="subtitle">
                   Coding Made Simple
                 </div>
@@ -132,7 +131,7 @@ class App extends React.Component {
                   Sign Up Today to Simplify the Programming Process
                 </div>
                 <div className="logo-container">
-                  <img src="/images/logo.svg"></img>
+                  <img src="/images/header.gif"></img>
                 </div>
                 <Modal
                   isOpen={this.state.modalIsOpen}
@@ -152,18 +151,73 @@ class App extends React.Component {
                 </Modal> 
               </div>
               <div className="login-container">
-                <div className="login-header">
-                  <div className="login">
-                    Reinvent Programming Today
+                <div className="login-container-container">
+                  <div className="login-header">
+                    <div className="login">
+                      Reinvent Programming Today
+                    </div>
                   </div>
-                </div>
-                <div className="login-box">
-                  <div className="login">
-                    {authenticate}
+                  <div className="login-box">
+                    <div className="login">
+                      {authenticate}
+                    </div>
                   </div>
                 </div>
               </div>
+              <div className="info">
+                <div className="info-header">Why picoShell?</div>
+                <div className="sub-header">
+                  picoShell is for educators, students, developers, and interviewers who want to collaborate through code remotely
+                </div>
+                <div className="info-container">
+                  <img src="/images/header.gif"></img>
+                  <div className="description-left">
+                    <span className="title">Powerful</span><br/>
+                    Gain full access to your own linux terminal emulator and code editor with ruby, node, python, gcc, git, and more installed
+                  </div>
+                </div>
+                <div className="info-container">
+                  <div className="description-right">
+                  <span className="title">Educational</span><br/>
+                  Add videos from YouTube to picoShell and instantly code alongside of it. 
+                  picoShell remembers the file you create with each video, so you can always pick up
+                  where you left off
+                  </div>
+                  <img src="/images/codeable.gif"></img>
+                </div>
+                <div className="info-container">
+                  <img src="/images/header.gif"></img>
+                  <div className="description-left">
+                    <span className="title">Collaborative</span><br/>
+                      Easily give read or write access to your computer to work on projects, assignments,
+                      or to conduct interviews
+                  </div>
+                </div>
+                <div className="info-container">
+                  <div className="description-right">
+                  <span className="title">Convenient</span><br/>
+                    You could just push your code up to git...or you could use picoShell's download button
+                    to export all your files to your local filesystem
+                  </div>
+                  <img src="/images/codeable.gif"></img>
+                </div>
+              </div>
+              <div className="footer">
+                <div className="footer-column">
+                    <p className="footer-header">picoShell</p>
+                    <ul>
+                      <li><img src="/images/whitelogo.svg"></img>About</li>
+                      <li><i className="ion-ios-world-outline"></i>FAQ</li>
+                    </ul>
+                </div>
+                <div className="footer-column">
+                  <p className="footer-header">Contact Us</p>
+                  <ul>
+                    <li><i className="ion-ios-email-outline"></i>bianca.subion@gmail.com</li>
+                  </ul>
+              </div>
             </div>
+          </div>
         </div>
       );
     } else {
@@ -199,7 +253,7 @@ class App extends React.Component {
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}></Route>
-    <Route path="/linuxcomputer" component = {LinuxComputer} ></Route>
+    <Route path="/computer" component = {LinuxComputer} ></Route>
     <Route path="/dashboard" component={Dashboard} ></Route>
     <Route path="/video" component={VideoHome}></Route>
     <Route path="/video/:videoId" component={VideoPage}></Route>

@@ -126,8 +126,8 @@ class LinuxComputer extends React.Component {
                   })}
                   </optgroup>
                 </select>
-                <i className="ion-ios-locked-outline"></i>
-                <span className="permissions-indicator">  {this.state.permissions}</span>
+                <div className="role"><i className="ion-ios-locked-outline"></i></div>
+                <span className="permissions-indicator"><div className="role">{this.state.permissions}</div></span>
               </div>
 
               <div className="row">
