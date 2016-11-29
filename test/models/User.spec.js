@@ -25,7 +25,7 @@ describe('Users table', function() {
         expect(user.dataValues.username).to.equal('steve');
         expect(user.dataValues.password).to.equal('stevespassword');
         done();
-      })
+      });
   });
 
   it('should update a user', function(done) {

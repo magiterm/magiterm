@@ -11,6 +11,5 @@ db/config/config.json
 coverage/
 .nyc_output/
 public/stylesheets/style.css
-utils/keys.js
 .env
 public/files

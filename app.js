@@ -18,10 +18,10 @@ const auth = require('./routes/auth');
 const docker = require('./routes/docker');
 const videos = require('./routes/videos');
 const messages = require('./routes/messages');
-
+require('dotenv').config({path: __dirname + '/.env'});
 const app = express();
 
-SALT_WORK_FACTOR = 12;
+var SALT_WORK_FACTOR = 12;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
