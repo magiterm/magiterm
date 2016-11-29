@@ -5,6 +5,10 @@ const docker = require('../utils/dockerAPI');
 const Container = require('./Container');
 
 const User = db.define('user', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true
+  },
   username: Sequelize.STRING,
   password: Sequelize.STRING,
   salt: Sequelize.STRING,
@@ -19,7 +23,6 @@ const User = db.define('user', {
   {
     classMethods: {
       associate: function(models) {
-        User.hasOne(models.Container, { foreignKey: 'userId'});
       },
       updateOrCreate: function(newUser, cb) {
         if (newUser.authenticatedWith !== 'local') {
