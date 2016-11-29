@@ -44,10 +44,9 @@ handleLogOut() {
           <span className="logo"> <a href="/"><img src="/images/logo.svg"></img></a><a className="logo" href="/">picoShell</a></span>
     			<ul>
       			<li> <a className="logout" onClick={this.handleLogOut}> Log Out </a> </li>
-      			<li> <a href="/linuxcomputer"> Computer </a> </li>
-      			<li> <a href="/dashboard"> Dashboard </a> </li>
+      			<li> <a href="/computer"> Computer </a> </li>
             <li> <a href="/video"> Videos </a> </li>
-            <li className="username">{this.props.username}</li>
+            <li className="username"><a href="/dashboard">{this.props.username}</a></li>
     			</ul>
   			</div>	
 			)

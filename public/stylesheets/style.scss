@@ -95,6 +95,7 @@ html {
       text-align: center;
       padding: 20px 20px 0 20px;
       width: 200px;
+      cursor: pointer;
     }
   }
   .username{
@@ -106,168 +107,39 @@ html {
 }
 
 .card-container {
-  overflow: none;
   display: flex;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
   .header {
-    padding: 10px 0 0 10px;
-    border-bottom: 1px solid $offblack;
+    padding: 10px 0 10px 0;
     text-align: center;
-    color: rgba(255,255,255, 0.4);;
+    color: rgba(255,255,255, 0.4);
+    background-color: rgba(0,0,0,0.2);
     font-size: 1.3em;
     font-weight: bold;
-    padding-bottom: 30px;
+    width: 100%;
+    align-items:center;
+    flex: 1;
+    flex-wrap: wrap;
+    box-sizing: border-box;
   }
   .information {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding: 20px;
     color: $themewhite;
-    border: 1px solid black;
-    width: 90%;
-    overflow-y: auto;
-    box-shadow: 2px 2px black;
-    height: 180%;
-    .collaboratorRow {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      width: 90%;
-      .title {
-        color: $themewhite;
-        font-size: 24px;
-      }
-    
-      .info {
-        font-size: 15px;
-        color: $themewhite;
-        padding-bottom: 10px;
-      }
+    align-items:center;
+    flex: 1;
+    flex-wrap: wrap;
+    box-sizing: border-box;
 
-      .editing {
-        color: black;
-        text-align: center;
-      }
-      
-      .none {
-        font-size: 25px;
-        color: $offwhite;
-      }
+    .title {
+      font-size: 1.2em;
+    }
 
-      form {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-      }
-      .collaborators-input {
-        margin: 5px;
-        background: rgba(36, 35, 39, 0.6);
-        border: 0;
-        color: $themewhite;
-        width: 90%;
-        padding: 5px;
-        text-align: center;
-        &:focus {
-          outline: none;
-        }
-      }
-      .collab-card-top {
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        width: 190%;
-        flex: 1;
-        .left {
-          margin-left: -55px;
-          width: 160%;
-          padding: 20px;
-          flex: 1;
-          align-items: stretch;
-          .title {
-            color: $themewhite;
-          }
-          .info {
-            color: $themewhite;
-          }
-          .collaborators {
-            width: 100%;
-            padding: 5px;
-            border: 2px solid black;
-          }
-        }
-        .right {
-          width: 160%;
-          padding: 20px;
-          flex: 1;
-          .title {
-            color: $themewhite;
-          }
-          .info {
-            color: $themewhite;
-          }
-          
-          .collaborators {
-            border: 2px solid black;
-            padding: 5px;
-            .columnContent{
-              display: flex;
-              flex-direction:row;
-              justify-content:space-around;
-              select {
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                width: 60px;
-                color: white;
-                background-color: $translucentdarkpurple;
-                font-size: 15px;
-              }
-              i {
-                cursor: pointer;
-                margin-left: 10px;
-                margin-right: 10px;
-                border:    1px;
-                border-radius: 10px;
-                margin-top: 4px;
-                margin-bottom: 4px;
-                text-align: center;
-              } 
-            }     
-          }
-        }
-      }
+    .info {
+      padding-bottom: 20px;
+    }
 
-      .collab-card-bottom {
-        padding: 0px 15px 30px 15px;
-        flex: 1;
-        align-items: stretch;
-
-        .left {
-          padding: 20px;
-          flex: 1;
-          align-items: stretch;
-          .title {
-            color: $themewhite;
-          }
-          .info {
-            color: $themewhite;
-          }
-        }
-
-        .right {
-          padding: 20px;
-          flex: 1;
-          height: 200%;
-          width: 100%;
-          align-items: stretch;
-          .title {
-            color: $themewhite;
-          }
-          .info {
-            color: $themewhite;
-          }
-        }
-      }
 
       .inline-edit {
         width: 100px;
@@ -294,29 +166,28 @@ html {
          border-color: $purpleblue; 
         }
       }
-    }
   }
 }
 
 .dashboard-container {
   height: 100%;
   width: 100%;
-  background-image: url('/images/geometric.png');
+  background-image: url('/images/gradient4.png');
   background-color: $white;
   position: relative;
   background-size: cover;
   align-items: center;
-  overflow: auto;
+  overflow-y: auto;
 
   .overlay {
     background: rgba(0,0,0,0.6);
     background-size: cover;
-    overflow: auto;
     height: 100%;
+    width: 100%;
+    overflow-y: auto;
 
     .contain {
       padding: 10px 10px 10px 10px;
-      height: 350px;
 
       .card {
         flex: 1;
@@ -329,6 +200,7 @@ html {
         margin: 10px, 20px, 5px, 5px;
         box-shadow: 3px 3px 1px rgba(0, 0, 0,0.5);
         background-size: cover;
+        overflow-x: hidden;
         height: 100%;
         width: 100%;
       }
@@ -355,50 +227,135 @@ html {
 }
 
 .tabs {
-  margin-top: -50px;
-}
+  width: 100%;
+  align-items:center;
+  flex: 1;
+  flex-wrap: wrap;
+  box-sizing: border-box;
 
-.tabs-navigation {
-  padding: 0 30px;
-}
+  .ion-ios-trash-outline {
+    font-size: 1.4em;
+    cursor: pointer;
+  }
+  .list {
+    padding-left: 10px;
+  }
+  .none {
+    font-size: 1.5em;
+  }
 
-.tabs-navigation {
-  padding: 0 0px;
-  max-height: 50px;
-  border-bottom: 1px solid #DDD;
-}
+  .tab-panel {
+    .collaboratorRow {
+      color: $offwhite;
 
-.tabs-menu {
-  display: table;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+      .title {
+        font-size: 1.3em;
+        padding: 20px;
+      }
 
-.tabs-menu-item {
-  float: left;
-  cursor: pointer;
-}
+      .collab-card {
+        padding: 20px;
+      }
 
-.tabs-menu-item a {
-  display: block;
-  padding: 0 30px;
-  height: 50px;
-  line-height: 50px;
-  border-bottom: 0;
-  color: #A9A9A9;
-}
+      form {
+        display: table;
+        margin: 0 auto;
+        input {
+          background-color: rgba(0, 0, 0, 0.2);
+          border: 0px;
+          text-decoration: none;
+          color: $offwhite;
+          padding: 5px;
+          &:focus {
+            text-decoration: none;
+            outline: none;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+    .collaborators {
+      .columnContent{
+        display: flex;
+        flex-direction:row;
+        justify-content:space-around;
+        select {
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          color: white;
+          background-color: rgba(0, 0, 0, 0);
+          border: 1px solid $translucentdarkpurple;
+          text-align: center;
+          padding: 2px;
+          cursor: pointer;
 
-.tabs-menu-item:not(.is-active) a:hover {
-  color: #3498db;
-}
+          &:focus {
+            outline: none;
+            text-decoration: none;
+          }
+        }
+        i {
+          cursor: pointer;
+          margin-left: 10px;
+          margin-right: 10px;
+          border:    1px;
+          border-radius: 10px;
+          margin-top: 4px;
+          margin-bottom: 4px;
+          text-align: center;
+        } 
+      }     
+    }
 
-.tabs-menu-item.is-active a {
-  background: $translucentdarkpurple;
-  border: 1px solid #DDD;
-  border-top: 2px solid #3498db;
-  border-bottom: 0;
-  color: #ffffff;
+    .collaborators-input {
+      margin: 5px;
+      background: rgba(36, 35, 39, 0.6);
+      border: 0;
+      color: $themewhite;
+      width: 90%;
+      padding: 5px;
+      text-align: center;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .tabs-navigation {
+    width: 100%;
+    border-bottom: 1px solid $lightgrey;
+    height: 38px;
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+    .tabs-menu {
+      display: table;
+      list-style: none;
+      padding: 0;
+
+      .tabs-menu-item:not(.is-active) a:hover {
+        color: #3498db;
+      }
+
+      .tabs-menu-item.is-active a {
+        background: $translucentdarkpurple;
+        color: $offwhite;
+      }
+
+      .tabs-menu-item {
+        float: left;
+        cursor: pointer;
+        a {
+          display: block;
+          padding: 10px;
+          height: 100%;
+          border: none;
+          color: #A9A9A9;
+        }
+      }
+    }
+  }
 }
 
 

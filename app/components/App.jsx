@@ -253,7 +253,7 @@ class App extends React.Component {
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}></Route>
-    <Route path="/linuxcomputer" component = {LinuxComputer} ></Route>
+    <Route path="/computer" component = {LinuxComputer} ></Route>
     <Route path="/dashboard" component={Dashboard} ></Route>
     <Route path="/video" component={VideoHome}></Route>
     <Route path="/video/:videoId" component={VideoPage}></Route>

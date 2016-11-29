@@ -200,11 +200,10 @@ class Collaborators extends React.Component {
         <div className="header">
           COLLABORATORS
         </div>
-        <div className="information">
           <Tabs>
             <Tabs.Panel title='Collaborators'>
                 <div className='collaboratorRow'>
-                  <div className="col-md-4 collab-card-top">
+                  <div className="col-md-6 collab-card">
                     <div className="left">
                       <div className="title">
                         Your Collaborators
@@ -215,29 +214,29 @@ class Collaborators extends React.Component {
                             <div className="collaborators" key={i}>
                               {accepted}
                               <span className='list' onClick={() => { context.handleRemoveCollabWith(accepted); }} key={i}>
-                                <i className="ion-trash-a"></i>
+                              <i className="ion-ios-trash-outline"></i>
                               </span>
                             </div>
                           );
-                        }) : <div className="none"> None </div>}
+                        }) : <div className="none"> - </div>}
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-4 collab-card-top">
+                  <div className="col-md-6 collab-card">
                     <div className="right">
                     <div className="title">
                         Your Computer
                     </div>
                     
                     <div>
+                      <div className="collaborators">
+                      <div className="columnContent">
+                        <div>Username</div><div>Permission</div><div>Delete</div>
+                      </div>
                       {this.state.collaborators.length ? this.state.collaborators.map(function(collaboration, i) {
                         console.log('collaboration', collaboration);
                         return (
 
-                          <div className="collaborators" key={i}> 
-                            <div className="columnContent">
-                              <div>Username</div><div>Permission</div><div>Delete</div>
-                            </div>
                             <div className="columnContent">
                               {collaboration.recieverUsername}
                               <select className='collabAccess' onChange={(e) => { context.handleSelectRoleChange(e, collaboration.recieverUsername); }}>
@@ -249,20 +248,20 @@ class Collaborators extends React.Component {
                                 })}
                               </select>
                               <span onClick={() => { context.handleRemoveCollaborator(collaboration.recieverUsername); }}>
-                                <i className="ion-trash-a"></i>
+                                <i className="ion-ios-trash-outline"></i>
                               </span>
                             </div>
-                          </div>
                         );
-                      }) : <div className="none"> None </div>}
+                      }) : <div className="none"> - </div>}
                     </div>
                     </div>
+                  </div>
                   </div>
               </div>
             </Tabs.Panel>
             <Tabs.Panel title='Invitations'>
-              <div className="row">            
-                 <div className="col-md-4 col-md-offset-2 collab-card-bottom">
+                <div className='collaboratorRow'>
+                 <div className="col-md-6 collab-card">
                    <div className="left">
                      <div className="title">
                      Invite People to Collaborate
@@ -281,17 +280,13 @@ class Collaborators extends React.Component {
                             placeholder='username'
                             className="invitation"
                             />
-                            <input 
-                              type='submit'
-                              className='iSubmit'
-                            />
                           </div>
                         </div>
                       </form>
                     </div>
                   </div>
                 </div>
-                <div className="col-md-4 collab-card-bottom">
+                <div className="col-md-6 collab-card">
                   <div className="right">
                     <div className="title">
                     Pending Invites
@@ -308,14 +303,13 @@ class Collaborators extends React.Component {
                         </div>
                         );
                       }) : 
-                      <div className="none"> None </div>
+                      <div className="none"> - </div>
                     }
                   </div>
                 </div>
               </div>
             </Tabs.Panel>
           </Tabs>
-        </div>
       </div>
     );
   }

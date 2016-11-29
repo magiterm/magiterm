@@ -19,7 +19,7 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'picoShell' });
 });
 
-router.get('/linuxcomputer', function(req, res) {
+router.get('/computer', function(req, res) {
   res.render('index', { title: 'picoShell' });
 });
 
