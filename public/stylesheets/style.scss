@@ -226,6 +226,7 @@ html {
   margin-top: 25px;
 }
 
+
 .tabs {
   width: 100%;
   align-items:center;
@@ -509,43 +510,53 @@ html {
 }
 
 .collaborator-bar {
-  width: 250px;
+  width: 300px;
   flex: 1;
   display: flex;
   position: relative;
   flex-wrap: wrap;
   box-sizing: border-box;
   margin: 0;
+  font-weight: 200;
   padding: 0;
-
+  font-family: $lato;
+  font-size: 1.6em;
+  position: relative;
+  
   i {
-    font-size: 1.7em;
+    font-size: 1em;
     color: $brightgreen;
+    margin-left: 5px;
   }
 
   .permissions-indicator {
-    font-family: $dosis;
-    font-size: 20px;
+    font-size: 0.8em;
     color: $brightgreen;
     padding-left: 10px;
+    vertical-align: bottom;
+    position: relative;
+
+    .role {
+      position: absolute;
+      bottom: 0;
+    }
   }
 }
 #thisSelect {
   width: 150px;
   height: 100%;
-  font-family: $dosis;
   height: 30px;
   padding: 0px;
   padding-left: 15px;
   border-radius: 0px;
   color: $brightgreen;
   background-color: black;
-  // background-color: $translucentred;
   cursor: pointer;
 
   margin:   0px;
   border: 0px;
-  font-size: 20px;
+  font-size: 0.8em;
+  vertical-align: bottom;
   option {
     font-family: $dosis;
     // font-size: 20px;
@@ -909,6 +920,7 @@ select {
   // background-image: url('/images/geometric.png');
   background-color: black;
   background-size: cover;
+  font: $lato;  
 
   .code-editor-container {
     height: 620px;
