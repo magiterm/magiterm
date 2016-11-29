@@ -120,11 +120,10 @@ class App extends React.Component {
       return (
         <div> 
             <div className="homepage-container">
-              <div className="logo">
-                <a href="/"><img src="/images/logo.svg"></img></a>
-                <a href="/">picoShell</a>
-              </div>
               <div className="header">
+                <div className="title">
+                  <img className="mini-logo" src="/images/whitelogo.svg"></img> <span className="logo-text"></span>
+                </div>
                 <div className="subtitle">
                   Coding Made Simple
                 </div>
@@ -132,7 +131,7 @@ class App extends React.Component {
                   Sign Up Today to Simplify the Programming Process
                 </div>
                 <div className="logo-container">
-                  <img src="/images/logo.svg"></img>
+                  <img src="/images/header.gif"></img>
                 </div>
                 <Modal
                   isOpen={this.state.modalIsOpen}
@@ -152,16 +151,21 @@ class App extends React.Component {
                 </Modal> 
               </div>
               <div className="login-container">
-                <div className="login-header">
-                  <div className="login">
-                    Reinvent Programming Today
+                <div className="login-container-container">
+                  <div className="login-header">
+                    <div className="login">
+                      Reinvent Programming Today
+                    </div>
+                  </div>
+                  <div className="login-box">
+                    <div className="login">
+                      {authenticate}
+                    </div>
                   </div>
                 </div>
-                <div className="login-box">
-                  <div className="login">
-                    {authenticate}
-                  </div>
-                </div>
+              </div>
+              <div className="info-container">
+                Add videos from YouTube to picoShell and instantly code alongside of it
               </div>
             </div>
         </div>

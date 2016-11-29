@@ -437,7 +437,7 @@ select {
 .homepage-container {
   overflow-x: hidden;
   overflow-y: auto;
-  background-image: url("/images/geometric.png");
+  background-image: url("/images/gradient4.png");
   background-size: cover;
   height: 100%;
   align-items: center;
@@ -453,11 +453,21 @@ select {
       height: auto;
       width: 100%; }
     .homepage-container .header img {
-      width: 35%; }
+      width: 50%; }
+    .homepage-container .header .title {
+      height: 50px;
+      padding: 20px; }
+      .homepage-container .header .title img {
+        width: 40px;
+        vertical-align: text-bottom; }
+      .homepage-container .header .title .logo-text {
+        font-family: Dosis-Regular;
+        font-size: 1.5em;
+        color: #FFFFFF; }
   .homepage-container .subtitle {
     color: #FEFEFE;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 20px;
     font-family: "Work Sans", sans-serif;
     font-size: 3em; }
   .homepage-container .subsubtitle {
@@ -480,10 +490,11 @@ select {
       .homepage-container .logo a:hover {
         text-decoration: none; }
     .homepage-container .logo img {
-      width: 40px; }
+      width: 30px; }
   .homepage-container .logo-container {
     padding-top: 10px;
-    text-align: center; }
+    text-align: center;
+    margin-bottom: 100px; }
     .homepage-container .logo-container .title {
       font-family: Dosis-Regular;
       font-size: 120px;
@@ -506,59 +517,66 @@ select {
     background-color: #F4F6F7;
     overflow: hidden;
     padding-top: 30px; }
-    .homepage-container .login-container .login-header {
-      background: rgba(36, 35, 39, 0.6);
-      color: #FEFEFE;
-      margin-left: 200px;
-      margin-right: 200px;
-      font-family: "Work Sans", sans-serif;
-      font-size: 1.5em;
-      box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2); }
-      .homepage-container .login-container .login-header .login {
-        padding: 10px;
-        margin-bottom: 0; }
-    .homepage-container .login-container .login-box {
-      margin-left: 200px;
-      margin-right: 200px;
-      margin-bottom: 100px;
-      background: rgba(36, 35, 39, 0.4);
-      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-      font-family: "Work Sans", sans-serif;
-      font-size: 1em;
-      padding: 0; }
-      .homepage-container .login-container .login-box .login {
-        padding: 0; }
-        .homepage-container .login-container .login-box .login .login-input {
-          margin: 5px;
-          background: rgba(36, 35, 39, 0.6);
-          border: 0;
-          color: #F4F6F7;
-          width: 90%;
-          padding: 5px; }
-          .homepage-container .login-container .login-box .login .login-input:focus {
-            outline: none; }
-        .homepage-container .login-container .login-box .login .login-query-container {
-          padding: 5px; }
-          .homepage-container .login-container .login-box .login .login-query-container .login-query {
+    .homepage-container .login-container .login-container-container {
+      width: 40%;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      margin: 0 auto; }
+      .homepage-container .login-container .login-container-container .login-header {
+        background: rgba(36, 35, 39, 0.6);
+        color: #FEFEFE;
+        margin: auto;
+        font-family: "Work Sans", sans-serif;
+        font-size: 1.5em;
+        box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2); }
+        .homepage-container .login-container .login-container-container .login-header .login {
+          padding: 10px;
+          margin-bottom: 0; }
+      .homepage-container .login-container .login-container-container .login-box {
+        margin: auto;
+        margin-bottom: 100px;
+        background: rgba(36, 35, 39, 0.4);
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        font-family: "Work Sans", sans-serif;
+        font-size: 1em;
+        padding: 0;
+        padding-top: 10px; }
+        .homepage-container .login-container .login-container-container .login-box .login {
+          padding: 0; }
+          .homepage-container .login-container .login-container-container .login-box .login .login-input {
+            margin: 5px;
+            background: rgba(36, 35, 39, 0.6);
+            border: 0;
+            color: #F4F6F7;
+            width: 90%;
+            padding: 5px; }
+            .homepage-container .login-container .login-container-container .login-box .login .login-input:focus {
+              outline: none; }
+          .homepage-container .login-container .login-container-container .login-box .login .login-query-container {
+            padding: 5px; }
+            .homepage-container .login-container .login-container-container .login-box .login .login-query-container .login-query {
+              color: #FEFEFE;
+              cursor: pointer; }
+              .homepage-container .login-container .login-container-container .login-box .login .login-query-container .login-query:hover {
+                color: white;
+                text-decoration: none; }
+          .homepage-container .login-container .login-container-container .login-box .login .btn-success {
+            background-color: #9d5ee1;
+            border-color: #9d5ee1;
+            border-radius: 0;
+            width: 90%;
+            padding: 2px;
+            margin: 2px;
             color: #FEFEFE;
-            cursor: pointer; }
-            .homepage-container .login-container .login-box .login .login-query-container .login-query:hover {
-              color: white;
-              text-decoration: none; }
-        .homepage-container .login-container .login-box .login .btn-success {
-          background-color: #90728C;
-          border-color: #90728C;
-          border-radius: 0;
-          width: 90%;
-          padding: 2px;
-          margin: 2px;
-          color: #FEFEFE;
-          word-wrap: break-word;
-          word-break: normal; }
-          .homepage-container .login-container .login-box .login .btn-success:hover {
-            background-color: #b2baef;
-            border-color: #b2baef;
-            color: #FEFEFE; }
+            word-wrap: break-word;
+            word-break: normal; }
+            .homepage-container .login-container .login-container-container .login-box .login .btn-success:hover {
+              background-color: rgba(157, 94, 225, 0.8);
+              border-color: rgba(157, 94, 225, 0.8);
+              color: #FEFEFE; }
 
 .error {
   color: #FFFFFF;

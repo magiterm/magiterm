@@ -25,6 +25,10 @@ $translucentdarkpurple: rgba(91,105,225,0.5);
 $translucentbrightpurple: rgba(113,86,251,0.5);
 $translucentred: rgba(225,91,105,0.95);
 
+$svgmidpurple: #aa348a;
+$svglightpurple: #a25e97;
+$svgdeepblue: #2c356a;
+
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 @import url('https://fonts.googleapis.com/css?family=Advent+Pro|Dosis');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
@@ -625,7 +629,7 @@ select {
 .homepage-container {
   overflow-x: hidden;
   overflow-y: auto;
-  background-image: url('/images/geometric.png');
+  background-image: url('/images/gradient4.png');
   background-size: cover;
   height: 100%;
   align-items:center;
@@ -645,15 +649,32 @@ select {
     overflow: auto;
 
     img {
-      width: 35%;
+      width: 50%;
 
     }
+
+    .title {
+      height: 50px;
+      padding: 20px;
+      img {
+        width: 40px;
+        vertical-align: text-bottom;
+
+      }
+      .logo-text {
+        font-family: Dosis-Regular;
+        font-size: 1.5em;
+        color: #FFFFFF;
+      }
+    }
+
+
   }
 
   .subtitle {
     color: $themewhite;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 20px;
     font-family: $work;
     font-size: 3em;
   }
@@ -683,13 +704,14 @@ select {
       }
     }
       img {
-        width: 40px;
+        width: 30px;
       }
   }
 
   .logo-container {
     padding-top: 10px;
     text-align: center;
+    margin-bottom: 100px;
     .title {
       font-family: Dosis-Regular;
       font-size: 120px;
@@ -716,73 +738,82 @@ select {
     background-color: $offwhite;
     overflow: hidden;
     padding-top: 30px;
-    .login-header {
-      background: rgba(36, 35, 39, 0.6);
-      color: $themewhite;
-      margin-left: 200px;
-      margin-right: 200px;
-      font-family: $work;
-      font-size: 1.5em;
-      box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2); 
-      .login {
-        padding: 10px;
-        margin-bottom: 0;
-      }
-    }
-    .login-box {
-      margin-left: 200px;
-      margin-right: 200px;
-      margin-bottom: 100px;
-      background: rgba(36, 35, 39, 0.4);
-      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-      font-family: $work;
-      font-size: 1em;
-      padding: 0;
-
-      .login {
-        padding: 0;
-        .login-input {
-          margin: 5px;
-          background: rgba(36, 35, 39, 0.6);
-          border: 0;
-          color: $offwhite;
-          width: 90%;
-          padding: 5px;
-
-          &:focus {
-            outline: none;
-          }
+    .login-container-container {
+      width: 40%;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      margin: 0 auto;
+      .login-header {
+        background: rgba(36, 35, 39, 0.6);
+        color: $themewhite;
+        margin: auto;
+        font-family: $work;
+        font-size: 1.5em;
+        box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2); 
+        .login {
+          padding: 10px;
+          margin-bottom: 0;
         }
-        .login-query-container {
-          padding: 5px;
-          .login-query {
+      }
+      .login-box {
+        margin: auto;
+        margin-bottom: 100px;
+        background: rgba(36, 35, 39, 0.4);
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        font-family: $work;
+        font-size: 1em;
+        padding: 0;
+        padding-top: 10px;
+
+        .login {
+          padding: 0;
+          .login-input {
+            margin: 5px;
+            background: rgba(36, 35, 39, 0.6);
+            border: 0;
+            color: $offwhite;
+            width: 90%;
+            padding: 5px;
+
+            &:focus {
+              outline: none;
+            }
+          }
+          .login-query-container {
+            padding: 5px;
+            .login-query {
+              color: $themewhite;
+              cursor: pointer;
+
+              &:hover {
+                color: white;
+                text-decoration: none;
+              }
+            }
+          }
+          .btn-success {
+            background-color: rgba(157, 94, 225, 1);
+            border-color: rgba(157, 94, 225, 1);
+            border-radius: 0;
+            width: 90%;
+            padding: 2px;
+            margin: 2px;
             color: $themewhite;
-            cursor: pointer;
+            word-wrap: break-word;
+            word-break: normal;
 
             &:hover {
-              color: white;
-              text-decoration: none;
+             background-color: rgba(157, 94, 225, 0.8);
+             border-color: rgba(157, 94, 225, 0.8); 
+             color: $themewhite;
             }
           }
         }
-        .btn-success {
-          background-color: $thememidpurple;
-          border-color: $thememidpurple;
-          border-radius: 0;
-          width: 90%;
-          padding: 2px;
-          margin: 2px;
-          color: $themewhite;
-          word-wrap: break-word;
-          word-break: normal;
-
-          &:hover {
-           background-color: $purpleblue;
-           border-color: $purpleblue; 
-           color: $themewhite;
-          }
-        }
       }
+
     }
   }
 }
