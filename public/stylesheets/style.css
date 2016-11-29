@@ -5,6 +5,8 @@
 @import url("https://fonts.googleapis.com/css?family=Work+Sans");
 @import url("https://fonts.googleapis.com/css?family=Libre+Franklin");
 @import url("https://use.fontawesome.com/30117f7f9d.js");
+@import url("https://fonts.googleapis.com/css?family=Lato");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300");
 body {
   font: 14px "Dosis", Helvetica, Arial, sans-serif;
   margin: 0;
@@ -444,6 +446,99 @@ select {
   flex: 1;
   flex-wrap: wrap;
   box-sizing: border-box; }
+  .homepage-container .footer {
+    color: #F4F6F7;
+    font-family: "Work Sans", sans-serif;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    width: 100%; }
+    .homepage-container .footer .footer-column {
+      padding: 20px 20px 20px 40px; }
+      .homepage-container .footer .footer-column p {
+        font-size: 1.1em;
+        padding-bottom: 2px;
+        margin: 0; }
+      .homepage-container .footer .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-weight: 200; }
+      .homepage-container .footer .footer-column i {
+        font-size: 1em;
+        padding: 0 4px 0 0; }
+      .homepage-container .footer .footer-column img {
+        width: 15px;
+        margin: 0;
+        padding: 0 4px 0 0; }
+  .homepage-container .info {
+    background-color: #F4F6F7;
+    font-family: "Lato", sans-serif;
+    font-weight: 300; }
+    .homepage-container .info .sub-header {
+      font-size: 1.3em;
+      font-weight: 100;
+      font-family: "Open Sans", sans-serif;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      flex: 1;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      margin-bottom: 10px; }
+    .homepage-container .info .info-header {
+      font-size: 2em;
+      color: #9d5ee1;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      flex: 1;
+      flex-wrap: wrap;
+      box-sizing: border-box; }
+    .homepage-container .info .info-container {
+      font-family: "Work Sans", sans-serif;
+      text-align: center;
+      width: 100%;
+      align-items: center;
+      flex: 1;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      background-color: #F4F6F7;
+      overflow: hidden;
+      padding: 30px;
+      margin: 0 auto;
+      font-family: "Open Sans", sans-serif; }
+      .homepage-container .info .info-container .description-left {
+        width: 400px;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        flex: 1;
+        flex-wrap: wrap;
+        font-size: 1.2em;
+        text-align: left;
+        vertical-align: middle; }
+      .homepage-container .info .info-container .title {
+        font-size: 1.2em;
+        font-family: "Lato", sans-serif;
+        font-weight: 300;
+        color: #9d5ee1; }
+      .homepage-container .info .info-container .description-right {
+        width: 400px;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        flex: 1;
+        flex-wrap: wrap;
+        font-size: 1.2em;
+        text-align: right;
+        vertical-align: middle; }
+      .homepage-container .info .info-container img {
+        width: 400px;
+        padding: 0 20px 20px 20px; }
   .homepage-container .header {
     width: 100%;
     padding: 0;
@@ -516,7 +611,7 @@ select {
     box-sizing: border-box;
     background-color: #F4F6F7;
     overflow: hidden;
-    padding-top: 30px; }
+    padding-top: 75px; }
     .homepage-container .login-container .login-container-container {
       width: 40%;
       justify-content: center;

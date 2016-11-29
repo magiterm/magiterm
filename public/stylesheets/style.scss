@@ -36,9 +36,13 @@ $svgdeepblue: #2c356a;
 @import url('https://fonts.googleapis.com/css?family=Work+Sans');
 @import url('https://fonts.googleapis.com/css?family=Libre+Franklin');
 @import url("https://use.fontawesome.com/30117f7f9d.js");
+@import url("https://fonts.googleapis.com/css?family=Lato");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300");
 $work: 'Work Sans', sans-serif;
 $franklin: 'Libre Franklin', sans-serif;
 $dosis: "Dosis", Helvetica, Arial, sans-serif;
+$lato: "Lato", sans-serif;
+$opensans: "Open Sans", sans-serif;
 
 body {
   font: 14px "Dosis", Helvetica, Arial, sans-serif;
@@ -637,6 +641,121 @@ select {
   flex-wrap: wrap;
   box-sizing: border-box;
 
+  .footer {
+    color: $offwhite;
+    font-family: $work;
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: row; 
+   flex-direction: row;
+   -webkit-justify-content: flex-start;
+   justify-content: flex-start;
+    width: 100%;
+    .footer-column {
+      padding: 20px 20px 20px 40px;
+      p {
+        font-size: 1.1em;
+        padding-bottom: 2px;
+        margin: 0;
+      }
+      ul {
+        list-style: none;
+        padding:0;
+        margin:0;
+        font-weight: 200;
+      }
+      i {
+        font-size: 1em;
+        padding: 0 4px 0 0;
+      }
+      img {
+        width: 15px;
+        margin: 0;
+        padding: 0 4px 0 0;
+      }
+    }
+  }
+
+  .info { 
+    background-color: $offwhite;
+    font-family: $lato;
+    font-weight: 300;
+
+    .sub-header {
+      font-size: 1.3em;
+      font-weight: 100;
+      font-family: $opensans;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      flex: 1;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    .info-header {
+      font-size: 2em;
+      color: rgba(157, 94, 225, 1);
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      flex: 1;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+    }
+    .info-container {
+      font-family: $work;
+      text-align: center;
+      width: 100%;
+      align-items:center;
+      flex: 1;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      background-color: $offwhite;
+      overflow: hidden;
+      padding: 30px;
+      margin: 0 auto;
+      font-family: $opensans;
+
+      .description-left {
+        width: 400px;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        flex: 1;
+        flex-wrap: wrap;
+        font-size: 1.2em;
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      .title {
+        font-size: 1.2em;
+        font-family: $lato;
+        font-weight: 300;
+        color: rgba(157, 94, 225, 1);
+      }
+
+      .description-right {
+        width: 400px;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        flex: 1;
+        flex-wrap: wrap;
+        font-size: 1.2em;
+        text-align: right;
+        vertical-align: middle;
+      }
+
+      img {
+        width: 400px;
+        padding: 0 20px 20px 20px;
+      }
+    }
+  }
+
+
   .header {
     width: 100%;
 
@@ -737,7 +856,7 @@ select {
     box-sizing: border-box;
     background-color: $offwhite;
     overflow: hidden;
-    padding-top: 30px;
+    padding-top: 75px;
     .login-container-container {
       width: 40%;
       justify-content: center;
