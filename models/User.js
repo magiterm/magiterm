@@ -19,7 +19,7 @@ const User = db.define('user', {
   {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        User.hasOne(models.Container, { foreignKey: 'userId'});
       },
       updateOrCreate: function(newUser, cb) {
         if (newUser.authenticatedWith !== 'local') {
