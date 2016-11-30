@@ -12,7 +12,7 @@ const HomePage = require('./HomePage.jsx');
 const LandingPage = require('./LandingPage.jsx');
 const FAQ = require('./FAQ.jsx');
 const About = require('./About.jsx');
-
+const Modal = require('react-modal');
 
 let authenticate;
 
@@ -251,7 +251,22 @@ class App extends React.Component {
     }
   }
 }
-
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)',
+    height: 300,
+    width: 600,
+    backgroundColor:'rgba(72,72,72,0.55)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    mostPopularVideos: null
+  },
+};
 
 ReactDOM.render((
   <Router history={browserHistory}>

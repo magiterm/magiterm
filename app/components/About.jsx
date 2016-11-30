@@ -1,6 +1,13 @@
 const React = require('react');
+const NavBar = require('./NavBar');
+let bar;
 
 class About extends React.Component {
+  componentWillRender() {
+    if (localStorage['user'] !== undefined) {
+      bar
+    }
+  }
   render() {
     return (
       <div className="homepage-container">
