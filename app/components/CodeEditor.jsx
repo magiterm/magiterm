@@ -120,15 +120,14 @@ class CodeEditor extends React.Component {
 
     var editor = CodeMirror.fromTextArea(codeEditor, {
       lineNumbers: true,
-      theme: 'abcdef',
+      theme: 'monokai',
       styleActiveLine: true,
       matchBrackets: true,
       autoCloseBrackets: true,
       lineWrapping: true,
-      scrollBarStyle: "overlay",
+      scrollbarStyle: "overlay",
       indent: true,
     });
-
 
     editor.on('changes', function(editor, e){
       if(Date.now() - context.lastUpdate < 100) {
@@ -144,6 +143,7 @@ class CodeEditor extends React.Component {
       }
     });
 
+    //this keeps indentation during a word wrap
     var charWidth = editor.defaultCharWidth(), basePadding = 1;
     editor.on("renderLine", function(cm, line, elt) {
       var off = CodeMirror.countColumn(line.text, null, cm.getOption("tabSize")) * charWidth;
@@ -152,9 +152,6 @@ class CodeEditor extends React.Component {
     });
     editor.refresh();
 
-    editor.on('cursorActivity', function(editor, e) {
-      //context.cursorPos = context.editor.doc.getCursor();
-    });
 
     this.editor = editor;
     this.lastUpdate = Date.now();
@@ -222,7 +219,7 @@ class CodeEditor extends React.Component {
     if(code !== '' || sendBlank) {
       this.socket.emit('/TE/', {code: code, username: this.username, containerName: this.state.containerName, fileName: this.state.fileName, filePath: this.state.filePath});
     }
-    if (window.location.pathname !== '/computer') {
+    if (window.location.pathname !== '/computer' || window.location !== "/computer") {
       this.handleCodeSaveIfVideo();
     }
   }

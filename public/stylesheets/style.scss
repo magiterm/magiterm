@@ -29,6 +29,7 @@ $translucentred: rgba(225,91,105,0.95);
 $svgmidpurple: #aa348a;
 $svglightpurple: #a25e97;
 $svgdeepblue: #2c356a;
+$mainpurple: rgba(157, 94, 225, 1);
 
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 @import url('https://fonts.googleapis.com/css?family=Advent+Pro|Dosis');
@@ -39,11 +40,13 @@ $svgdeepblue: #2c356a;
 @import url("https://use.fontawesome.com/30117f7f9d.js");
 @import url("https://fonts.googleapis.com/css?family=Lato");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300");
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
 $work: 'Work Sans', sans-serif;
 $franklin: 'Libre Franklin', sans-serif;
 $dosis: "Dosis", Helvetica, Arial, sans-serif;
 $lato: "Lato", sans-serif;
 $opensans: "Open Sans", sans-serif;
+$inconsolata: "Inconsolata", monospace;
 
 body {
   font: 14px "Dosis", Helvetica, Arial, sans-serif;
@@ -576,46 +579,53 @@ html {
 }
 
 .collaborator-bar {
-  width: 300px;
+  width: 200px;
   flex: 1;
   display: flex;
   position: relative;
   flex-wrap: wrap;
   box-sizing: border-box;
   margin: 0;
-  font-weight: 200;
+  font-weight: 100;
   padding: 0;
   font-family: $lato;
-  font-size: 1.6em;
+  font-size: 1.2em;
   position: relative;
+
+  .collaborators-select {
+    border: 1px solid #C199EC;
+    border-radius: 5px;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    width: 100;
+  }
   
   i {
-    font-size: 1em;
-    color: $brightgreen;
+    font-size: 1.5em;
+    color: #C199EC;
     margin-left: 5px;
+
   }
 
-  .permissions-indicator {
-    font-size: 0.8em;
-    color: $brightgreen;
-    padding-left: 10px;
-    vertical-align: bottom;
-    position: relative;
 
-    .role {
-      position: absolute;
-      bottom: 0;
-    }
+  .role {
+    font-size: 0.8em;
+    color: #C199EC;
+    padding-left: 0px;
+    padding-top: 7px;
+    bottom: 0;
   }
 }
 #thisSelect {
-  width: 150px;
+  width: 100px;
   height: 100%;
   height: 30px;
   padding: 0px;
   padding-left: 15px;
-  border-radius: 0px;
-  color: $brightgreen;
+  border-radius: 5px;
+  border: 1px solid $brightgreen;
+  color: #C199EC;
   background-color: black;
   cursor: pointer;
 
@@ -1128,7 +1138,7 @@ select {
     margin: 0;
     flex: 1;
     flex-wrap: wrap;
-    overflow-y: auto;
+    overflow-y: hidden;
     min-width: 0;
     .code-editor-menu {
       padding: 0;
@@ -1706,7 +1716,7 @@ select {
           }
 
           .current-file {
-            color: $brightgreen;
+            color: $mainpurple;
             font-weight: bold;
             flex: 1;
             flex-wrap: wrap;
@@ -1714,7 +1724,7 @@ select {
           }
 
           .code-saved-indicator {
-            color: $brightgreen;
+            color: $mainpurple;
             font-weight: bold;
             flex: 1;
             flex-wrap: wrap;
@@ -1784,6 +1794,35 @@ select {
 }
 
 
+.terminal .terminal-output div div, .cmd .prompt {
+    display: block;
+    line-height: 17 px;
+    height: auto;
+    font-family: $inconsolata;
+    font-size: 15px;
+}
+
+.terminal, .cmd {
+    font-family: $inconsolata;
+    color: #aaa;
+    background-color: #000;
+    line-height: 15px;
+
+}
+.prompt {
+  span {
+    color: $brightgreen;
+  }
+}
+.command span {
+  color: #C199EC;
+}
+.cmd span {
+    float: left;
+    font-family: $inconsolata;
+    font-size: 15px;
+}
+
 
 
 
@@ -1838,7 +1877,27 @@ Resizer.disabled:hover {
   border-color: transparent;
 }
 
+::-webkit-scrollbar {
+      width: 6px;
+      background:  black;
+      border-radius: 3px;
+} /* this targets the default scrollbar (compulsory) */
 
+::-webkit-scrollbar-track {
+      background:  #8fead6;
+
+      border-radius: 3px;
+} /* the new scrollbar will have a flat appearance with the set background color */
+ 
+::-webkit-scrollbar-thumb {
+  background:  #07bd95;
+  border-radius: 3px; 
+} /* this will style the thumb, ignoring the track */
+ 
+ 
+::-webkit-scrollbar-corner {
+      background-color: black;
+} /* if both th
 
 
 
@@ -1859,7 +1918,7 @@ Resizer.disabled:hover {
 
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
-  font-family: monospace;
+  font-family: $inconsolata;
   height: 90%;
   color: black;
 }

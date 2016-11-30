@@ -138,21 +138,21 @@ class LinuxComputer extends React.Component {
               <Dropzone containerName={this.state.containerName} curDir={this.state.curDir}/>
               <NavBar username={this.state.username} />
               <div className="collaborator-bar">
-
-                <i className="ion-ios-monitor-outline"></i>
-                <select id="thisSelect" className="form-control" onChange={this.selectChange}>
-                  <optgroup label="Collaborators">
-                  <option value={this.state.username}>{this.state.username}</option>
-                  {
-                    this.state.collabWith.map(function(user, i) {
-                    return (
-                        <option value={user} key={i}>{user}</option>
-                      );
-                  })}
-                  </optgroup>
-                </select>
-                <div className="role"><i className="ion-ios-locked-outline"></i></div>
-                <span className="permissions-indicator"><div className="role">{this.state.permissions}</div></span>
+                <div className="collaborators-select">
+                  <i className="ion-ios-monitor-outline"></i>
+                  <select id="thisSelect" className="form-control" onChange={this.selectChange}>
+                    <optgroup label="Collaborators">
+                    <option value={this.state.username}>{this.state.username}</option>
+                    {
+                      this.state.collabWith.map(function(user, i) {
+                      return (
+                          <option value={user} key={i}>{user}</option>  
+                        );
+                    })}
+                    </optgroup>
+                  </select>
+                  <div className="role">{'|   ' + this.state.permissions}</div>
+                </div>
               </div>
 
               <div className="row">
