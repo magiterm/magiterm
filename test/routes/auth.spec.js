@@ -15,9 +15,9 @@ describe('Local Signup/Login test', function () {
   });
   console.log('running');
   it('should sign up a user ', function (done) {
-    console.log('signing signing signing signing signing signing')
+    console.log('signing signing signing signing signing signing');
     util.localSignup(function(result) {
-      console.log('resultresultresult', result)
+      console.log('resultresultresult', result);
       expect(result.body.username).to.equal('user');
       expect(result.body.password).to.equal('pass11');
       done();
@@ -30,6 +30,19 @@ describe('Local Signup/Login test', function () {
       expect(result.body.password).to.equal(undefined);
       done();
     });
+  });
+
+  it('should create a session by making a user', function(done) {
+    util.testSession(function(result) {
+      expect(result.user.username).to.equal('user');
+      done();
+    });
+  });
+
+  it('should kill the session upon logout', function(done) {
+    util.signout(function(err, results) {
+      d
+    })
   });
 
   after(function(done) {

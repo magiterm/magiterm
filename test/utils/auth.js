@@ -7,6 +7,8 @@ const port = process.env.PORT || 3000;
 const host = `http://localhost:${port}`;
 const app = require('../../app.js');
 const request = require('supertest')(app);
+var session = require('supertest-session');
+
 const options = {
   username: 'user',
   password: 'pass11'
@@ -56,6 +58,22 @@ module.exports = {
       }
       callback(result);
     });
-  } 
+  }, 
 
+  testSession: function(callback) {
+    session(app, {
+      before: function (req) {
+        callback(req.session);
+      }
+    });
+  },
+
+  signOut: function(callback) {
+    request
+    .get('/logout')
+    .end(function(err, results) {
+      testSession(callback)
+    });
+  }
 };
+
