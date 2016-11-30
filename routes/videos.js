@@ -3,7 +3,7 @@ const router = express.Router();
 const utils = require('../utils/videoHelpers.js');
 const Video = require('../models/Videos.js');
 const request = require('request');
-const keys = require('../utils/keys.js');
+const key = process.env.API_KEY
 
 router.post('/submitVideo', function(req, res, next) {
 	const options = {
@@ -11,7 +11,7 @@ router.post('/submitVideo', function(req, res, next) {
 		uri: 'https://www.googleapis.com/youtube/v3/videos',
 		qs: {
 			id: req.body.videoId,
-			key: keys.youtubeKey,
+			key: key,
 			part: 'snippet',
 			type: 'video'
 		}
@@ -100,6 +100,7 @@ router.get('/checkVideoIdInDB', function(req, res, next) {
 });
 
 router.get('/mostPopularVideos', function(req, res) {
+	console.log('found')
   Video.findAll({
     limit: 8,
     order: 'videoClicks DESC'

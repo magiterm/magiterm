@@ -5,7 +5,7 @@ const VideoTable = require('./VideoTable.jsx');
 const VideoPage = require('./VideoPage.jsx');
 const utils = require('../../utils/videoHelpers.js');
 const bootstrap = require('bootstrap');
-const API_KEY = require('../../utils/keys');
+const API_KEY = process.env.API_KEY;
 const NavBar = require('./NavBar.jsx');
 const axios = require('axios');
 

@@ -9,7 +9,7 @@ const docker = require('../utils/dockerAPI');
 const Container = require('../models/Container');
 const passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
+var SALT_WORK_FACTOR = 12;
 router.post('/signup', function(req, res) {
   console.log('signing up: ', req.body);
   const username = req.body.username;
@@ -18,16 +18,15 @@ router.post('/signup', function(req, res) {
   const lastname = req.body.lastname;
   const email = req.body.email;
   const githubHandle = req.body.githubHandle;
-
+  
   bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
     const salty = salt;
     bcrypt.hash(password, salt, function(err, hash) {
       if (err) {
         return console.log('Error hashing the password', err);
       }
-      passwordHashed = hash;
-      console.log('about to create local user');
-      console.log('username', username, 'firstname', firstname);
+      var passwordHashed = hash;
+      console.log('about to create local user', passwordHashed);
       User.create({
         username: username,
         password: passwordHashed,

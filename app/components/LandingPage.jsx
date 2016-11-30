@@ -111,8 +111,9 @@ const LandingPage = ({authenticate, email, modalIsOpen, mostPopularVideos, handl
 	          <div className="footer-column">
 	              <p className="footer-header">picoShell</p>
 	              <ul>
-	                <li><img src="/images/whitelogo.svg"></img>About</li>
-	                <li><i className="ion-ios-world-outline"></i>FAQ</li>
+	                <li><img src="/images/whitelogo.svg"></img><a href="/about">About</a></li>
+	                <li><i className="ion-ios-world-outline"></i><a href='/faq'>FAQ</a></li>
+	                <li><i className="ion-ios-home-outline"></i><a href='/'>Home</a></li>
 	              </ul>
 	          </div>
 	          <div className="footer-column">

@@ -11,7 +11,7 @@ const isValidPassword = function(password) {
 	}
 	return false;
 }
-
+ 
 const isValidName = function(string) {
 	if (string.length > 0) {
 		return true;
