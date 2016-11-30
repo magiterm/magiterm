@@ -26,7 +26,6 @@ class Terminal extends React.Component {
 	}
 
   componentWillReceiveProps(nextProps) {
-    console.log('TERM GOT PROPS', nextProps);
     const context = this;
     this.socket.off('/TERM/' + this.state.containerName);
     this.socket.off('/TERM/RES/' + this.state.containerName);
@@ -102,8 +101,6 @@ class Terminal extends React.Component {
        const command = 'open ' + obj.fileName;
        axios.post('/docker/cmd', {cmd: command, containerName: context.state.containerName, curDir: context.state.curDir})
         .then(function(res) {
-          console.log(res);
-          console.log(res.termResponse);
           context.socket.emit('/TE/', {filePath: obj.filePath, fileOpen:true, fileName: obj.fileName, code: res.data.termResponse,username: context.state.username, containerName: context.state.containerName});
         })
         .catch(function(err) {
@@ -170,9 +167,7 @@ class Terminal extends React.Component {
 
   updateScroll() {
     const ele = document.getElementById("terminal-container");
-   console.log('in update scroll');
    if (ele) {
-     console.log(ele.scrollHeight);
      ele.scrollTop = ele.scrollHeight;
    }
   }
@@ -296,9 +291,6 @@ class Terminal extends React.Component {
           keydown: function(event, term) {
             context.updateScroll();
             if(event.key === 'Backspace') {
-              //the keydown event fires as soon as the key is pressed, but before a character is removed
-              //A timeout of 10ms allows term.get_command() to reflecct the actual new command after backspace
-              //is pressed. If this is too janky, we can remove this.
               setTimeout(function() {
                 context.socket.emit('/TERM/', {cmd: term.get_command(), username: context.state.username, containerName: context.state.containerName});
               }, 10);

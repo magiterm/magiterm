@@ -40,8 +40,6 @@ class FileBrowser extends React.Component {
         const name = arr[arr.length - 1];
         if(name !== '.pico') contentsArr.push({type: type, name: name});
       }
-      //remove the last element, which is ''
-      //remove the first element, which is '.'
       contentsArr.shift();
       contentsArr.pop();
       context.setState({
@@ -77,7 +75,6 @@ class FileBrowser extends React.Component {
   }
 
   downloadClick(e, entry) {
-    console.log(this.state.curDir, entry);
     const file = this.state.curDir.endsWith('/') ? this.state.curDir + entry : this.state.curDir + '/' + entry;
     console.log(file);
     axios.post('/docker/cmd', {cmd: 'download ' + file, containerName: this.state.containerName, curDir: this.state.curDir})
@@ -94,7 +91,6 @@ class FileBrowser extends React.Component {
         var blob = new Blob(text.split(' ').map(function(txt) { return str2bytes(FileHelpers.hex2a(txt)); }), {type: "application/zip"});
         FileSaver.saveAs(blob, filename);
       }
-      console.log('downloading', res.data.fileContents, 'as', res.data.fileName);
       download(entry, res.data.fileContents);
     });
   }

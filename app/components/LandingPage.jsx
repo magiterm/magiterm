@@ -91,7 +91,7 @@ const LandingPage = ({authenticate, email, modalIsOpen, mostPopularVideos, handl
 	            <img src="/images/codeable.gif"></img>
 	          </div>
 	          <div className="info-container">
-	            <img src="/images/header.gif"></img>
+	            <img src="/images/collaborative.gif"></img>
 	            <div className="description-left">
 	              <span className="title">Collaborative</span><br/>
 	                Easily give read or write access to your computer to work on projects, assignments,
@@ -104,7 +104,7 @@ const LandingPage = ({authenticate, email, modalIsOpen, mostPopularVideos, handl
 	              You could just push your code up to git...or you could use picoShell's download button
 	              to export all your files to your local filesystem
 	            </div>
-	            <img src="/images/codeable.gif"></img>
+	            <img src="/images/download.gif"></img>
 	          </div>
 	        </div>
 	        <div className="footer">

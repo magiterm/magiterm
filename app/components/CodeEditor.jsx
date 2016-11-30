@@ -60,13 +60,31 @@ class CodeEditor extends React.Component {
       }
     });
 
+
+
   }
 
   recievedCEChange(code) {
     const fileName = code.fileName;
     const filePath = code.filePath;
     const codeValue = code.code;
-    console.log('this is recievedCEChange', code);
+
+    console.log(this.state.fileName);
+    const type = fileName.split(".").pop();
+    console.log('this is the type', type);
+    let mode;
+
+    if (type === 'js') {
+      mode = 'javascript';
+    } else if (type === 'py' || type === "pyo" || type === "pyc" || type === "pyd") {
+      mode = 'python';
+    } else if (type === 'rb' || fileName === "Gemfile" || type === "ru") {
+      mode = 'ruby';
+    }
+
+    this.editor.setOption("mode", mode);
+    console.log(this.editor);
+
     if(code.fileOpen) {
       this.setState({
         codeSaved: true
@@ -85,9 +103,11 @@ class CodeEditor extends React.Component {
       //Must place the cursor back where it was after replacing contents. Otherwise weird things happen.
       this.cursorPos = this.editor.doc.getCursor();
       this.editor.getDoc().setValue(code.code);
+
       this.editor.doc.setCursor(this.cursorPos);
     }
   }
+
   
   componentDidMount() {
     $(".code-editor-container").resizable({
@@ -96,17 +116,21 @@ class CodeEditor extends React.Component {
     });
     const context = this;
     var codeEditor = document.getElementById("code-editor")
+
+
     var editor = CodeMirror.fromTextArea(codeEditor, {
       lineNumbers: true,
       theme: 'abcdef',
       styleActiveLine: true,
       matchBrackets: true,
       autoCloseBrackets: true,
+      lineWrapping: true,
+      scrollBarStyle: "overlay",
       indent: true,
     });
 
+
     editor.on('changes', function(editor, e){
-      //context.cursorPos = context.editor.doc.getCursor();
       if(Date.now() - context.lastUpdate < 100) {
         return;
       }
@@ -119,6 +143,14 @@ class CodeEditor extends React.Component {
         context.handleCodeChange();
       }
     });
+
+    var charWidth = editor.defaultCharWidth(), basePadding = 1;
+    editor.on("renderLine", function(cm, line, elt) {
+      var off = CodeMirror.countColumn(line.text, null, cm.getOption("tabSize")) * charWidth;
+      elt.style.textIndent = "-" + off + "px";
+      elt.style.paddingLeft = (basePadding + off) + "px";
+    });
+    editor.refresh();
 
     editor.on('cursorActivity', function(editor, e) {
       //context.cursorPos = context.editor.doc.getCursor();
@@ -146,7 +178,6 @@ class CodeEditor extends React.Component {
     if(!this.state.fileName) {
       alert('Please select a file before attempting to run.');
     } else {
-      // context.socket.emit('/TERM/SHOW/', {containerName: context.state.containerName});
       axios.post('/docker/executeFile', {code: document.getElementById('code-editor').value, containerName: this.state.containerName, fileName: this.state.fileName, filePath: this.state.filePath})
       .then(function(resp) {
         const exResponse = resp.data.res;
@@ -191,13 +222,12 @@ class CodeEditor extends React.Component {
     if(code !== '' || sendBlank) {
       this.socket.emit('/TE/', {code: code, username: this.username, containerName: this.state.containerName, fileName: this.state.fileName, filePath: this.state.filePath});
     }
-    if (window.location !== '/linuxComputer') {
+    if (window.location.pathname !== '/computer') {
       this.handleCodeSaveIfVideo();
     }
   }
 
   handleCodeSaveIfVideo() {
-    console.log('in handle code video save');
     const key = window.location;
     const code = document.getElementById('code-editor').value;
     window.localStorage.setItem(window.location, JSON.stringify({codeValue: code, fileName: this.state.fileName, filePath: this.state.filePath}));
