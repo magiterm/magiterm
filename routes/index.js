@@ -34,15 +34,15 @@ router.get('/video', function(req, res) {
 
 router.get('/video/:video', function(req, res) {
   res.render('index', {title: 'picoShell'});
-})
+});
 
 router.get('/about', function(req, res) {
   res.render('index', {title: 'picoShell'});
-})
+});
 
 router.get('/faq', function(req, res) {
   res.render('index', {title: 'picoShell'});
-})
+});
 
 
 router.post('/email', function(req, res) {
@@ -67,8 +67,8 @@ router.post('/email', function(req, res) {
           }
         })
         .then(function(response) {
-          console.log('response', response[0])
-          console.log('reponse2222', response[1])
+          console.log('response', response[0]);
+          console.log('reponse2222', response[1]);
           var data = {
             from: 'The Pico Team <support@picoshell.com>',
             to: req.body.email,

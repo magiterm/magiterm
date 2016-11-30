@@ -9,10 +9,16 @@ const app = require('../../app.js');
 const request = require('supertest')(app);
 var session = require('supertest-session');
 
+
 const options = {
   username: 'user',
   password: 'pass11'
 };
+
+router.get('/return', function(req, res) {
+  if (req.session) res.send(req.session);
+  else res.send(':(');
+});
 
 module.exports = {
   clearUser: function(callback) {
@@ -61,10 +67,16 @@ module.exports = {
   }, 
 
   testSession: function(callback) {
-    session(app, {
-      before: function (req) {
-        callback(req.session);
+    request
+    .get('/test/return')
+    .send(options)
+    .end(function(err, result) {
+      if (err) {
+        console.log(err);
+        return;
       }
+      console.log('testSession', result.body);
+      callback(result.body.cookie);
     });
   },
 
@@ -72,7 +84,11 @@ module.exports = {
     request
     .get('/logout')
     .end(function(err, results) {
-      testSession(callback)
+      if (err) {
+        console.log('error', err);
+        return;
+      }
+      callback();
     });
   }
 };
