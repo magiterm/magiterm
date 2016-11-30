@@ -13,7 +13,7 @@ class About extends React.Component {
   render() {
     return (
       <div>
-        {bar}
+            {bar}
         <div className="homepage-container">
           <div className="header">
             <div className="title">
