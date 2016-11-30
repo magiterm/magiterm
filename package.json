@@ -103,8 +103,8 @@
     "socket.io-parser": "2.3.1",
     "superagent": "^2.3.0",
     "supertest": "^2.0.1",
-    "swipe-js-iso": "^2.0.3",
-    "supertest-session": "^2.0.1"
+    "supertest-session": "^2.0.1",
+    "swipe-js-iso": "^2.0.3"
   },
   "devDependencies": {
     "babel": "^6.5.2",

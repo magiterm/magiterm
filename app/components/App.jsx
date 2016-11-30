@@ -109,7 +109,7 @@ class App extends React.Component {
       })
       .catch(function(err) {
         console.error(err);
-      })
+      });
   }
 
   handleGoToLogin(event) {
@@ -139,8 +139,8 @@ class App extends React.Component {
       )
     } else if (this.state.authenticated && this.state.mostPopularVideos) {
       return (
-        <HomePage username={this.state.username} mostPopularVideos={this.state.mostPopularVideos}/>
         <div> 
+          <HomePage username={this.state.username} mostPopularVideos={this.state.mostPopularVideos}/>   
             <div className="homepage-container">
               <div className="header">
                 <div className="title">
@@ -230,6 +230,7 @@ class App extends React.Component {
                     <ul>
                       <li><img src="/images/whitelogo.svg"></img><a href="/about">About</a></li>
                       <li><i className="ion-ios-world-outline"></i><a href='/faq'>FAQ</a></li>
+                      <li><i className="ion-ios-home-outline"></i><a href='/'>Home</a></li>
                     </ul>
                 </div>
                 <div className="footer-column">
@@ -241,6 +242,7 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+
       );
     } else {
       return (
