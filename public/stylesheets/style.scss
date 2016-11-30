@@ -360,24 +360,67 @@ html {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
 .option {
       text-align: center;
       margin-left: 25px;
     }
 
 
+//About
+.content {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 50px;
+  .cContainer {
+    width: 70%;
+    .cSubtitle {
+      margin-top: 60px;
+      margin-bottom: 40px;
+      color: rgba(157, 94, 225, 1);
+      text-align: center;
+      font-family: $work;
+      font-size: 3em;
+    }
+    .question {
+      font-size: 30px;
+      color: rgba(157, 94, 225, 1);
+      font-weight: bold;
+      margin-top: 50px;
 
+    }
+    .answer {
+      font-size: 16px;
+      margin-left: 50px;
+      color: rgba(157, 94, 225, 1);
+      margin-bottom: 40px;
+
+    }
+    .cText {
+      font-size: 16px;
+      margin-top: 100px;
+      text-align: center;
+    }
+    .teamRow{
+      height: 100%;
+      flex-direction: row;
+      display: flex;
+      align-items: center;
+      margin-bottom: 100px;
+      .pic {
+        height: 200px;
+        margin-right: 20px;
+      }
+      .tText {
+        margin-left: 20px;
+        text-align: center;
+        align-items: center;
+      }
+    }
+  }
+}
 
 
 //NAVBAR

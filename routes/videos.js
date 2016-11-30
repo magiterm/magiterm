@@ -100,6 +100,7 @@ router.get('/checkVideoIdInDB', function(req, res, next) {
 });
 
 router.get('/mostPopularVideos', function(req, res) {
+	console.log('found')
   Video.findAll({
     limit: 8,
     order: 'videoClicks DESC'
