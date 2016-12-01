@@ -451,7 +451,7 @@ html {
 //NAVBAR
 .navbar {
   height: 34px;
-  background-color: $themedarkpurple;
+  background-color: $offblack;
   border-radius: 0;
   padding: 2px;
   margin: 0;
@@ -462,6 +462,8 @@ html {
     padding: 0;
     margin: 0;
     float: right;
+    color: $offwhite;
+
     li {
       display: inline;
       padding: 0 5px 0 5px;
@@ -470,12 +472,12 @@ html {
         color: $offwhite;
         &:hover {
           text-decoration: none;
+          color: #C199EC;
         }
       }
     }
     .logout {
       cursor: pointer;
-      color: $offwhite;
     }
     .username {
       color: $offwhite;
@@ -490,6 +492,7 @@ html {
     font-size: 20px;
     color: #FFFFFF;
     text-align: left;
+    padding-left: 5px;
     text-decoration: none;
 
     a {
@@ -640,7 +643,7 @@ html {
 
   &:hover {
     // background-color: $brightgreen;
-    color: $themebrightpurple;
+    color: $offwhite;
     outline: none;
   }
 
@@ -985,7 +988,6 @@ select {
   }
 
   .logo {
-    background-color: $themedarkpurple;
     margin: 0;
     padding: 5px;
     a {
@@ -1131,6 +1133,31 @@ select {
   background-size: cover;
   font: $lato;  
 
+  ::-webkit-scrollbar {
+        width: 6px;
+        background:  black;
+        border-radius: 3px;
+  } /* this targets the default scrollbar (compulsory) */
+
+  ::-webkit-scrollbar-track {
+        background:  #8fead6;
+
+        border-radius: 3px;
+  } /* the new scrollbar will have a flat appearance with the set background color */
+   
+  ::-webkit-scrollbar-thumb {
+    background:  #07bd95;
+    border-radius: 3px; 
+  } /* this will style the thumb, ignoring the track */
+   
+   
+  ::-webkit-scrollbar-corner {
+        background-color: black;
+  } 
+
+
+
+
   .code-editor-container {
     height: 620px;
     width: 100%;
@@ -1266,16 +1293,17 @@ select {
 }
 
 .chat-box-mini {
-  width: 105px;
-  background-color: $translucentred;
+  width: 300px;
   position: absolute;
   bottom: 0;
   right: 10px;
-  padding: 10px;
+  padding: 3px;
   margin: 0;
   z-index: 7;
   color: $offwhite;
   cursor: pointer;
+  border: 1px solid $translucentred;
+  border-bottom-style: none;
 
   i {
     font-size: 1.6em;
@@ -1290,29 +1318,69 @@ select {
 .message {
   color: white;
   display: block;
+  padding: 6px;
   
   .message-user {
     font-weight: bold;
-    color: $offblack;
+    color: #C199EC;
+    border: 0px solid $offblack;
+    background-color: $offblack;
+    border-radius: 10px;
+    padding: 4px; 
   }
 
   &.own {
     text-align: right;
     overflow-wrap: break-word;
+    .message-user {
+      font-weight: bold;
+      border: 0px solid #313033;
+      background-color: #313033;
+      border-radius: 10px;
+      padding: 4px;
+      a {
+        color: $offwhite;
+        font-weight: bold;
+      }
+    }
   }
 
 }
 
-.chat-box-container {
+.cheat-sheet-mini {
+  width: 75px;
   position: absolute;
   bottom: 0;
-  right: 10px;
+  right: 325px;
+  padding: 3px;
+  margin: 0;
+  z-index: 7;
+  color: $offwhite;
+  border: 1px solid $translucentred;
+  border-bottom-style: none;
+  cursor: pointer;
+
+  .chatText {
+    color: white;
+    padding-left: 3px;
+    a {
+      color: $offwhite;
+    }
+  }
+}
+
+.cheat-sheet-container {
+  position: absolute;
+  bottom: 0;
+  right: 325px;
   padding: 0;
   margin: 0;
   z-index: 7;
   height: 200px;
   width: 300px;
-  background-color: $translucentred;
+  border: 1px solid $translucentred;
+  border-bottom-style: none;
+  background-color: black;
 
   .minimize {
     color: $offwhite;
@@ -1333,13 +1401,78 @@ select {
     padding-right: 10px;
     height: 146px;
     width: 295px;
-    background-color: $translucentred;
     text-decoration: none;
     border: 0px;
     color: $offwhite;
     overflow: auto;
 
     a {
+      color: $offwhite;
+    }
+
+  }
+}
+
+.chat-box-container {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  padding: 0;
+  margin: 0;
+  z-index: 7;
+  height: 200px;
+  width: 300px;
+  border: 1px solid $translucentred;
+  border-bottom-style: none;
+  background-color: black;
+
+  ::-webkit-scrollbar {
+        width: 6px;
+        background:  black;
+        border-radius: 3px;
+  } /* this targets the default scrollbar (compulsory) */
+
+  ::-webkit-scrollbar-track {
+        background:  black;
+
+        border-radius: 3px;
+  } /* the new scrollbar will have a flat appearance with the set background color */
+   
+  ::-webkit-scrollbar-thumb {
+    background:  $translucentred;
+    border-radius: 3px; 
+  } /* this will style the thumb, ignoring the track */
+   
+   
+  ::-webkit-scrollbar-corner {
+        background-color: black;
+  } 
+
+  .minimize {
+    color: $offwhite;
+    text-align: left;
+    background-color: rgba(138, 55, 63, 0.95);
+    position: absolute;
+    overflow: hidden;
+    padding: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .chatText {
+    padding: 0;
+    margin-top: 27px;
+    margin-left: 5px;
+    padding-left: 5px;
+    padding-right: 10px;
+    height: 146px;
+    width: 295px;
+    text-decoration: none;
+    color: $offwhite;
+    overflow: auto;
+
+    a {
+      padding: 2px;
       color: $offwhite;
     }
 
@@ -1632,6 +1765,27 @@ select {
       .terminal-container {
         max-height: 200px;
         overflow: auto;
+        ::-webkit-scrollbar {
+              width: 6px;
+              background:  black;
+              border-radius: 3px;
+        } /* this targets the default scrollbar (compulsory) */
+
+        ::-webkit-scrollbar-track {
+              background:  #8fead6;
+
+              border-radius: 3px;
+        } /* the new scrollbar will have a flat appearance with the set background color */
+         
+        ::-webkit-scrollbar-thumb {
+          background:  #07bd95;
+          border-radius: 3px; 
+        } /* this will style the thumb, ignoring the track */
+         
+         
+        ::-webkit-scrollbar-corner {
+              background-color: black;
+        } 
       }
     }
 
@@ -1667,6 +1821,31 @@ select {
       flex-wrap: wrap;
       overflow-y: auto;
 
+      ::-webkit-scrollbar {
+            width: 6px;
+            background:  black;
+            border-radius: 3px;
+      } /* this targets the default scrollbar (compulsory) */
+
+      ::-webkit-scrollbar-track {
+            background:  #8fead6;
+
+            border-radius: 3px;
+      } /* the new scrollbar will have a flat appearance with the set background color */
+       
+      ::-webkit-scrollbar-thumb {
+        background:  #07bd95;
+        border-radius: 3px; 
+      } /* this will style the thumb, ignoring the track */
+       
+       
+      ::-webkit-scrollbar-corner {
+            background-color: black;
+      } 
+
+
+
+
       #terminal {
         width: 100%;
         height: 100%;
@@ -1686,6 +1865,31 @@ select {
       flex-direction: row;
       justify-content: center;
       align-items: center;
+
+      ::-webkit-scrollbar {
+            width: 6px;
+            background:  black;
+            border-radius: 3px;
+      } /* this targets the default scrollbar (compulsory) */
+
+      ::-webkit-scrollbar-track {
+            background:  #8fead6;
+
+            border-radius: 3px;
+      } /* the new scrollbar will have a flat appearance with the set background color */
+       
+      ::-webkit-scrollbar-thumb {
+        background:  #07bd95;
+        border-radius: 3px; 
+      } /* this will style the thumb, ignoring the track */
+       
+       
+      ::-webkit-scrollbar-corner {
+            background-color: black;
+      } 
+
+
+
         .code-editor-container {
           height: 80%;
           width: 100%;
@@ -1716,7 +1920,7 @@ select {
           }
 
           .current-file {
-            color: $mainpurple;
+            color: $brightgreen;
             font-weight: bold;
             flex: 1;
             flex-wrap: wrap;
@@ -1724,7 +1928,7 @@ select {
           }
 
           .code-saved-indicator {
-            color: $mainpurple;
+            color: $brightgreen;
             font-weight: bold;
             flex: 1;
             flex-wrap: wrap;
@@ -1876,29 +2080,6 @@ Resizer.disabled {
 Resizer.disabled:hover {
   border-color: transparent;
 }
-
-::-webkit-scrollbar {
-      width: 6px;
-      background:  black;
-      border-radius: 3px;
-} /* this targets the default scrollbar (compulsory) */
-
-::-webkit-scrollbar-track {
-      background:  #8fead6;
-
-      border-radius: 3px;
-} /* the new scrollbar will have a flat appearance with the set background color */
- 
-::-webkit-scrollbar-thumb {
-  background:  #07bd95;
-  border-radius: 3px; 
-} /* this will style the thumb, ignoring the track */
- 
- 
-::-webkit-scrollbar-corner {
-      background-color: black;
-} /* if both th
-
 
 
 

@@ -219,7 +219,9 @@ class CodeEditor extends React.Component {
     if(code !== '' || sendBlank) {
       this.socket.emit('/TE/', {code: code, username: this.username, containerName: this.state.containerName, fileName: this.state.fileName, filePath: this.state.filePath});
     }
-    if (window.location.pathname !== '/computer' || window.location !== "/computer") {
+
+    if (window.location.pathname.split("/")[1] === "video") {
+      console.log('tried to save video');
       this.handleCodeSaveIfVideo();
     }
   }
