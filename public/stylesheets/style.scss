@@ -1254,6 +1254,7 @@ select {
       z-index: 1;
       height: 100%;
       position: relative;
+      max-width: 625px;
     }
 
     .dropzone-area {
