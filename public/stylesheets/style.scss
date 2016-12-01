@@ -1570,22 +1570,22 @@ select {
 
 .video-home-page {
   overflow: auto;
+  background-image: url('/images/gradient4.png');
+  background-size: cover;
 
   .video-homepage-container {
     width: 100%;
     height: 83px;
-    background-color: #FFFFFF;
+    // background-color: #FFFFFF;
     overflow: auto;
-    .homepage-landing{
-        background-image: url('/images/gradient4.png');
-        background-size: cover;
+    .homepage-landing {
         width: 100%;
         // height: 481px;
         overflow: hidden;
 
         .overlay {
           opacity: 0.85;
-          background: rgba(99,135,152,0.50);
+          // background: rgba(99,135,152,0.50);
           // height: 481px;
           text-align: center;
 
@@ -1613,8 +1613,9 @@ select {
             padding: 16px;
 
             input {
-              background-color: rgba(255,255,255,0.3);
-              border-radius: 100px;
+              background-color: $offblack;
+              color: white;
+              border-radius: 120px;
               font-size: 34px;
               height: 80%;
               width: 100%;
@@ -1625,6 +1626,7 @@ select {
               }
               &:focus {
                 border-color: white;
+                border-width: 2px;
               }
             }
           }
@@ -1636,7 +1638,7 @@ select {
   .video-search-results-container {
     width: 100%;
     padding: 10px;
-    background: $offblack;
+    // background: $offblack;
     overflow: auto;
     .row {
       justify-content: center;
@@ -1728,7 +1730,7 @@ select {
   .video-table-container {
     width: 100%;
     padding: 10px;
-    background: $offblack;
+    // background: $offblack;
     overflow: auto;
     text-align: center;
 
