@@ -1192,6 +1192,7 @@ select {
       font-weight: bold;
       flex: 1;
       flex-wrap: wrap;
+      word-wrap: break-word;
       float: right;
     }
 
@@ -1304,6 +1305,7 @@ select {
   cursor: pointer;
   border: 1px solid $translucentred;
   border-bottom-style: none;
+  background-color: black;
 
   i {
     font-size: 1.6em;
@@ -1359,6 +1361,7 @@ select {
   border: 1px solid $translucentred;
   border-bottom-style: none;
   cursor: pointer;
+  background-color: black;
 
   .chatText {
     color: white;
@@ -1376,11 +1379,36 @@ select {
   padding: 0;
   margin: 0;
   z-index: 7;
-  height: 200px;
-  width: 300px;
+  height: 300px;
+  width: 450px;
   border: 1px solid $translucentred;
   border-bottom-style: none;
   background-color: black;
+  overflow: hidden;
+  font-size: 1em;
+
+  ::-webkit-scrollbar {
+        width: 6px;
+        background:  black;
+        border-radius: 3px;
+  } /* this targets the default scrollbar (compulsory) */
+
+  ::-webkit-scrollbar-track {
+        background:  black;
+
+        border-radius: 3px;
+  } /* the new scrollbar will have a flat appearance with the set background color */
+   
+  ::-webkit-scrollbar-thumb {
+    background:  $translucentred;
+    border-radius: 3px; 
+  } /* this will style the thumb, ignoring the track */
+   
+   
+  ::-webkit-scrollbar-corner {
+        background-color: black;
+  } 
+
 
   .minimize {
     color: $offwhite;
@@ -1393,24 +1421,31 @@ select {
     width: 100%;
   }
 
-  .chatText {
-    padding: 0;
-    margin-top: 27px;
-    margin-left: 5px;
-    padding-left: 5px;
-    padding-right: 10px;
-    height: 146px;
-    width: 295px;
+  .cheat-container {
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    margin-top: 25px;
     text-decoration: none;
-    border: 0px;
     color: $offwhite;
     overflow: auto;
 
-    a {
-      color: $offwhite;
-    }
+    .command-container {
+      margin: 0px 0px 25px 0px;
+      padding: 5px;
+      background-color: $offblack;
+      border-radius: 10px;
+      .title {
+        color: #C199EC
+      }
 
+      .info {
+        float: right;
+        color: $offwhite;
+      }
+    }
   }
+
 }
 
 .chat-box-container {
@@ -1420,7 +1455,7 @@ select {
   padding: 0;
   margin: 0;
   z-index: 7;
-  height: 200px;
+  height: 300px;
   width: 300px;
   border: 1px solid $translucentred;
   border-bottom-style: none;
@@ -1465,7 +1500,7 @@ select {
     margin-left: 5px;
     padding-left: 5px;
     padding-right: 10px;
-    height: 146px;
+    height: 246px;
     width: 295px;
     text-decoration: none;
     color: $offwhite;
