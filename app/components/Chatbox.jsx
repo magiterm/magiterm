@@ -160,9 +160,6 @@ class Chatbox extends React.Component {
       return (
         <div className="chat-box-mini" onClick={this.handleChangeActive.bind(this)}>
           Group Chat
-          
-          <i className="ion-ios-chatbubble-outline"></i>
-
         </div>
       )
     }
