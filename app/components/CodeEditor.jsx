@@ -80,7 +80,30 @@ class CodeEditor extends React.Component {
       mode = 'python';
     } else if (type === 'rb' || fileName === "Gemfile" || type === "ru") {
       mode = 'ruby';
+    } else if (type === 'jsx') {
+      mode = 'jsx';
+    } else if (type === 'erb') {
+      mode = 'application/x-erb'
+    } else if (type === 'erb') {
+      mode = 'application/x-ejs'
+    } else if (type === 'aspx') {
+      mode = 'application/x-aspx'
+    } else if (type === 'jsp') {
+      mode = 'application/x-jsp'
+    } else if (type === 'css') {
+      mode = 'text/css';
+    } else if (type === 'scss') {
+      mode = 'text/x-scss';
+    } else if (type === 'gss') {
+      mode = 'text/x-gss';
+    } else if (type === 'less') {
+      mode = 'text/x-less';
+    } else if (type === 'md') {
+      mode = 'gfm';
     }
+    // } else if (type === 'c' || type === 'h' || type === 'cc'|| type === 'C' || type === 'cpp' || type === 'CPP' || type === 'c++' || type === 'cp' || type === 'cxx') {
+    //   mode = 'cli'
+    // }
 
     this.editor.setOption("mode", mode);
     console.log(this.editor);

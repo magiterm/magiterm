@@ -85,18 +85,22 @@ class FileBrowser extends React.Component {
   }
 
   downloadClick(e, entry) {
+    console.log(entry);
     const file = this.state.curDir.endsWith('/') ? this.state.curDir + entry : this.state.curDir + '/' + entry;
     console.log(file);
     axios.post('/docker/cmd', {cmd: 'download ' + file, containerName: this.state.containerName, curDir: this.state.curDir})
     .then(function(res) {
       var str2bytes = function(str) {
+        console.log(str);
         var bytes = new Uint8Array(str.length);
         for (var i=0; i<str.length; i++) {
           bytes[i] = str.charCodeAt(i);
         }
+        console.log(bytes);
         return bytes;
       }
       var download = function(filename, text) {
+        console.log(filename, text);
         text = text.replace(/\n/g, '');
         var blob = new Blob(text.split(' ').map(function(txt) { return str2bytes(FileHelpers.hex2a(txt)); }), {type: "application/zip"});
         FileSaver.saveAs(blob, filename);

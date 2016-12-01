@@ -47,7 +47,6 @@ handleLogOut() {
       			<li> <a href="/computer"> Computer </a> </li>
             <li> <a href="/video"> Videos </a> </li>
             <li> <a href="/faq"> FAQ </a> </li>
-            <li> <a href="/about"> About </a> </li>
             <li className="username"><a href="/dashboard">{this.props.username}</a></li>
     			</ul>
   			</div>	
