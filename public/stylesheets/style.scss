@@ -1212,6 +1212,10 @@ select {
     }
   }
 
+  .file-browser-yay.onDrag *  {
+    pointer-events: none;
+  }
+
   .file-browser-container {
     height: 100%;
     max-height: 600px;
@@ -1219,11 +1223,50 @@ select {
     flex: 1;
     flex-direction: row;
     flex-wrap: wrap;
-    overflow-y: auto;
+    overflow: hidden;
     color: $offwhite;
     cursor: default;
     padding: 0px 0px 0px 2px;
     font-size: 15px;
+
+    .file-and-dropzone {
+      height: 100%;
+      width: 100%;
+      position: relative;
+
+      .file-browser-yay {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+
+
+    .file-browser {
+      overflow-y: auto;
+      width: 100%;
+      z-index: 1;
+      height: 100%;
+      position: fixed;
+    }
+
+    .dropzone-area {
+      position: absolute;
+      top: 0;
+      float: left;
+      height: 100%;
+      width: 100%;
+      z-index: 0;
+      div {
+        height: 100%;
+        width: 100%;
+        .dropzone {
+          height: 100%;
+          width: 100%;
+        }
+      }
+ 
+    }
 
     .fileBrowser {
       &:hover {
@@ -1246,7 +1289,9 @@ select {
     flex: 1;
     flex-wrap: wrap;
     overflow: hidden;
-    .ion-ios-folder-outline{
+    flex-direction: row;
+    justify-content: right;
+    i {
       color: $brightgreen;
       font-weight: bold;
       float: right;
@@ -1892,13 +1937,14 @@ select {
       width: 100%;
       flex: 1;
       flex-wrap: wrap;
-      .ion-ios-folder-outline{
+      i{
         color: $brightgreen;
         font-weight: bold;
         float: right;
         padding-right: 20px;
         font-size: 20px;
         cursor: pointer;
+        display: inline-block;
 
         &:hover {
           color: $themebrightpurple;
@@ -2048,11 +2094,13 @@ select {
           flex: 1;
           flex-direction: row;
           flex-wrap: wrap;
-          overflow-y: auto;
+          overflow: hidden;
           color: $offwhite;
           cursor: default;
           padding: 0px 0px 0px 2px;
           font-size: 15px;
+
+
 
           .fileBrowser {
             &:hover {

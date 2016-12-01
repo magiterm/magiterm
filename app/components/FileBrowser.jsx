@@ -2,6 +2,9 @@ const React = require('react');
 const axios = require('axios');
 const FileSaver = require('file-saver');
 const FileHelpers = require('../../utils/FileHelpers.js');
+const Dropzone = require('./Dropzone.jsx');
+
+let counter = 0;
 
 class FileBrowser extends React.Component {
   constructor(props) {
@@ -69,7 +72,14 @@ class FileBrowser extends React.Component {
     });
     this.socket.on('/FB/REFRESH/' + this.props.containerName, function(ref) {
       console.log('FBREFRESH', ref);
+      const dropzone = document.getElementById("dropzone-area");
+      dropzone.style.backgroundColor="transparent";
+      dropzone.style.borderColor="transparent";
+      const target = document.getElementById("file-browser-yay");
+      dropzone.style.zIndex="0";
+      target.className = "file-browser-yay";
       context.updateFileBrowser(ref.path, context.props.containerName);
+
     });
     this.updateFileBrowser(nextProps.curDir, nextProps.containerName);
   }
@@ -139,36 +149,66 @@ class FileBrowser extends React.Component {
 
   }
 
+  handleDragEnter(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    const target = document.getElementById("file-browser-yay");
+    const dropzone = document.getElementById("dropzone-area");
+    dropzone.style.zIndex="4";
+    dropzone.style.border="1px dashed white"
+    dropzone.style.backgroundColor = "rgba(255,255,255,0.1)"
+    target.className += " onDrag";
+  }
+
+  handleDragLeave(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    const dropzone = document.getElementById("dropzone-area");
+    dropzone.style.backgroundColor="transparent";
+    dropzone.style.borderColor="transparent";
+    const target = document.getElementById("file-browser-yay");
+    dropzone.style.zIndex="0";
+    target.className = "file-browser-yay";
+  }
+
 
 
   render() {
     const context = this;
     if(!this.state.hidden) {
       return (
-          <div>
-            {this.state.contents.map(function(entry) {
-              if (entry.type === "file") {
-                return (
-                  <div className="fileBrowser" onDoubleClick={(e) => {context.doubleClick(e, entry.name)}}>
-                    <i onClick={(e) => {context.deleteClick(e, entry.name, false)}} style={{paddingRight: '10px'}} className="ion-ios-close-outline">  </i>
-                    <i className="ion-ios-paper-outline">{" " + entry.name}</i>
-                    <i onClick={(e) => {context.downloadClick(e, entry.name)}} style={{float: 'right', 'paddingRight': '10px'}}className="ion-ios-download-outline">Download</i>
-                  </div>
-                )
-              } else if (entry.type === "folder" && entry.name !== ".") {
-                return (
-                  <div id={entry.name} className="fileBrowser" onDoubleClick={(e) => {context.doubleClick(e, entry.name)}}>
-                    { entry.name === ".." ? <i className="ion-ios-arrow-up">{entry.name}</i> : 
-                    <div>
-                    {context.state.curDir !== '/' ? <i onClick={(e) => {context.deleteClick(e, entry.name, true)}} style={{paddingRight: '10px'}} className="ion-ios-close-outline">  </i> : null }
-                    <i className="ion-ios-arrow-down">{" " + entry.name}</i> 
-                    {context.state.curDir !== '/' ? <i onClick={(e) => {context.downloadClick(e, entry.name)}} style={{float: 'right', 'paddingRight': '15px'}} className="ion-ios-download-outline">Download Zip</i> : null}
+          <div className="file-and-dropzone">
+            <div id="file-browser-yay" className="file-browser-yay">
+            <div id="file-browser" className="file-browser" onDragEnter={this.handleDragEnter.bind(this)}>
+              {this.state.contents.map(function(entry) {
+                if (entry.type === "file") {
+                  return (
+                    <div className="fileBrowser" onDoubleClick={(e) => {context.doubleClick(e, entry.name)}}>
+                      <i onClick={(e) => {context.deleteClick(e, entry.name, false)}} style={{paddingRight: '10px'}} className="ion-ios-close-outline">  </i>
+                      <i className="ion-ios-paper-outline">{" " + entry.name}</i>
+                      <i onClick={(e) => {context.downloadClick(e, entry.name)}} style={{float: 'right', 'paddingRight': '10px'}}className="ion-ios-download-outline">Download</i>
                     </div>
-                    }
-                  </div>
-                )
-              }
-            })}
+                  )
+                } else if (entry.type === "folder" && entry.name !== ".") {
+                  return (
+                    <div id={entry.name} className="fileBrowser" onDoubleClick={(e) => {context.doubleClick(e, entry.name)}}>
+                      { entry.name === ".." ? <i className="ion-ios-arrow-up">{entry.name}</i> : 
+                      <div>
+                      {context.state.curDir !== '/' ? <i onClick={(e) => {context.deleteClick(e, entry.name, true)}} style={{paddingRight: '10px'}} className="ion-ios-close-outline">  </i> : null }
+                      <i className="ion-ios-arrow-down">{" " + entry.name}</i> 
+                      {context.state.curDir !== '/' ? <i onClick={(e) => {context.downloadClick(e, entry.name)}} style={{float: 'right', 'paddingRight': '15px'}} className="ion-ios-download-outline">Download Zip</i> : null}
+                      </div>
+                      }
+                    </div>
+                  )
+                }
+              })}
+              </div>
+              </div>
+              <div className="dropzone-area" id="dropzone-area" onDragLeave={this.handleDragLeave.bind(this)}>
+                <Dropzone containerName={this.state.containerName}
+                        curDir={this.state.curDir}/>
+              </div>
           </div>
         );
     } else {

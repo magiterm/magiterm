@@ -18,7 +18,7 @@ class LinuxComputer extends React.Component {
       username: '',
       containerName: '',
       collabWith: [],
-      toggle: false,
+      toggle: "terminal-icon",
       permissions: '',
       curDir: '/picoShell'
     }
@@ -131,12 +131,19 @@ class LinuxComputer extends React.Component {
     });
   }
 
+  handleMenuClick(e) {
+    const value = e.target.id;
+    this.setState({
+      toggle: value
+    });
+  }
+
     render() {
       const context = this;
+      console.log(this.state.toggle);
       if (this.state.containerName.length) {
            return (
             <div className="linux-computer-container">
-              <Dropzone containerName={this.state.containerName} curDir={this.state.curDir}/>
               <NavBar username={this.state.username} />
               <div className="collaborator-bar">
                 <div className="collaborators-select">
@@ -163,14 +170,15 @@ class LinuxComputer extends React.Component {
                     permissions={this.state.permissions} />
                     <div className="file-browser-container">
                       <div className="terminal-menu">
-                       <i className="ion-ios-folder-outline" onClick={this.handleToggle.bind(this)}></i>
+                       <i className="ion-ios-folder-outline" id="file-browser" onClick={this.handleMenuClick.bind(this)}></i>
+                       <i className="ion-ios-monitor-outline" id="terminal-icon" onClick={this.handleMenuClick.bind(this)}></i>
                       </div>
                       <FileBrowser containerName={this.state.containerName} 
-                        hidden={!this.state.toggle}
+                        hidden={this.state.toggle === "terminal-icon" || this.state.toggle === "dropzone"}
                         permissions={this.state.permissions} 
                         curDir={this.state.curDir}/>
                       <Terminal username={this.state.username} containerName={this.state.containerName} 
-                        hidden={this.state.toggle} permissions={this.state.permissions}
+                        hidden={this.state.toggle === "file-browser" || this.state.toggle === "dropzone"} permissions={this.state.permissions}
                         curDir={this.state.curDir}/>
                     </div>
                 </SplitPane>

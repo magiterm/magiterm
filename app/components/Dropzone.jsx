@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const DropzoneComponent = require('react-dropzone');
 const request = require('superagent');
+
 var Dropzone = React.createClass({
 
   componentWillReceiveProps: function(nextProps) {
@@ -16,8 +17,7 @@ var Dropzone = React.createClass({
   render: function() {
     return (
       <div>
-        <DropzoneComponent disableClick={false} multiple={false} onDrop={this.dropHandler}>
-          <div> Drop a photo, or click to add. </div>
+        <DropzoneComponent className="dropzone" disableClick={false} multiple={false} onDrop={this.dropHandler} style={{display:"block"}}>
         </DropzoneComponent>
       </div>
     );
