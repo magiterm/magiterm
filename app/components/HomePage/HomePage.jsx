@@ -1,5 +1,6 @@
 const React = require('react');
 const NavBar = require('../NavBar.jsx'); 
+const Footer = require('../Footer.jsx');
 const HomePage = ({username, mostPopularVideos}) => {
 	const showInfo = (event) => {	
 		event.preventDefault();
@@ -63,21 +64,7 @@ const HomePage = ({username, mostPopularVideos}) => {
 		  <div className="info">
 		    <div className="info-header">Ruby Videos</div>
     	</div>
-		  <div className="footer">
-		    <div className="footer-column">
-		        <p className="footer-header">picoShell</p>
-		        <ul>
-		          <li><img src="/images/whitelogo.svg"></img>About</li>
-		          <li><i className="ion-ios-world-outline"></i>FAQ</li>
-		        </ul>
-		    </div>
-		    <div className="footer-column">
-		      <p className="footer-header">Contact Us</p>
-		      <ul>
-		        <li><i className="ion-ios-email-outline"></i>picoShellTeam@gmail.com</li>
-		      </ul>
-		  </div>
-		</div>
+		   <Footer/>
 		</div>
 	)
 }
