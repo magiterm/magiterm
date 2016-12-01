@@ -19,7 +19,8 @@ class CodeEditor extends React.Component {
       username: this.props.username,
       fileName: obj.fileName || '',
       filePath: obj.filePath || '',
-      codeSaved: true
+      codeSaved: true,
+      permissions: this.props.permissions
     }
     this.recievedCEChange = this.recievedCEChange.bind(this);
     this.username = JSON.parse(localStorage['user']).username;
@@ -27,12 +28,11 @@ class CodeEditor extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('CE GOT PROPS', nextProps);
-    console.log(this.state);
     const context = this;
+
     this.socket.off('/TE/' + this.state.containerName);
     this.socket.off('/TE/JOIN/' + this.state.containerName);
-    if(nextProps.containerName === this.state.containerName) {
+    if(nextProps.containerName === this.state.username) {
       this.setState({
         fileName: this.state.fileName,
         filePath: this.state.filePath,
@@ -43,7 +43,8 @@ class CodeEditor extends React.Component {
         containerName: nextProps.containerName,
         fileName: '',
         filePath: '',
-        codeValue: ''
+        codeValue: '',
+        permissions: nextProps.permissions
       });
 
       this.editor.getDoc().setValue('');
@@ -69,9 +70,7 @@ class CodeEditor extends React.Component {
     const filePath = code.filePath;
     const codeValue = code.code;
 
-    console.log(this.state.fileName);
     const type = fileName.split(".").pop();
-    console.log('this is the type', type);
     let mode;
 
     if (type === 'js') {
@@ -106,7 +105,6 @@ class CodeEditor extends React.Component {
     // }
 
     this.editor.setOption("mode", mode);
-    console.log(this.editor);
 
     if(code.fileOpen) {
       this.setState({
@@ -188,7 +186,6 @@ class CodeEditor extends React.Component {
     const context = this;
 
     this.socket.on('/TE/' + this.props.containerName, function(code) {
-      console.log(code);
       context.recievedCEChange(code);
     });
   }
@@ -201,7 +198,6 @@ class CodeEditor extends React.Component {
       axios.post('/docker/executeFile', {code: document.getElementById('code-editor').value, containerName: this.state.containerName, fileName: this.state.fileName, filePath: this.state.filePath})
       .then(function(resp) {
         const exResponse = resp.data.res;
-        console.log('this is the response', resp);
         var filePath = context.state.filePath.endsWith('/') ? context.state.filePath + context.state.fileName : context.state.filePath + '/' + context.state.fileName;
         context.socket.emit('/TERM/RES/', {cmd: resp.data.cmd + ' ' + filePath, res: exResponse, username: 'FILEBROWSER', containerName: context.state.containerName});
         context.setState({
@@ -216,6 +212,11 @@ class CodeEditor extends React.Component {
 
   handleOnKeyDown(e) {
     const context = this;
+    if(context.state.permissions === 'read') {
+      e.preventDefault();
+      return;
+    }
+
     if((e.ctrlKey && e.key === 'Enter') || (e.metaKey && e.key === 'Enter')) {
       this.handleFileRun();
     }
@@ -226,7 +227,6 @@ class CodeEditor extends React.Component {
 
     if((e.metaKey && e.key === 's') || (e.ctrlKey && e.key === 's')) {
       e.preventDefault();
-      console.log('save file');
       this.handleCodeSave(e);
     }
 
@@ -244,7 +244,7 @@ class CodeEditor extends React.Component {
     }
 
     if (window.location.pathname.split("/")[1] === "video") {
-      console.log('tried to save video');
+      // console.log('tried to save video');
       this.handleCodeSaveIfVideo();
     }
   }
@@ -257,9 +257,12 @@ class CodeEditor extends React.Component {
 
   handleCodeSave(e) {
     var context = this;
+    if(context.state.permissions === 'read') {
+      return;
+    }
+
     var code = document.getElementById('code-editor').value;
     const fileName = this.state.fileName;
-    console.log('filename is: ', fileName);
     const containerName = this.state.containerName;
     if(!fileName.length || !this.state.filePath.length) {
       alert('Must specify a filename first!');
@@ -272,7 +275,6 @@ class CodeEditor extends React.Component {
       filePath: this.state.filePath
     })
     .then(function(response) {
-      console.log('Successfully saved file', response);
       context.setState({ codeSaved: true })
     })
     .catch(function(err) {
@@ -280,7 +282,7 @@ class CodeEditor extends React.Component {
     });
   }
 
-   render() {
+  render() {
     if (this.state.fileName) {
       return (
         <div className="code-editor-container" onKeyDown={this.handleOnKeyDown.bind(this)}>

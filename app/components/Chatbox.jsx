@@ -31,7 +31,7 @@ class Chatbox extends React.Component {
       containerName: nextProps.containerName
     });
 
-    console.log('get chats for ', nextProps.containerName);
+    // console.log('get chats for ', nextProps.containerName);
     this.updateMessages(nextProps.containerName);
   }
 
@@ -54,7 +54,7 @@ class Chatbox extends React.Component {
       text: message,
       time: new Date().toString()
     };
-    console.log(messageToSend);
+    // console.log(messageToSend);
 
 
     document.getElementById('messageText').value = '';
@@ -99,7 +99,7 @@ class Chatbox extends React.Component {
             time: res.data[i].createdAt
           };
 
-          console.log(msgObj);
+          // console.log(msgObj);
           arr.push(msgObj);
         }
 
@@ -112,7 +112,7 @@ class Chatbox extends React.Component {
       });
 
     this.socket.on('/CHAT/' + container, function(msg) {
-      console.log('received chat', msg);
+      // console.log('received chat', msg);
 
       if(context.state.username !== msg.msg.user) {
         const messageArray = context.state.messages.slice();

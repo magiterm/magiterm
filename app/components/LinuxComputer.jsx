@@ -60,7 +60,6 @@ class LinuxComputer extends React.Component {
     });
 
     this.socket.on('/TERM/SHOW/' + user.username, function(show) {
-      console.log('SHOWING');
       context.setState({
         toggle: false
       });
@@ -74,7 +73,6 @@ class LinuxComputer extends React.Component {
     });
 
     this.socket.on('/DASH/UPDATE/COLLABROLE/' + user.username, function(roleUpdate) {
-      console.log('received /DASH/UPDATE/COLLABROLE/', roleUpdate);
       context.setState({ permissions: roleUpdate.newRole})
     });
 
@@ -93,13 +91,14 @@ class LinuxComputer extends React.Component {
           return axios.get('/users/roleById', { params: { id: res.data.role } } )
         })
         .then(function(role) {
+          console.log('changed role in LC', role.data.name);
           context.setState({ permissions: role.data.name });
         });    
     }
 
     axios.post('/docker/restart', {containerName: event.target.value})
     .then(function(resp) {
-      console.log(resp);
+      // console.log('docker container restart response', resp);
     });
 
     this.setState({
@@ -109,14 +108,12 @@ class LinuxComputer extends React.Component {
 
     
     this.socket.on('/TERM/SHOW/' + event.target.value, function(show) {
-      console.log('SHOWING1');
       context.setState({
         toggle: false
       });
     });
 
     this.socket.on('/TERM/CD/' + event.target.value, function(code) {
-      console.log('LC CD', code);
       if(code.dir === context.state.curDir) return;
       context.setState({
         curDir: code.dir
@@ -140,7 +137,7 @@ class LinuxComputer extends React.Component {
 
     render() {
       const context = this;
-      console.log(this.state.toggle);
+      // console.log(this.state.toggle);
       if (this.state.containerName.length) {
            return (
             <div className="linux-computer-container">

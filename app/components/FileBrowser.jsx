@@ -16,7 +16,8 @@ class FileBrowser extends React.Component {
       containerName: this.props.containerName,
       curDir: '/picoShell',
       contents: [],
-      hidden: true
+      hidden: true,
+      permissions: this.props.permissions
     };
     this.doubleClick = this.doubleClick.bind(this);
     this.downloadClick = this.downloadClick.bind(this);
@@ -68,7 +69,8 @@ class FileBrowser extends React.Component {
     this.setState({
       containerName: nextProps.containerName,
       hidden: nextProps.hidden,
-      curDir: nextProps.curDir
+      curDir: nextProps.curDir,
+      permissions: nextProps.permissions
     });
     this.socket.on('/FB/REFRESH/' + this.props.containerName, function(ref) {
       console.log('FBREFRESH', ref);
@@ -82,6 +84,13 @@ class FileBrowser extends React.Component {
 
     });
     this.updateFileBrowser(nextProps.curDir, nextProps.containerName);
+  }
+
+  isPermitted() {
+    if(this.state.permissions === 'read') {
+      return false;
+    }
+    return true;
   }
 
   downloadClick(e, entry) {
@@ -139,6 +148,8 @@ class FileBrowser extends React.Component {
 
   deleteClick(e, entry, isFolder) {
     const context = this;
+
+    if(!context.isPermitted) return;
     var confirmed;
     if(!isFolder) confirmed = confirm('You are about to delete "' + entry + '". Continue?');
     else confirmed = confirm('You are about to delete the folder "' + entry + '". Continue?');
@@ -155,7 +166,7 @@ class FileBrowser extends React.Component {
 
   handleDragEnter(event) {
     event.stopPropagation();
-    event.preventDefault();
+    event.preventDefault();    
     const target = document.getElementById("file-browser-yay");
     const dropzone = document.getElementById("dropzone-area");
     dropzone.style.zIndex="4";
@@ -188,7 +199,10 @@ class FileBrowser extends React.Component {
                 if (entry.type === "file") {
                   return (
                     <div className="fileBrowser" onDoubleClick={(e) => {context.doubleClick(e, entry.name)}}>
-                      <i onClick={(e) => {context.deleteClick(e, entry.name, false)}} style={{paddingRight: '10px'}} className="ion-ios-close-outline">  </i>
+                      {context.state.permissions !== 'read' 
+                          ? <i onClick={(e) => {context.deleteClick(e, entry.name, false)}} style={{paddingRight: '10px'}} className="ion-ios-close-outline"></i>
+                          : <div></div>}
+                      
                       <i className="ion-ios-paper-outline">{" " + entry.name}</i>
                       <i onClick={(e) => {context.downloadClick(e, entry.name)}} style={{float: 'right', 'paddingRight': '10px'}}className="ion-ios-download-outline">Download</i>
                     </div>
@@ -198,7 +212,7 @@ class FileBrowser extends React.Component {
                     <div id={entry.name + i} className="fileBrowser" onDoubleClick={(e) => {context.doubleClick(e, entry.name)}}>
                       { entry.name === ".." ? <i className="ion-ios-arrow-up">{entry.name}</i> : 
                       <div>
-                      {context.state.curDir !== '/' ? <i onClick={(e) => {context.deleteClick(e, entry.name, true)}} style={{paddingRight: '10px'}} className="ion-ios-close-outline">  </i> : null }
+                      {((context.state.curDir !== '/') && (context.state.permissions !== 'read')) ? <i onClick={(e) => {context.deleteClick(e, entry.name, true)}} style={{paddingRight: '10px'}} className="ion-ios-close-outline">  </i> : null }
                       <i className="ion-ios-arrow-down">{" " + entry.name}</i> 
                       {context.state.curDir !== '/' ? <i onClick={(e) => {context.downloadClick(e, entry.name)}} style={{float: 'right', 'paddingRight': '15px'}} className="ion-ios-download-outline">Download Zip</i> : null}
                       </div>
@@ -209,10 +223,13 @@ class FileBrowser extends React.Component {
               })}
               </div>
               </div>
-              <div className="dropzone-area" id="dropzone-area" onDragLeave={this.handleDragLeave.bind(this)}>
-                <Dropzone containerName={this.state.containerName}
-                        curDir={this.state.curDir}/>
-              </div>
+              { context.state.permissions !== 'read'
+                  ? <div className="dropzone-area" id="dropzone-area" onDragLeave={this.handleDragLeave.bind(this)}>
+                      <Dropzone containerName={this.state.containerName}
+                              curDir={this.state.curDir}/>
+                    </div>
+                  : <div></div>
+              }
           </div>
         );
     } else {
