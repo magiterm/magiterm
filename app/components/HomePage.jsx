@@ -75,7 +75,7 @@ const HomePage = ({username, mostPopularVideos}) => {
 		    <div className="footer-column">
 		      <p className="footer-header">Contact Us</p>
 		      <ul>
-		        <li><i className="ion-ios-email-outline"></i>bianca.subion@gmail.com</li>
+		        <li><i className="ion-ios-email-outline"></i>picoShellTeam@gmail.com</li>
 		      </ul>
 		  </div>
 		</div>
