@@ -180,7 +180,7 @@ class FileBrowser extends React.Component {
           <div className="file-and-dropzone">
             <div id="file-browser-yay" className="file-browser-yay">
             <div id="file-browser" className="file-browser" onDragEnter={this.handleDragEnter.bind(this)}>
-              {this.state.contents.map(function(entry) {
+              {this.state.contents.map(function(entry, i) {
                 if (entry.type === "file") {
                   return (
                     <div className="fileBrowser" onDoubleClick={(e) => {context.doubleClick(e, entry.name)}}>
@@ -191,7 +191,7 @@ class FileBrowser extends React.Component {
                   )
                 } else if (entry.type === "folder" && entry.name !== ".") {
                   return (
-                    <div id={entry.name} className="fileBrowser" onDoubleClick={(e) => {context.doubleClick(e, entry.name)}}>
+                    <div id={entry.name + i} className="fileBrowser" onDoubleClick={(e) => {context.doubleClick(e, entry.name)}}>
                       { entry.name === ".." ? <i className="ion-ios-arrow-up">{entry.name}</i> : 
                       <div>
                       {context.state.curDir !== '/' ? <i onClick={(e) => {context.deleteClick(e, entry.name, true)}} style={{paddingRight: '10px'}} className="ion-ios-close-outline">  </i> : null }
