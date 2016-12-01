@@ -32,6 +32,22 @@ class CheatSheet extends React.Component {
 		        	</div>
               <div className="command-container">
                 <span className="title">
+                  Run File
+                </span>
+                <span className="info">
+                  {'⌘ + Enter'}
+                </span>
+              </div>
+              <div className="command-container">
+                <span className="title">
+                  Save File
+                </span>
+                <span className="info">
+                  {'⌘ + S'}
+                </span>
+              </div>
+              <div className="command-container">
+                <span className="title">
                   Download File / Folder
                 </span>
                 <span className="info">

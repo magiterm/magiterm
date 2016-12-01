@@ -1323,6 +1323,7 @@ select {
   padding: 6px;
   
   .message-user {
+    display: inline-block;
     font-weight: bold;
     color: #C199EC;
     border: 0px solid $offblack;
@@ -1335,6 +1336,7 @@ select {
     text-align: right;
     overflow-wrap: break-word;
     .message-user {
+      display: inline-block;
       font-weight: bold;
       border: 0px solid #313033;
       background-color: #313033;

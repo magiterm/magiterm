@@ -8,9 +8,9 @@ const Message = ({message, username, counter}) => {
 	return (
 	<div className={message.user===username ? "message own" : "message"} id={counter}>
 
-    <span className="message-user"> {message.user===username ? "" : message.user} 
+    <div className="message-user"> {message.user===username ? "" : message.user} 
     <a data-tip data-for={"msg-tooltip-"+message.time} className="message-text"> {message.text} </a>
-    </span>
+    </div>
 
     <ReactTooltip id={"msg-tooltip-"+message.time} place='top' type='dark' effect='solid'>
       <span className="message-time">
