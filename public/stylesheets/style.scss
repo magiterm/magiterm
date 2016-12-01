@@ -1645,6 +1645,65 @@ select {
           padding: 10px;
           cursor: pointer;
         }
+
+        .video-search-image-container-inner {
+          position: relative;
+          -o-transition:.5s;
+          -ms-transition:.5s;
+          -moz-transition:.5s;
+          -webkit-transition:.5s;
+
+          transition:.5s;
+
+          &:hover {
+            display: block;
+            background: rgba(0, 0, 0, .6);
+            visibility: visible;
+          }
+
+          &:hover .front-layer {
+            display: block;
+            background: rgba(0, 0, 0, .6);
+            visibility: visible;
+          }
+
+          .front-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 340px;
+            height: 200px;
+            display: none;
+            color: #FFF;
+            font-family: $lato;
+            font-size: 1.5em;
+            font-weight: 100;
+            text-align:center;
+            cursor: pointer;
+            -o-transition:.5s;
+            -ms-transition:.5s;
+            -moz-transition:.5s;
+            -webkit-transition:.5s;
+            transition:.5s;
+
+            .ion-ios-plus-outline {
+              color: white;
+              font-size: 4em;
+              -o-transition:.5s;
+              -ms-transition:.5s;
+              -moz-transition:.5s;
+              -webkit-transition:.5s;
+              transition:.5s;
+              &:hover {
+                color: #888888;
+              }
+            }
+          } 
+
+          
+        }
+
+
         p {
           padding: 10px;
           font-size: 16px;

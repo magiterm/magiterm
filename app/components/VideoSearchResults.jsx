@@ -6,6 +6,8 @@ const VideoSearchResults = ({ videos, handleSearchedVideoClick, handleSearchNext
     return <div></div>
   }
 
+
+
   return (
     <div className="video-search-image-container row">
       <button className="search-prev slick-arrow slick-prev" onClick={handleSearchPrev}>
@@ -13,11 +15,15 @@ const VideoSearchResults = ({ videos, handleSearchedVideoClick, handleSearchNext
       </button>
       { videos.map((video, i) => {
           return (
-            <div className="video-search-result" key={i} >
-              <img className="video-search-image"
+            <div className="video-search-image-container-inner" key={i} >
+              <img
                   key={video.id.videoId} 
                   src={video.snippet.thumbnails.medium.url} 
                   onClick={handleSearchedVideoClick.bind(null, video)} />
+              <div className="front-layer" onClick={handleSearchedVideoClick.bind(null, video)} >
+                <p>{video.snippet.title}</p>
+                <i className="ion-ios-plus-outline"/>
+              </div>
               <p className="video-search-description" key={i} >{video.snippet.description}</p>
             </div>
           )
