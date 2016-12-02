@@ -83,6 +83,7 @@ class FileBrowser extends React.Component {
       context.updateFileBrowser(ref.path, context.props.containerName);
 
     });
+    
     this.updateFileBrowser(nextProps.curDir, nextProps.containerName);
   }
 
