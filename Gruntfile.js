@@ -47,7 +47,15 @@ module.exports = function(grunt) {
       target: {
         files: {
           'public/dist/main.css': [
+          'public/stylesheets/imports.css',
+          'public/stylesheets/bootstrap.css',
+          'public/stylesheets/slick.css',
+          'public/stylesheets/slick-theme.css',
+          'public/stylesheets/flexboxgrid.css',
           'public/stylesheets/style.css',
+          'public/codemirror/theme/monokai.css',
+          'public/codemirror/addon/scroll/simplescrollbars.css',
+          'public/stylesheets/ionicons.css'
 
           ]
         }
